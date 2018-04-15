@@ -4,17 +4,17 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-     production: false,
-     firebase: {
-          apiKey: 'AIzaSyAuCohujFcI1qWi1uT6ewSPdeA3yco4im8',
-          authDomain: 'project-manager-firebase.firebaseapp.com',
-          databaseURL: 'https://project-manager-firebase.firebaseio.com',
-          projectId: 'project-manager-firebase',
-          storageBucket: 'project-manager-firebase.appspot.com',
-          messagingSenderId: '856404455538'
-     },
-     routing: {
-        loginPage: 'login',
-        toolbar: ''
-     }
+    production: false,
+    firebase: {
+        apiKey: 'AIzaSyCo2L0I3GWadM1GxWPUBQYjl_9iybBPgRE',
+        authDomain: 'task-manager-free.firebaseapp.com',
+        databaseURL: 'https://task-manager-free.firebaseio.com',
+        projectId: 'task-manager-free',
+        storageBucket: 'task-manager-free.appspot.com',
+        messagingSenderId: '850994270189'
+    },
+    routing: {
+    loginPage: 'login',
+    toolbar: ''
+    }
 };

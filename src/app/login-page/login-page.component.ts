@@ -11,13 +11,13 @@ import { Router } from '@angular/router';
 })
 export class LoginPageComponent implements OnInit {
 
-    private passTooltip = 'pass is required';
-    private loginTooltip = 'login is required';
-    private errorMatcher = new FormErrorStateMatcher();
+    public passTooltip = 'pass is required';
+    public loginTooltip = 'login is required';
+    public errorMatcher = new FormErrorStateMatcher();
 
-    private email: FormControl;
-    private password: FormControl;
-    private loginForm: FormGroup;
+    public email: FormControl;
+    public password: FormControl;
+    public loginForm: FormGroup;
 
     constructor(
         public authSrervice: AuthService
