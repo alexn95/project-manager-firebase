@@ -1,0 +1,36 @@
+<div class="container login-container">
+    <img class="login-container_logo" src="./../../assets/logo.png">
+    <span class="login-container_header">Log in to Task Manager</span>
+    <form [formGroup]="loginForm" (ngSubmit)="login()" class="login-form ">
+        <mat-form-field class="login-form__input"   >
+            <input matInput placeholder="Email" name="email" id="email" [formControl]="email" 
+                [errorStateMatcher]="errorMatcher">
+            <mat-hint>Errors appear instantly!</mat-hint>
+            <mat-error *ngIf="email.hasError('required')">
+                Email is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="email.hasError('email') && !email.hasError('required')">
+                Email address invalid
+            </mat-error>
+        </mat-form-field> 
+
+        <mat-form-field class="login-form__input" >
+            <input matInput placeholder="Password" type="password" name="password" id="password" [formControl]="password"
+                [errorStateMatcher]="errorMatcher">
+            <mat-hint>Errors appear instantly!</mat-hint>
+            <mat-error *ngIf="password.hasError('required')">
+                Password is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="password.hasError('minlength')">
+                Password can not be shorter than 6 characters.
+            </mat-error>
+        </mat-form-field>
+        
+        <div class="login-form__action-row">
+            <button type="submit" [disabled]="!loginForm.valid" mat-raised-button color="primary">
+                Log in
+            </button>
+            <button type="button" mat-button (click)="signup()"  color="primary">Sign up</button>      
+        </div> 
+    </form>
+</div>

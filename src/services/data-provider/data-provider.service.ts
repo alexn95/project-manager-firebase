@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app';
 import { FirebaseDatabase } from '@firebase/database-types';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireDatabaseModule } from 'angularfire2/database';
 
 @Injectable()
 export class DataProviderService {
@@ -12,9 +12,8 @@ export class DataProviderService {
         private fireDataBase: AngularFireDatabase
     ) { }
 
-    public writeDate(): void {
-        this.fireDataBase.database.ref('data').set(String(new Date()));
-        // this.db.ref('data').set(String(new Date()));
+    public writeCurrentDate(): void {
+        this.db.ref('date').set(String(new Date()));
     }
 
 }
