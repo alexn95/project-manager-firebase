@@ -1,9 +1,9 @@
 <div class="container login-container">
     <img class="login-container_logo" src="./../../assets/logo.png">
     <span class="login-container_header">Log in to Task Manager</span>
-    <form [formGroup]="loginForm" (ngSubmit)="login()" class="login-form ">
-        <mat-form-field class="login-form__input"   >
-            <input matInput placeholder="Email" name="email" id="email" [formControl]="email" 
+    <form [formGroup]="loginForm" (ngSubmit)="login()" class="login-form form">
+        <mat-form-field class="form__input"   >
+            <input matInput placeholder="Email" [formControl]="email" 
                 [errorStateMatcher]="errorMatcher">
             <mat-hint>Errors appear instantly!</mat-hint>
             <mat-error *ngIf="email.hasError('required')">
@@ -14,8 +14,8 @@
             </mat-error>
         </mat-form-field> 
 
-        <mat-form-field class="login-form__input" >
-            <input matInput placeholder="Password" type="password" name="password" id="password" [formControl]="password"
+        <mat-form-field class="form__input" >
+            <input matInput placeholder="Password" type="password" [formControl]="password"
                 [errorStateMatcher]="errorMatcher">
             <mat-hint>Errors appear instantly!</mat-hint>
             <mat-error *ngIf="password.hasError('required')">
@@ -26,7 +26,7 @@
             </mat-error>
         </mat-form-field>
         
-        <div class="login-form__action-row">
+        <div class="form__action-row">
             <button type="submit" [disabled]="!loginForm.valid" mat-raised-button color="primary">
                 Log in
             </button>

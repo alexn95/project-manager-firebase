@@ -61,7 +61,13 @@ export class AuthService {
     }
 
     public signup(email: string, password: string): void {
-        this.fireAuth.auth.createUserWithEmailAndPassword(email, password);
+        this.fireAuth.auth.createUserWithEmailAndPassword(email, password)
+            .then(result => {
+                this.router.navigateByUrl(environment.routing.loginPage);
+            })
+            .catch(error => {
+                console.error('%Login ERROR\n%o', 'color:white;background-color:magenta', error);
+            });
     }
 
     public logout(): void {

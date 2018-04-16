@@ -1,11 +1,11 @@
-$width: 350px;
+$width: 400px;
 
-.login-form {
+.signup-form {
     width: $width;
     padding: 0 0 100px 0;
 }
 
-.login-container {
+.signup-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -23,7 +23,7 @@ $width: 350px;
 }
 
 
-app-login-page {
+app-signup-page {
     height: 100%;
     text-align: center;
 }

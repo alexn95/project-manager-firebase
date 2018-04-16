@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { FormErrorStateMatcher } from './../../models/form-error-state-matcher';
 import { AuthService } from './../../services/auth/auth.service';
@@ -11,16 +12,14 @@ import { Router } from '@angular/router';
 })
 export class LoginPageComponent implements OnInit {
 
-    public passTooltip = 'pass is required';
-    public loginTooltip = 'login is required';
     public errorMatcher = new FormErrorStateMatcher();
-
     public email: FormControl;
     public password: FormControl;
     public loginForm: FormGroup;
 
     constructor(
-        public authSrervice: AuthService
+        public authSrervice: AuthService,
+        public router: Router
     ) {
         authSrervice.logout();
 
@@ -33,7 +32,7 @@ export class LoginPageComponent implements OnInit {
             Validators.minLength(6)
         ]);
         this.loginForm = new FormGroup({
-            login: this.email,
+            email: this.email,
             password: this.password
         });
     }
@@ -42,6 +41,7 @@ export class LoginPageComponent implements OnInit {
     }
 
     public signup(): void {
+        this.router.navigateByUrl(environment.routing.signupPage);
     }
 
     public login(): void {

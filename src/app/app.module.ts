@@ -1,3 +1,4 @@
+import { SignupPageModule } from './signup-page/singup-page.module';
 import { AuthGuardService } from './../services/auth-guard/auth-guard.service';
 import { environment } from './../environments/environment';
 import { routing } from './app.routes';
@@ -25,13 +26,14 @@ import { CommonModule } from '@angular/common';
         BrowserAnimationsModule,
         CommonModule,
         BrowserModule,
-        ToolbarModule,
-        LoginPageModule,
         FormsModule,
         AngularFireModule.initializeApp(environment.firebase),
         AngularFireAuthModule,
         AngularFireDatabaseModule,
         routing,
+        ToolbarModule,
+        LoginPageModule,
+        SignupPageModule
     ],
     providers: [
         AuthGuardService

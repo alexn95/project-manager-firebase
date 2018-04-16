@@ -9,7 +9,8 @@ export const environment = {
         messagingSenderId: '850994270189'
     },
     routing: {
-    loginPage: 'login',
-    toolbar: ''
+        loginPage: 'login',
+        toolbar: '',
+        signupPage: 'signup'
     }
 };

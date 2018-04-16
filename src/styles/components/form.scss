@@ -1,0 +1,17 @@
+.form {
+    &__input {
+        width: 100%;
+        padding: 10px 0px;
+    }
+    
+    &__action-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0;
+        &-button {
+            margin: 10px 0 0 0  !important;
+        }
+    }
+}
