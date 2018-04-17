@@ -5,24 +5,6 @@ $width: 400px;
     padding: 0 0 100px 0;
 }
 
-.signup-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    &_logo {
-        width: $width;
-    }
-
-    &_header {
-        padding: 10px;
-        font: 22px areal;
-        width: $width;
-    }
-}
-
-
 app-signup-page {
     height: 100%;
     text-align: center;

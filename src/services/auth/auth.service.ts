@@ -1,9 +1,11 @@
+import { SnackBarService } from './../snack-bar/snack-bar.service';
 import { environment } from './../../environments/environment';
 import { Router } from '@angular/router';
 import { AuthEvents } from './auth-events';
 import { Injectable, EventEmitter } from '@angular/core';
 import { AngularFireAuth, AngularFireAuthModule } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
+import { variables } from '../../environments/const-variables';
 
 
 
@@ -15,8 +17,9 @@ export class AuthService {
     private user: firebase.User;
 
     constructor(
-        public fireAuth: AngularFireAuth,
-        public router: Router
+        private fireAuth: AngularFireAuth,
+        private router: Router,
+        private snackBar: SnackBarService
     ) {
         fireAuth.authState.subscribe(
             user => {
@@ -45,28 +48,30 @@ export class AuthService {
             .then(user => {
                 this.user = user;
                 this.authEvents.emit(AuthEvents.AUTHENTICATED);
+                this.snackBar.open(variables.snackBar.login.success);
             })
-            .catch(error => {
-                console.error('%Login ERROR\n%o', 'color:white;background-color:magenta', error);
+            .catch((error: Error) => {
                 this.authEvents.emit(AuthEvents.AUTH_ERROR);
+                this.snackBar.open(variables.snackBar.login.incorrectData);
             });
         this.fireAuth.auth.getRedirectResult()
             .then(result => {
                 this.router.navigateByUrl(environment.routing.toolbar);
             })
-            .catch(error => {
-                console.error('%Login ERROR\n%o', 'color:white;background-color:magenta', error);
+            .catch((error: Error) => {
                 this.authEvents.emit(AuthEvents.AUTH_ERROR);
+                this.snackBar.open(variables.snackBar.login.incorrectData);
             });
     }
 
     public signup(email: string, password: string): void {
         this.fireAuth.auth.createUserWithEmailAndPassword(email, password)
             .then(result => {
+                this.snackBar.open(variables.snackBar.signup.success);
                 this.router.navigateByUrl(environment.routing.loginPage);
             })
-            .catch(error => {
-                console.error('%Login ERROR\n%o', 'color:white;background-color:magenta', error);
+            .catch((error: Error) => {
+                this.snackBar.openMsg(error.message, variables.snackBar.default);
             });
     }
 
@@ -76,8 +81,8 @@ export class AuthService {
                 this.authEvents.emit(AuthEvents.LOGOUT);
                 this.router.navigateByUrl(environment.routing.loginPage);
             })
-            .catch(error => {
-                console.log(error);
+            .catch((error: Error) => {
+                this.snackBar.openMsg(error.message, variables.snackBar.default);
                 this.authEvents.emit(AuthEvents.AUTH_ERROR);
                 this.router.navigateByUrl(environment.routing.loginPage);
             });

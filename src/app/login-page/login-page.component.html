@@ -1,6 +1,6 @@
-<div class="container login-container">
-    <img class="login-container_logo" src="./../../assets/logo.png">
-    <span class="login-container_header">Log in to Task Manager</span>
+<div class="container auth-container">
+    <span class="logo auth-container_logo">Task Manager</span>
+    <span class="auth-container_header">Log in page</span>
     <form [formGroup]="loginForm" (ngSubmit)="login()" class="login-form form">
         <mat-form-field class="form__input"   >
             <input matInput placeholder="Email" [formControl]="email" 

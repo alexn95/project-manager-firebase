@@ -1,6 +1,6 @@
-<div class="container signup-container">
-    <img class="signup-container_logo" src="./../../assets/logo.png">
-    <span class="signup-container_header">Sign up to Task Manager</span>
+<div class="container auth-container">
+        <span class="logo auth-container_logo">Task Manager</span>
+        <span class="auth-container_header">Sign up page</span>
     <form [formGroup]="signupForm" (ngSubmit)="signup()" class="signup-form form">
         <mat-form-field class="form__input" >
             <input matInput placeholder="Email" [formControl]="email" 

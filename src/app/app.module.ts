@@ -16,6 +16,8 @@ import * as firebase from 'firebase/app';
 
 import { AppComponent } from './app.component';
 import { CommonModule } from '@angular/common';
+import { MatSnackBarModule } from '@angular/material';
+import { SnackBarService } from '../services/snack-bar/snack-bar.service';
 
 
 @NgModule({
@@ -33,10 +35,14 @@ import { CommonModule } from '@angular/common';
         routing,
         ToolbarModule,
         LoginPageModule,
-        SignupPageModule
+        SignupPageModule,
+
+        // MATERIAL
+        MatSnackBarModule
     ],
     providers: [
-        AuthGuardService
+        AuthGuardService,
+        SnackBarService
     ],
     bootstrap: [AppComponent]
 })
