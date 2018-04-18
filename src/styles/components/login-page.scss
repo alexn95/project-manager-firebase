@@ -6,6 +6,6 @@ $width: 350px;
 }
 
 app-login-page {
-    height: 100%;
-    text-align: center;
+    flex: 1;
+    display: flex;
 }
