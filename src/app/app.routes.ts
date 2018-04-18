@@ -1,3 +1,6 @@
+import { HomeComponent } from './home/home.component';
+import { routingUrl } from './../environments/const-variables';
+import { ProjectsComponent } from './projects/projects.component';
 import { SignupPageComponent } from './signup-page/signup-page.component';
 import { AuthGuardService } from './../services/auth-guard/auth-guard.service';
 import { environment } from './../environments/environment';
@@ -11,20 +14,24 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 
 const routes: Routes = [
     {
-        path: environment.routing.toolbar,
-        component: ToolbarComponent,
-        canActivate: [AuthGuardService],
+        path: routingUrl.home,
+        component: HomeComponent
     },
     {
-        path: environment.routing.signupPage,
+        path: routingUrl.projects,
+        component: ProjectsComponent,
+        canActivate: [AuthGuardService]
+    },
+    {
+        path: routingUrl.signupPage,
         component: SignupPageComponent
     },
     {
-        path: environment.routing.loginPage,
+        path: routingUrl.loginPage,
         component: LoginPageComponent
     },
 
 ];
 
-export const appRoutingProviders: any[] = [];
+export const approutingProviders: any[] = [];
 export const routing = RouterModule.forRoot(routes);

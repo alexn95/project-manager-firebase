@@ -3,10 +3,10 @@ const timeToClose = 5000;
 export const variables = {
     snackBar: {
         default:
-        {
-            action: 'close',
-            config: { duration: timeToClose }
-        },
+            {
+                action: 'close',
+                config: { duration: timeToClose }
+            },
         signup: {
             success:
                 {
@@ -28,8 +28,19 @@ export const variables = {
                     action: 'close',
                     config: { duration: timeToClose }
                 },
-        }
+        },
+        mustLogin:
+            {
+                message: 'To use our aplication you must login.',
+                action: 'close',
+                config: { duration: timeToClose }
+            }
     }
 };
 
-
+export const routingUrl = {
+    home: '',
+    projects: 'projects',
+    loginPage: 'login',
+    signupPage: 'signup'
+};

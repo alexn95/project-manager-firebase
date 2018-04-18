@@ -1,5 +1,6 @@
+import { SnackBarService } from './../snack-bar/snack-bar.service';
+import { routingUrl, variables } from './../../environments/const-variables';
 import { AuthEvents } from './../auth/auth-events';
-import { environment } from './../../environments/environment';
 import { AuthService } from './../auth/auth.service';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Injectable } from '@angular/core';
@@ -12,7 +13,8 @@ export class AuthGuardService implements CanActivate {
 
     constructor(
         private router: Router,
-        public authService: AuthService
+        private authService: AuthService,
+        private snackBar: SnackBarService
     ) {
     }
 
@@ -26,7 +28,8 @@ export class AuthGuardService implements CanActivate {
                         return true;
                     } else {
                         console.log('%c%s', 'color:red', 'access denied');
-                        this.router.navigateByUrl(environment.routing.loginPage);
+                        this.router.navigateByUrl(routingUrl.loginPage);
+                        this.snackBar.open(variables.snackBar.mustLogin);
                         return false;
                     }
                 }

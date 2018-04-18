@@ -1,3 +1,6 @@
+import { CommonModule } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
 import { ServicesModule } from './../../services/services.module';
 import { NgModule } from '@angular/core';
 import { ToolbarComponent } from './toolbar.component';
@@ -8,7 +11,10 @@ import { MatToolbarModule, MatButtonModule } from '@angular/material';
     imports: [
         ServicesModule,
         MatButtonModule,
-        MatToolbarModule
+        MatToolbarModule,
+        RouterModule,
+        BrowserModule,
+        CommonModule
     ],
     declarations: [
         ToolbarComponent

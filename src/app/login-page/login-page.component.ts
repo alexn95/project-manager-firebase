@@ -1,10 +1,10 @@
-import { environment } from './../../environments/environment';
 import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { FormErrorStateMatcher } from './../../models/form-error-state-matcher';
 import { AuthService } from './../../services/auth/auth.service';
 import { DataProviderService } from './../../services/data-provider/data-provider.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { routingUrl } from '../../environments/const-variables';
 
 @Component({
     selector: 'app-login-page',
@@ -41,7 +41,7 @@ export class LoginPageComponent implements OnInit {
     }
 
     public signup(): void {
-        this.router.navigateByUrl(environment.routing.signupPage);
+        this.router.navigateByUrl(routingUrl.signupPage);
     }
 
     public login(): void {

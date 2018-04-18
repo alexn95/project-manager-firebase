@@ -1,3 +1,5 @@
+import { HomeModule } from './home/home.module';
+import { ProjectsModule } from './projects/projects.module';
 import { SignupPageModule } from './signup-page/singup-page.module';
 import { AuthGuardService } from './../services/auth-guard/auth-guard.service';
 import { environment } from './../environments/environment';
@@ -18,6 +20,8 @@ import { AppComponent } from './app.component';
 import { CommonModule } from '@angular/common';
 import { MatSnackBarModule } from '@angular/material';
 import { SnackBarService } from '../services/snack-bar/snack-bar.service';
+import { ProjectsComponent } from './projects/projects.component';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
@@ -36,6 +40,8 @@ import { SnackBarService } from '../services/snack-bar/snack-bar.service';
         ToolbarModule,
         LoginPageModule,
         SignupPageModule,
+        ProjectsModule,
+        HomeModule,
 
         // MATERIAL
         MatSnackBarModule

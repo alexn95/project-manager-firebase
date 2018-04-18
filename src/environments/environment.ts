@@ -12,10 +12,5 @@ export const environment = {
         projectId: 'task-manager-free',
         storageBucket: 'task-manager-free.appspot.com',
         messagingSenderId: '850994270189'
-    },
-    routing: {
-        loginPage: 'login',
-        toolbar: '',
-        signupPage: 'signup'
     }
 };
