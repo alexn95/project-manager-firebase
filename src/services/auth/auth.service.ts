@@ -53,17 +53,11 @@ export class AuthService {
             .then(user => {
                 this.user = user;
                 this.authEvents.next(AuthEvents.AUTHENTICATED);
+                this.router.navigateByUrl(routingUrl.projects);
                 this.snackBar.open(variables.snackBar.login.success);
             })
             .catch((error: Error) => {
-                this.authEvents.next(AuthEvents.AUTH_ERROR);
-                this.snackBar.open(variables.snackBar.login.incorrectData);
-            });
-        this.fireAuth.auth.getRedirectResult()
-            .then(result => {
-                this.router.navigateByUrl(routingUrl.projects);
-            })
-            .catch((error: Error) => {
+                console.warn(error);
                 this.authEvents.next(AuthEvents.AUTH_ERROR);
                 this.snackBar.open(variables.snackBar.login.incorrectData);
             });

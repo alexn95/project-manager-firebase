@@ -24,7 +24,7 @@ export const variables = {
                 },
             incorrectData:
                 {
-                    message: 'Incorrect email ro password.',
+                    message: 'Incorrect email or password.',
                     action: 'close',
                     config: { duration: timeToClose }
                 },
