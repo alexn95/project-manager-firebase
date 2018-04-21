@@ -27,10 +27,15 @@
         </mat-form-field>
         
         <div class="form__action-row">
-            <button type="submit" [disabled]="!loginForm.valid" mat-raised-button color="primary">
+            <div class="form__action-row_sub-row">
+                <mat-checkbox [formControl]="rememberMe">Remember me</mat-checkbox>
+                <button type="button" mat-button (click)="signup()" color="primary">Sign up</button> 
+            </div>
+            <button class="form__action-row_sub-row form__action-row_button"
+                type="submit" [disabled]="!loginForm.valid" mat-raised-button color="primary">
                 Log in
             </button>
-            <button type="button" mat-button (click)="signup()" color="primary">Sign up</button>      
+                 
         </div> 
     </form>
 </div>

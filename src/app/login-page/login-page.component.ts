@@ -5,6 +5,7 @@ import { DataProviderService } from './../../services/data-provider/data-provide
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { routingUrl } from '../../environments/const-variables';
+import * as firebase from 'firebase/app';
 
 @Component({
     selector: 'app-login-page',
@@ -15,6 +16,7 @@ export class LoginPageComponent implements OnInit {
     public errorMatcher = new FormErrorStateMatcher();
     public email: FormControl;
     public password: FormControl;
+    public rememberMe: FormControl;
     public loginForm: FormGroup;
 
     constructor(
@@ -31,9 +33,11 @@ export class LoginPageComponent implements OnInit {
             Validators.required,
             Validators.minLength(6)
         ]);
+        this.rememberMe = new FormControl(true);
         this.loginForm = new FormGroup({
             email: this.email,
-            password: this.password
+            password: this.password,
+            rememberMe: this.rememberMe
         });
     }
 
@@ -45,7 +49,10 @@ export class LoginPageComponent implements OnInit {
     }
 
     public login(): void {
-        this.authSrervice.login(this.email.value, this.password.value);
+        this.authSrervice.login(
+            this.email.value,
+            this.password.value,
+            this.rememberMe.value ? firebase.auth.Auth.Persistence.LOCAL : firebase.auth.Auth.Persistence.SESSION);
     }
 
 }

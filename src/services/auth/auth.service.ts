@@ -48,18 +48,24 @@ export class AuthService {
         });
     }
 
-    public login(email: string, password: string): void {
-        this.fireAuth.auth.signInWithEmailAndPassword(email, password)
-            .then(user => {
-                this.user = user;
-                this.authEvents.next(AuthEvents.AUTHENTICATED);
-                this.router.navigateByUrl(routingUrl.projects);
-                this.snackBar.open(variables.snackBar.login.success);
+    public login(email: string, password: string, persistence: firebase.auth.Auth.Persistence): void {
+        firebase.auth().setPersistence(persistence)
+            .then( () => {
+                this.fireAuth.auth.signInWithEmailAndPassword(email, password)
+                .then(user => {
+                    this.user = user;
+                    this.authEvents.next(AuthEvents.AUTHENTICATED);
+                    this.router.navigateByUrl(routingUrl.projects);
+                    this.snackBar.open(variables.snackBar.login.success);
+                })
+                .catch((error: Error) => {
+                    this.authEvents.next(AuthEvents.AUTH_ERROR);
+                    this.snackBar.open(variables.snackBar.login.incorrectData);
+                });
             })
             .catch((error: Error) => {
-                console.warn(error);
                 this.authEvents.next(AuthEvents.AUTH_ERROR);
-                this.snackBar.open(variables.snackBar.login.incorrectData);
+                this.snackBar.openMsg(error.message, variables.snackBar.default);
             });
     }
 

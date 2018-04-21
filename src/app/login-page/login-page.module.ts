@@ -3,7 +3,7 @@ import { AuthService } from './../../services/auth/auth.service';
 import { NgModule } from '@angular/core';
 import { LoginPageComponent } from './login-page.component';
 import { ServicesModule } from '../../services/services.module';
-import { MatButtonModule, MatInputModule } from '@angular/material';
+import { MatButtonModule, MatInputModule, MatCheckboxModule } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -14,7 +14,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 
         // MATERIAL
         MatButtonModule,
-        MatInputModule
+        MatInputModule,
+        MatCheckboxModule
 
     ],
     declarations: [

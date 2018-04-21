@@ -2,16 +2,24 @@
     &__input {
         width: 100%;
         padding: 10px 0px;
-    }
+    }    
     
     &__action-row {
         display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        align-items: stretch;
         padding: 10px 0;
-        &-button {
-            margin: 10px 0 0 0  !important;
+        &_sub-row {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            margin: 5px 0;
         }
+        &_button {
+            margin: 10px 0 !important;
+        }
+        
     }
 }
