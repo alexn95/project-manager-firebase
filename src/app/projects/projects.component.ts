@@ -8,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProjectsComponent implements OnInit {
 
+    public items = [1, 2, 3, 4, 5, 6, 7, 8];
+
     public user: User;
 
     constructor(
