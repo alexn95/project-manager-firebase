@@ -1,41 +1,39 @@
 const timeToClose = 5000;
 
-export const variables = {
-    snackBar: {
-        default:
+export const snackBarMsgs = {
+    default:
+        {
+            action: 'close',
+            config: { duration: timeToClose }
+        },
+    signup: {
+        success:
             {
+                message: 'New user was created.',
                 action: 'close',
                 config: { duration: timeToClose }
             },
-        signup: {
-            success:
-                {
-                    message: 'New user was created.',
-                    action: 'close',
-                    config: { duration: timeToClose }
-                },
-        },
-        login: {
-            success:
-                {
-                    message: 'You are authorized.',
-                    action: 'close',
-                    config: { duration: timeToClose }
-                },
-            incorrectData:
-                {
-                    message: 'Incorrect email or password.',
-                    action: 'close',
-                    config: { duration: timeToClose }
-                },
-        },
-        mustLogin:
+    },
+    login: {
+        success:
             {
-                message: 'To use our aplication you must login.',
+                message: 'You are authorized.',
                 action: 'close',
                 config: { duration: timeToClose }
-            }
-    }
+            },
+        incorrectData:
+            {
+                message: 'Incorrect email or password.',
+                action: 'close',
+                config: { duration: timeToClose }
+            },
+    },
+    mustLogin:
+        {
+            message: 'To use our aplication you must login.',
+            action: 'close',
+            config: { duration: timeToClose }
+        }
 };
 
 export const routingUrl = {
@@ -43,4 +41,8 @@ export const routingUrl = {
     projects: 'projects',
     loginPage: 'login',
     signupPage: 'signup'
+};
+
+export const functions = {
+    searchProjects: 'https://us-central1-task-manager-free.cloudfunctions.net/searchProjects'
 };

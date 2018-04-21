@@ -1,3 +1,4 @@
+import { DataProviderService } from './../../services/data-provider/data-provider.service';
 import { AuthService } from './../../services/auth/auth.service';
 import { User } from 'firebase/app';
 import { Component, OnInit } from '@angular/core';
@@ -13,11 +14,13 @@ export class ProjectsComponent implements OnInit {
     public user: User;
 
     constructor(
-        public authSrervice: AuthService
+        public authSrervice: AuthService,
+        public dataProvider: DataProviderService
     ) {
         authSrervice.fetchUser().subscribe(
             user => this.user = user
         );
+        dataProvider.searchProjects();
     }
 
     ngOnInit() {

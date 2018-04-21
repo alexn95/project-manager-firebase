@@ -1,3 +1,4 @@
+import { snackBarMsgs } from './../../environments/const-variables';
 import { Observable } from 'rxjs/Observable';
 import { SnackBarService } from './../snack-bar/snack-bar.service';
 import { Router } from '@angular/router';
@@ -5,7 +6,7 @@ import { AuthEvents } from './auth-events';
 import { Injectable, EventEmitter } from '@angular/core';
 import { AngularFireAuth, AngularFireAuthModule } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
-import { variables, routingUrl } from '../../environments/const-variables';
+import { routingUrl } from '../../environments/const-variables';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 
 
@@ -56,27 +57,27 @@ export class AuthService {
                     this.user = user;
                     this.authEvents.next(AuthEvents.AUTHENTICATED);
                     this.router.navigateByUrl(routingUrl.projects);
-                    this.snackBar.open(variables.snackBar.login.success);
+                    this.snackBar.open(snackBarMsgs.login.success);
                 })
                 .catch((error: Error) => {
                     this.authEvents.next(AuthEvents.AUTH_ERROR);
-                    this.snackBar.open(variables.snackBar.login.incorrectData);
+                    this.snackBar.open(snackBarMsgs.login.incorrectData);
                 });
             })
             .catch((error: Error) => {
                 this.authEvents.next(AuthEvents.AUTH_ERROR);
-                this.snackBar.openMsg(error.message, variables.snackBar.default);
+                this.snackBar.openMsg(error.message, snackBarMsgs.default);
             });
     }
 
     public signup(email: string, password: string): void {
         this.fireAuth.auth.createUserWithEmailAndPassword(email, password)
             .then(result => {
-                this.snackBar.open(variables.snackBar.signup.success);
+                this.snackBar.open(snackBarMsgs.signup.success);
                 this.router.navigateByUrl(routingUrl.loginPage);
             })
             .catch((error: Error) => {
-                this.snackBar.openMsg(error.message, variables.snackBar.default);
+                this.snackBar.openMsg(error.message, snackBarMsgs.default);
             });
     }
 
@@ -87,7 +88,7 @@ export class AuthService {
                 this.router.navigateByUrl(routingUrl.loginPage);
             })
             .catch((error: Error) => {
-                this.snackBar.openMsg(error.message, variables.snackBar.default);
+                this.snackBar.openMsg(error.message, snackBarMsgs.default);
                 this.authEvents.next(AuthEvents.AUTH_ERROR);
                 this.router.navigateByUrl(routingUrl.loginPage);
             });
