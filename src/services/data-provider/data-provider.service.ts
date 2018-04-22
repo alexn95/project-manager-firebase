@@ -47,7 +47,8 @@ export class DataProviderService {
             create_date : 'date',
             description : 'desc',
             state : 'open',
-            title : 'proj1'
+            title : 'proj1',
+            access : 'public'
         };
         return new Observable(observer => {
             const ref = this.db.ref('projects');

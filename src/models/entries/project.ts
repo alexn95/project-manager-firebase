@@ -4,5 +4,6 @@ export interface Project {
     description: string;
     state: string;
     create_date: string;
-    task_count?: number;
+    issues_count?: number;
+    access: string;
 }

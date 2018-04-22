@@ -1,8 +1,11 @@
 <mat-card class="project-card" *ngFor="let project of projects">
-    <mat-card-header>{{project.title}}</mat-card-header>
-    <mat-card-content>content</mat-card-content>
-    <mat-card-actions>
-        <button mat-button>LIKE</button>
-        <button mat-button>SHARE</button>
+    <a href="/projects/{{ project.id }}" class="project-card__header" >{{ project.title }}</a>
+    <div class="project-card__desc">{{ project.description }}</div>
+    <div class="project-card__info">State: {{ project.state }}</div>
+    <div class="project-card__info">Access: {{ project.access }}</div>
+    <div class="project-card__info">12 issues</div>
+    <mat-card-actions class="project-card__actions">
+        <button mat-button>Open</button>
+        <button mat-button>Assign to me</button>
     </mat-card-actions>
 </mat-card>

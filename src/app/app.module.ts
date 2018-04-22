@@ -1,3 +1,4 @@
+import { ProjectModule } from './project/project.module';
 import { HomeModule } from './home/home.module';
 import { ProjectsModule } from './projects/projects.module';
 import { SignupPageModule } from './signup-page/singup-page.module';
@@ -22,6 +23,7 @@ import { MatSnackBarModule } from '@angular/material';
 import { SnackBarService } from '../services/snack-bar/snack-bar.service';
 import { ProjectsComponent } from './projects/projects.component';
 import { HomeComponent } from './home/home.component';
+import { ProjectComponent } from './project/project.component';
 
 
 @NgModule({
@@ -42,6 +44,7 @@ import { HomeComponent } from './home/home.component';
         SignupPageModule,
         ProjectsModule,
         HomeModule,
+        ProjectModule,
 
         // MATERIAL
         MatSnackBarModule

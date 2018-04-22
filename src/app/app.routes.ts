@@ -1,3 +1,4 @@
+import { ProjectComponent } from './project/project.component';
 import { HomeComponent } from './home/home.component';
 import { routingUrl } from './../environments/const-variables';
 import { ProjectsComponent } from './projects/projects.component';
@@ -18,9 +19,14 @@ const routes: Routes = [
         component: HomeComponent
     },
     {
+        path: routingUrl.project,
+        component: ProjectComponent,
+        canActivate: [AuthGuardService],
+    },
+    {
         path: routingUrl.projects,
         component: ProjectsComponent,
-        canActivate: [AuthGuardService]
+        canActivate: [AuthGuardService],
     },
     {
         path: routingUrl.signupPage,

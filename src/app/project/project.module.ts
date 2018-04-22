@@ -1,9 +1,9 @@
+import { ProjectComponent } from './project.component';
 import { DataProviderService } from './../../services/data-provider/data-provider.service';
 import { ServicesModule } from './../../services/services.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { MatToolbarModule, MatButtonModule, MatCardModule } from '@angular/material';
-import { ProjectsComponent } from './projects.component';
 
 @NgModule({
     imports: [
@@ -15,14 +15,14 @@ import { ProjectsComponent } from './projects.component';
         MatCardModule
     ],
     declarations: [
-        ProjectsComponent
+        ProjectComponent
     ],
     exports: [
-        ProjectsComponent
+        ProjectComponent
     ],
     providers: [
         DataProviderService
     ]
 })
-export class ProjectsModule {
+export class ProjectModule {
 }
