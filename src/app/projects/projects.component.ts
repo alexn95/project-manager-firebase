@@ -1,7 +1,9 @@
 import { DataProviderService } from './../../services/data-provider/data-provider.service';
-import { AuthService } from './../../services/auth/auth.service';
 import { User } from 'firebase/app';
 import { Component, OnInit } from '@angular/core';
+import { Project } from '../../models/entries/project';
+
+
 
 @Component({
     selector: 'app-projects',
@@ -9,18 +11,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProjectsComponent implements OnInit {
 
-    public items = [1, 2, 3, 4, 5, 6, 7, 8];
-
-    public user: User;
+    public projects: Project[];
 
     constructor(
-        public authSrervice: AuthService,
         public dataProvider: DataProviderService
     ) {
-        authSrervice.fetchUser().subscribe(
-            user => this.user = user
-        );
-        dataProvider.searchProjects();
+        dataProvider.searchProjects().subscribe(projects => {
+            this.projects = projects;
+        });
+        // dataProvider.saveProject().subscribe();
     }
 
     ngOnInit() {

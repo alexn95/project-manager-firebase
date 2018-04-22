@@ -10,6 +10,6 @@ const projectsFunctions = new projects_functions_1.ProjectsFunctions(db);
 exports.searchProjects = functions.https.onRequest((request, response) => {
     response.header("Access-Control-Allow-Origin", "*");
     response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    projectsFunctions.searchProjects().subscribe((res) => response.status(200).send(res));
+    projectsFunctions.searchProjects(request.body).subscribe((res) => response.status(200).send(res));
 });
 //# sourceMappingURL=index.js.map

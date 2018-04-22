@@ -1,3 +1,4 @@
+import { PipeModule } from './../../services/custom-pipe/custom-pipe.module';
 import { DataProviderService } from './../../services/data-provider/data-provider.service';
 import { ServicesModule } from './../../services/services.module';
 import { BrowserModule } from '@angular/platform-browser';

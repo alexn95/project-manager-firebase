@@ -5,7 +5,8 @@ class ProjectsFunctions {
     constructor(db) {
         this.db = db;
     }
-    searchProjects() {
+    searchProjects(params) {
+        console.log(params);
         return new Observable_1.Observable(observer => {
             this.db.ref('/projects')
                 .once('value')
