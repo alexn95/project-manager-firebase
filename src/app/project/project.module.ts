@@ -1,6 +1,5 @@
 import { ProjectComponent } from './project.component';
 import { DataProviderService } from './../../services/data-provider/data-provider.service';
-import { ServicesModule } from './../../services/services.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { MatToolbarModule, MatButtonModule, MatCardModule } from '@angular/material';
@@ -8,7 +7,6 @@ import { MatToolbarModule, MatButtonModule, MatCardModule } from '@angular/mater
 @NgModule({
     imports: [
         BrowserModule,
-        ServicesModule,
 
         // MATERIAL
         MatButtonModule,
@@ -21,7 +19,7 @@ import { MatToolbarModule, MatButtonModule, MatCardModule } from '@angular/mater
         ProjectComponent
     ],
     providers: [
-        DataProviderService
+        DataProviderService,
     ]
 })
 export class ProjectModule {

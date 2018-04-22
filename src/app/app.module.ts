@@ -1,3 +1,5 @@
+import { GlobalErrorHandler } from './../services/error-handler/error-handler.service';
+import { ServicesModule } from './../services/services.module';
 import { ProjectModule } from './project/project.module';
 import { HomeModule } from './home/home.module';
 import { ProjectsModule } from './projects/projects.module';
@@ -10,7 +12,7 @@ import { LoginPageModule } from './login-page/login-page.module';
 import { FormsModule } from '@angular/forms';
 import { ToolbarModule } from './toolbar/toolbar.module';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
@@ -39,6 +41,8 @@ import { ProjectComponent } from './project/project.component';
         AngularFireAuthModule,
         AngularFireDatabaseModule,
         routing,
+
+        ServicesModule,
         ToolbarModule,
         LoginPageModule,
         SignupPageModule,
@@ -51,7 +55,10 @@ import { ProjectComponent } from './project/project.component';
     ],
     providers: [
         AuthGuardService,
-        SnackBarService
+        {
+            provide: ErrorHandler,
+            useClass: GlobalErrorHandler
+        }
     ],
     bootstrap: [AppComponent]
 })

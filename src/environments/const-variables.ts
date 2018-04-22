@@ -1,6 +1,11 @@
 const timeToClose = 5000;
 
 export const snackBarMsgs = {
+    error:
+        {
+            action: 'close',
+            config: { duration: timeToClose }
+        },
     default:
         {
             action: 'close',

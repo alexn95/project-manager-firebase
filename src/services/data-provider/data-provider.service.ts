@@ -8,6 +8,7 @@ import { functions } from '../../environments/const-variables';
 import { Project } from '../../models/entries/project';
 
 
+
 @Injectable()
 export class DataProviderService {
 
@@ -55,6 +56,17 @@ export class DataProviderService {
             const key = ref.push(data).key;
             ref.child(key + '/id').set(key);
             observer.next();
+        });
+    }
+
+    public getProjectById(id: string): Observable<Project> {
+        return new Observable(observer => {
+            this.db.ref('/projects/' + id)
+            .once('value')
+            .then((project) => {
+                observer.next(project.val());
+            })
+            .catch((error: Error) => observer.error(error));
         });
     }
 
