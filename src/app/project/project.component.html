@@ -1,3 +1,46 @@
-<div *ngIf="project">
-    {{ project.title }}
-</div>
+<div class="project-container container" *ngIf="project">
+    <div class="project-container__header">Project details</div>
+
+    <form [formGroup]="projectForm" (ngSubmit)="updateProject()" class="project-form form">
+        <div class="project-form__create-date">
+            <span>{{ project.create_date }}</span>
+        </div>
+        <mat-form-field class="form__input project-form__input">
+            <input matInput placeholder="Title" [formControl]="title"  
+                [errorStateMatcher]="errorMatcher">
+            <mat-error *ngIf="title.hasError('required')">
+                Title is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="title.hasError('maxlength')">
+                Title can not be longer than 100 characters.
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="form__input project-form__input">
+            <textarea matInput placeholder="Description" matTextareaAutosize matAutosizeMinRows="1"
+            matAutosizeMaxRows="10" [formControl]="description" 
+            [errorStateMatcher]="errorMatcher">
+            </textarea>
+            <mat-error *ngIf="description.hasError('maxlength')">
+                Description can not be longer than 1000 characters.
+            </mat-error>
+        </mat-form-field>        
+        
+        
+        
+        <div class="form__action-row_direction_row project-form__action-row">
+            <button class="form__action-row_button"
+                type="submit" [disabled]="!projectForm.valid || !isChangeExist()" mat-raised-button color="primary">
+                Submit
+            </button>
+            <button class="form__action-row_button"
+                type="button" [disabled]="!isChangeExist()" mat-raised-button color="primary" (click)="cancel()">
+                Cancel 
+            </button>
+        </div>
+
+        <div class="form__action-row_direction_row project-form__issues-row" >
+            <a routerLink="#" class="link" >12 issues</a>
+            <a routerLink="#" class="link" >Create issues</a>
+        </div>
+    </form>
+</div> 

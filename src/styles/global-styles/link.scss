@@ -1,0 +1,12 @@
+.link {
+    overflow: hidden;
+    display: -webkit-box;
+    text-decoration: none;
+    color: #1866C5;
+    :visited {
+        color: #1866C5;;
+    }
+}
+.link:hover {
+    color: orange ;
+}

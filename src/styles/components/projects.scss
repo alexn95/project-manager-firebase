@@ -2,17 +2,7 @@
     margin: 10px;
     width: 190px;
     &__header {
-        overflow: hidden;
-        display: -webkit-box;
         font-size: 20px;
-        text-decoration: none;
-        color: #1866C5;
-        :visited {
-            color: #1866C5;;
-        }
-    }
-    a:hover {
-        color: orange ;
     }
     
     &__desc {

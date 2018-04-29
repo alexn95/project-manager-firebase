@@ -1,9 +1,9 @@
+import { ServicesModule } from './../../services/services.module';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { ToolbarComponent } from './toolbar.component';
-import { DataProviderService } from '../../services/data-provider/data-provider.service';
 import { MatToolbarModule, MatButtonModule } from '@angular/material';
 
 @NgModule({
@@ -12,7 +12,8 @@ import { MatToolbarModule, MatButtonModule } from '@angular/material';
         MatToolbarModule,
         RouterModule,
         BrowserModule,
-        CommonModule
+        CommonModule,
+        ServicesModule,
     ],
     declarations: [
         ToolbarComponent
@@ -21,7 +22,6 @@ import { MatToolbarModule, MatButtonModule } from '@angular/material';
         ToolbarComponent
     ],
     providers: [
-        DataProviderService
     ]
 })
 export class ToolbarModule {

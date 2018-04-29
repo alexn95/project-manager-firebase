@@ -1,3 +1,4 @@
+import { DataProjectsService } from './data-provider/data-projects.service';
 import { DataProviderService } from './data-provider/data-provider.service';
 import { AuthService } from './auth/auth.service';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -13,6 +14,7 @@ import { SnackBarService } from './snack-bar/snack-bar.service';
     providers: [
         AuthService,
         DataProviderService,
+        DataProjectsService,
         SnackBarService,
     ]
 })

@@ -1,22 +1,23 @@
 .form {
     &__input {
         width: 100%;
-        padding: 10px 0px;
-    }    
+    }
     
     &__action-row {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: stretch;
-        padding: 10px 0;
-        &_sub-row {
+        &_direction_column {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: stretch;
+        }
+
+        &_direction_row {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
             align-items: center;
-            margin: 5px 0;
         }
+        
         &_button {
             margin: 10px 0 !important;
         }

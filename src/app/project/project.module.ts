@@ -1,16 +1,22 @@
+import { ServicesModule } from './../../services/services.module';
+import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 import { ProjectComponent } from './project.component';
-import { DataProviderService } from './../../services/data-provider/data-provider.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { MatToolbarModule, MatButtonModule, MatCardModule } from '@angular/material';
+import { MatToolbarModule, MatButtonModule, MatCardModule, MatInputModule, MatCheckboxModule } from '@angular/material';
 
 @NgModule({
     imports: [
         BrowserModule,
+        ReactiveFormsModule,
+        RouterModule,
+        ServicesModule,
 
         // MATERIAL
         MatButtonModule,
-        MatCardModule
+        MatInputModule,
+        MatCheckboxModule
     ],
     declarations: [
         ProjectComponent
@@ -19,7 +25,6 @@ import { MatToolbarModule, MatButtonModule, MatCardModule } from '@angular/mater
         ProjectComponent
     ],
     providers: [
-        DataProviderService,
     ]
 })
 export class ProjectModule {

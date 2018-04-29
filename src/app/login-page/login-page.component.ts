@@ -1,7 +1,6 @@
 import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { FormErrorStateMatcher } from './../../models/form-error-state-matcher';
 import { AuthService } from './../../services/auth/auth.service';
-import { DataProviderService } from './../../services/data-provider/data-provider.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { routingUrl } from '../../environments/const-variables';

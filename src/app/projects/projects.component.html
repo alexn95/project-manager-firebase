@@ -1,5 +1,5 @@
 <mat-card class="project-card" *ngFor="let project of projects">
-    <a routerLink="/project/{{ project.id }}" class="project-card__header" >{{ project.title }}</a>
+    <a routerLink="/project/{{ project.id }}" class="project-card__header link" >{{ project.title }}</a>
     <div class="project-card__desc">{{ project.description }}</div>
     <div class="project-card__info">State: {{ project.state }}</div>
     <div class="project-card__info">Access: {{ project.access }}</div>

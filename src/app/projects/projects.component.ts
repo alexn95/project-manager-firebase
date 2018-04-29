@@ -1,4 +1,4 @@
-import { DataProviderService } from './../../services/data-provider/data-provider.service';
+import { DataProjectsService } from './../../services/data-provider/data-projects.service';
 import { User } from 'firebase/app';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Project } from '../../models/entries/project';
@@ -15,7 +15,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
     private searchSub: Subscription;
 
     constructor(
-        private dataProvider: DataProviderService,
+        private dataProvider: DataProjectsService,
     ) {
         this.searchSub = dataProvider.searchProjects().subscribe(projects => {
             this.projects = projects;

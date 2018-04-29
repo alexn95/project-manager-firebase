@@ -2,7 +2,7 @@
     <span class="logo auth-container_logo">Task Manager</span>
     <span class="auth-container_header">Log in page</span>
     <form [formGroup]="loginForm" (ngSubmit)="login()" class="login-form form">
-        <mat-form-field class="form__input"   >
+        <mat-form-field class="login-form__input form__input">
             <input matInput placeholder="Email" [formControl]="email" 
                 [errorStateMatcher]="errorMatcher">
             <mat-hint>Errors appear instantly!</mat-hint>
@@ -14,7 +14,7 @@
             </mat-error>
         </mat-form-field> 
 
-        <mat-form-field class="form__input" >
+        <mat-form-field class="login-form__input form__input">
             <input matInput placeholder="Password" type="password" [formControl]="password"
                 [errorStateMatcher]="errorMatcher">
             <mat-hint>Errors appear instantly!</mat-hint>
@@ -26,12 +26,12 @@
             </mat-error>
         </mat-form-field>
         
-        <div class="form__action-row">
-            <div class="form__action-row_sub-row">
+        <div class="form__action-row_direction_column margin_top_10">
+            <div class="form__action-row_direction_row">
                 <mat-checkbox [formControl]="rememberMe">Remember me</mat-checkbox>
                 <button type="button" mat-button (click)="signup()" color="primary">Sign up</button> 
             </div>
-            <button class="form__action-row_sub-row form__action-row_button"
+            <button class="form__action-row_direction_row form__action-row_button"
                 type="submit" [disabled]="!loginForm.valid" mat-raised-button color="primary">
                 Log in
             </button>

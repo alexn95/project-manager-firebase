@@ -33,12 +33,16 @@ export const snackBarMsgs = {
                 config: { duration: timeToClose }
             },
     },
-    mustLogin:
-        {
+    mustLogin: {
             message: 'To use our aplication you must login.',
             action: 'close',
             config: { duration: timeToClose }
-        }
+    },
+    updateProjectSuccess: {
+        message: 'Project was updated.',
+        action: 'close',
+        config: { duration: timeToClose }
+    }
 };
 
 export const routingUrl = {
