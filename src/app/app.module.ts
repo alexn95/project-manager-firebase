@@ -1,3 +1,4 @@
+import { DeleteModule } from './delete/delete.module';
 import { GlobalErrorHandler } from './../services/error-handler/error-handler.service';
 import { ServicesModule } from './../services/services.module';
 import { ProjectModule } from './project/project.module';
@@ -49,6 +50,7 @@ import { ProjectComponent } from './project/project.component';
         ProjectsModule,
         HomeModule,
         ProjectModule,
+        DeleteModule,
 
         // MATERIAL
         MatSnackBarModule

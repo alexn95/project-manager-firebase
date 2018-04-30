@@ -4,7 +4,7 @@ import * as firebase from 'firebase/app';
 import { FirebaseDatabase } from '@firebase/database-types';
 import { AngularFireDatabase, AngularFireDatabaseModule } from 'angularfire2/database';
 import { Http } from '@angular/http';
-import { functions } from '../../environments/const-variables';
+import { functions } from '../../environments/const-variables/functions';
 import { Project } from '../../models/entries/project';
 
 
@@ -42,24 +42,24 @@ export class DataProjectsService {
 
     public saveProject(): Observable<void> {
         const data = {
-            create_date : 'date',
+            create_date : String(new Date()),
             description : 'desc',
             state : 'open',
             title : 'proj1',
-            access : 'public'
+            access : 'public',
+            id: ''
         };
         return new Observable(observer => {
             const ref = this.db.ref('projects');
-            const key = ref.push(data).key;
-            ref.child(key + '/id').set(key).then((result) => {
-                observer.next();
-            });
+            const postRef = ref.push();
+            data.id = postRef.key;
+            postRef.set(data);
         });
     }
 
     public updateProject(project: Project): Observable<void> {
+        const ref = this.db.ref('projects/' + project.id);
         return new Observable(observer => {
-            const ref = this.db.ref('projects/' + project.id);
             ref.update(project).then((result) => {
                 observer.next();
             });
@@ -67,13 +67,20 @@ export class DataProjectsService {
     }
 
     public getProjectById(id: string): Observable<Project> {
+        const ref = this.db.ref('projects/' + id);
         return new Observable(observer => {
-            this.db.ref('/projects/' + id)
-            .once('value')
-            .then((project) => {
+            ref.once('value').then((project) => {
                 observer.next(project.val());
-            })
-            .catch((error: Error) => observer.error(error));
+            });
+        });
+    }
+
+    public deleteProject(id: string): Observable<void> {
+        const ref = this.db.ref('projects/' + id);
+        return new Observable(observer => {
+            ref.remove(result => {
+                observer.next();
+            });
         });
     }
 

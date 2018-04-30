@@ -1,4 +1,4 @@
-import { snackBarMsgs } from './../../environments/const-variables';
+import { snackBarMsgs } from './../../environments/const-variables/snack-bar-msgs';
 import { SnackBarService } from './../snack-bar/snack-bar.service';
 import { ErrorHandler, Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';

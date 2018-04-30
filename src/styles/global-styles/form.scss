@@ -1,5 +1,7 @@
 .form {
-    &__input {
+    &__row {
+        display: flex;
+        flex-direction: row;
         width: 100%;
     }
     

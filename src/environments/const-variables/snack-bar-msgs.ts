@@ -42,17 +42,12 @@ export const snackBarMsgs = {
         message: 'Project was updated.',
         action: 'close',
         config: { duration: timeToClose }
+    },
+    deleteProjectSuccess: {
+        message: 'Project was deleted.',
+        action: 'close',
+        config: { duration: timeToClose }
     }
 };
 
-export const routingUrl = {
-    home: '',
-    projects: 'projects',
-    project: 'project/:id',
-    loginPage: 'login',
-    signupPage: 'signup'
-};
 
-export const functions = {
-    searchProjects: 'https://us-central1-task-manager-free.cloudfunctions.net/searchProjects'
-};

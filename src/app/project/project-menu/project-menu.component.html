@@ -1,0 +1,41 @@
+<div class="project-menu" *ngIf="project">
+    <div class="project-menu__title">
+        {{ project.title }}
+    </div>
+    <div class="project-menu__description">
+        {{ project.description }}
+    </div>
+    <div class="project-menu__border"></div>
+    <div class="project-menu__item">
+        <button mat-raised-button color="primary" (click)="showDetails()">
+            Details
+        </button>
+    </div>
+    <div class="project-menu__item">
+        <button mat-raised-button color="primary" (click)="showUsers()">
+            Users
+        </button>
+    </div>
+    <div class="project-menu__border"></div>
+    <div class="project-menu__item project-menu__item_primary">
+        <button  mat-button color="primary">
+            10 ussues
+        </button>
+    </div>
+    <div class="project-menu__item project-menu__item_primary">
+        <button  mat-button color="primary">
+            Create issues
+        </button>
+    </div>
+    <div class="project-menu__item project-menu__item_primary">
+        <button  mat-button color="primary">
+            Invaite user
+        </button>
+    </div>
+    <div class="project-menu__border"></div>
+    <div class="project-menu__item project-menu__item_warn">
+        <button  mat-button color="warn" (click)="deleteProject()">
+            Delete project
+        </button>
+    </div>
+</div>

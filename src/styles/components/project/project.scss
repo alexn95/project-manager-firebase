@@ -1,0 +1,37 @@
+@import './project-details.scss';
+@import './project-menu.scss';
+@import './project-users.scss';
+
+app-project {
+    flex: 1;
+    display: flex;
+}
+
+app-project-details {
+    flex: 1;
+    display: flex;
+}
+
+app-project-users {
+    flex: 1;
+    display: flex;
+}
+
+app-project-menu {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.project-sidenav-content {
+    display: flex !important;
+}
+
+.project-sidenav-menu {
+    border-right: 2px solid #3F51B5;
+    width: 250px;
+    background-color: #FAFAFA;
+    margin: 20px 0;
+    // background-color: #3F51B5;
+}

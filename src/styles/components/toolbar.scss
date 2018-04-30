@@ -1,6 +1,6 @@
 
 .toolbar {
-    height: 50px !important;
+    height: 40px !important;
     padding: 8px 16px !important;
     font-size: 17px;
     &__space {
@@ -8,6 +8,8 @@
     }
     &__logo {
         color: white;
+    }
+    &__button {
     }
 
 }

@@ -1,0 +1,17 @@
+.delete-modal {
+    &__info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__action-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;  
+    }
+    &__button:hover {
+        background-color: #E3E6F2;
+    }
+}

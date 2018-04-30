@@ -2,7 +2,7 @@ import { errors$ } from './../error-handler/error-handler.service';
 import { MatSnackBar, MatSnackBarRef, SimpleSnackBar, MatSnackBarConfig } from '@angular/material';
 import { Injectable } from '@angular/core';
 import { SnackBarOpts } from '../../models/snackbat-options';
-import { snackBarMsgs } from '../../environments/const-variables';
+import { snackBarMsgs } from '../../environments/const-variables/snack-bar-msgs';
 
 @Injectable()
 export class SnackBarService {

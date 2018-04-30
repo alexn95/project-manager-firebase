@@ -1,0 +1,50 @@
+<div class="project-details-container container" *ngIf="project">
+    <form [formGroup]="projectForm" (ngSubmit)="updateProject()" class="project-details-form form">
+        <div class="project-details-form__header">Project details</div>
+        <div class="project-details-form__create-date">
+            <span>{{ project.create_date }}</span>
+        </div>
+        <div class="form__row">
+            <mat-form-field class="project-details-form__title project-details-form__input">
+                <input matInput placeholder="Title" [formControl]="title"  
+                    [errorStateMatcher]="errorMatcher">
+                <mat-error *ngIf="title.hasError('required')">
+                    Title is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="title.hasError('maxlength')">
+                    Title can not be longer than 100 characters.
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="project-details-form__access project-details-form__input">
+                <mat-select placeholder="Access"  [formControl]="access" >
+                    <mat-option *ngFor="let access of accessTypes" [value]="access">
+                        {{ access }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>    
+        </div>
+        
+        <mat-form-field class="form__row project-details-form__input">
+            <textarea matInput placeholder="Description" matTextareaAutosize matAutosizeMinRows="1"
+            matAutosizeMaxRows="10" [formControl]="description" 
+            [errorStateMatcher]="errorMatcher">
+            </textarea>
+            <mat-error *ngIf="description.hasError('maxlength')">
+                Description can not be longer than 1000 characters.
+            </mat-error>
+        </mat-form-field>    
+        
+        
+        <div class="project-details-form__action-row">
+            <button class="project-details-form__button"
+                type="submit" [disabled]="!projectForm.valid || !isChangeExist()" mat-raised-button color="primary">
+                Submit
+            </button>
+            <button class="project-details-form__button"
+                type="button" [disabled]="!isChangeExist()" mat-raised-button color="primary" (click)="cancel()">
+                Cancel 
+            </button>
+        </div>
+
+    </form>
+</div>

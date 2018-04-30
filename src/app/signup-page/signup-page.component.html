@@ -2,7 +2,7 @@
         <span class="logo auth-container_logo">Task Manager</span>
         <span class="auth-container_header">Sign up page</span>
     <form [formGroup]="signupForm" (ngSubmit)="signup()" class="signup-form form">
-        <mat-form-field class="form__input" >
+        <mat-form-field class="form__row" >
             <input matInput placeholder="Email" [formControl]="email" 
                 [errorStateMatcher]="errorMatcher">
             <mat-hint>Errors appear instantly!</mat-hint>
@@ -14,7 +14,7 @@
             </mat-error>
         </mat-form-field> 
 
-        <mat-form-field class="form__input" >
+        <mat-form-field class="form__row" >
             <input matInput placeholder="Password" type="password" [formControl]="password"
                 [errorStateMatcher]="errorMatcher">
             <mat-hint>Errors appear instantly!</mat-hint>
@@ -26,7 +26,7 @@
             </mat-error>
         </mat-form-field>
 
-        <mat-form-field class="form__input" >
+        <mat-form-field class="form__row" >
             <input matInput placeholder="Password confirm" type="password" [formControl]="passwordConfirm"
                 [errorStateMatcher]="errorMatcher">
             <mat-hint>Errors appear instantly!</mat-hint>

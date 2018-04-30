@@ -1,0 +1,41 @@
+$width: 100%;
+
+.project-menu {
+    
+    margin: 0 15px;
+    &__title {
+        font-size: 25px;
+        width: $width;
+        white-space: nowrap; 
+        overflow: hidden;
+        // text-overflow: ellipsis;
+    }
+    &__description {
+        width: $width;
+        font-size: 14px;
+        color: #999;
+        white-space: nowrap; 
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    &__border {
+        border-top: 1px solid #3F51B5;
+        height: 0;
+        margin: 20px 0;
+    }
+
+    &__item {
+        &_warn {
+            border: 1px solid red;
+        }
+        &_primary {
+            border: 1px solid #3F51B5;
+        }
+        width: $width;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        margin: 10px 0;
+    }
+}

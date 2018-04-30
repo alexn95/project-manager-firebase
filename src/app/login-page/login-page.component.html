@@ -2,7 +2,7 @@
     <span class="logo auth-container_logo">Task Manager</span>
     <span class="auth-container_header">Log in page</span>
     <form [formGroup]="loginForm" (ngSubmit)="login()" class="login-form form">
-        <mat-form-field class="login-form__input form__input">
+        <mat-form-field class="login-form__input form__row">
             <input matInput placeholder="Email" [formControl]="email" 
                 [errorStateMatcher]="errorMatcher">
             <mat-hint>Errors appear instantly!</mat-hint>
@@ -14,7 +14,7 @@
             </mat-error>
         </mat-form-field> 
 
-        <mat-form-field class="login-form__input form__input">
+        <mat-form-field class="login-form__input form__row">
             <input matInput placeholder="Password" type="password" [formControl]="password"
                 [errorStateMatcher]="errorMatcher">
             <mat-hint>Errors appear instantly!</mat-hint>

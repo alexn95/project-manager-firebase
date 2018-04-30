@@ -1,4 +1,5 @@
-import { snackBarMsgs } from './../../environments/const-variables';
+import { snackBarMsgs } from './../../environments/const-variables/snack-bar-msgs';
+import { routingUrl } from './../../environments/const-variables/routing-url';
 import { Observable } from 'rxjs/Observable';
 import { SnackBarService } from './../snack-bar/snack-bar.service';
 import { Router } from '@angular/router';
@@ -6,7 +7,6 @@ import { AuthEvents } from './auth-events';
 import { Injectable, EventEmitter } from '@angular/core';
 import { AngularFireAuth, AngularFireAuthModule } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
-import { routingUrl } from '../../environments/const-variables';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 
 

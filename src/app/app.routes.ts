@@ -1,6 +1,6 @@
+import { routingUrl } from './../environments/const-variables/routing-url';
 import { ProjectComponent } from './project/project.component';
 import { HomeComponent } from './home/home.component';
-import { routingUrl } from './../environments/const-variables';
 import { ProjectsComponent } from './projects/projects.component';
 import { SignupPageComponent } from './signup-page/signup-page.component';
 import { AuthGuardService } from './../services/auth-guard/auth-guard.service';

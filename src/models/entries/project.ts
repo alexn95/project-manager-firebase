@@ -1,9 +1,9 @@
 export interface Project {
-    id: number;
+    id: string;
     title: string;
     description: string;
-    state: string;
     create_date: string;
-    issues_count?: number;
+    issues_count: number;
     access: string;
+    users_id: string[];
 }
