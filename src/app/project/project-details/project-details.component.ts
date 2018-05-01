@@ -82,7 +82,7 @@ export class ProjectDetailsComponent implements OnInit, OnDestroy {
         this.project.title = this.title.value;
         this.project.description = this.description.value;
         this.project.access = this.access.value;
-        this.dataProvider.updateProject(this.project).subscribe(() =>  this.snackNar.open(snackBarMsgs.updateProjectSuccess));
+        this.dataProvider.updateProject(this.project).then(() =>  this.snackNar.open(snackBarMsgs.updateProjectSuccess));
     }
 
     public cancel(): void {

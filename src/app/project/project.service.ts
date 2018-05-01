@@ -28,7 +28,7 @@ export class ProjectService {
 
     public initProject(id: string): void {
         this.dataProvider.getProjectById(id)
-        .subscribe((project: Project) => {
+        .then((project: Project) => {
             this.project = project;
             this.projectSet.emit(project);
         });

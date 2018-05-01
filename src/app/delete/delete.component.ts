@@ -31,7 +31,7 @@ export class DeleteComponent implements OnInit {
     public delete(): void {
         switch (this.data.entity) {
             case entities.project:
-            this.dataProvider.deleteProject(this.data.id).subscribe( () => {
+            this.dataProvider.deleteProject(this.data.id).then( () => {
                 this.router.navigateByUrl(routingUrl.projects);
                 this.dialogRef.close();
                 this.snackBar.open(snackBarMsgs.deleteProjectSuccess);

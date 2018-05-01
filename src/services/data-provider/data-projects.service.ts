@@ -6,7 +6,6 @@ import { AngularFireDatabase, AngularFireDatabaseModule } from 'angularfire2/dat
 import { Http } from '@angular/http';
 import { functions } from '../../environments/const-variables/functions';
 import { Project } from '../../models/entries/project';
-import { randomBytes } from 'crypto';
 
 
 
@@ -46,7 +45,7 @@ export class DataProjectsService {
             create_date : String(new Date()),
             description : 'description',
             state : 'open',
-            title : 'Project ' + randomBytes,
+            title : 'Project 1',
             access : 'public',
             id: '',
         };
