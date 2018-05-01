@@ -3,7 +3,7 @@
     <div class="project-card__desc">{{ project.description }}</div>
     <div class="project-card__info">State: {{ project.state }}</div>
     <div class="project-card__info">Access: {{ project.access }}</div>
-    <div class="project-card__info">12 issues</div>
+    <div class="project-card__info">{{ project.issues_count }} issues</div>
     <mat-card-actions class="project-card__actions">
         <button mat-button>Open</button>
         <button mat-button>Assign to me</button>

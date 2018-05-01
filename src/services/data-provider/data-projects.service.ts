@@ -1,3 +1,5 @@
+import { projectRoles } from './../../environments/const-variables/project-roles';
+import { AuthService } from './../auth/auth.service';
 import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app';
@@ -16,6 +18,7 @@ export class DataProjectsService {
 
     constructor(
         private fireDataBase: AngularFireDatabase,
+        private auth: AuthService,
         private http: Http,
     ) { }
 
@@ -40,14 +43,19 @@ export class DataProjectsService {
         });
     }
 
-    public saveProject(): Promise<any> {
-        const data = {
-            create_date : String(new Date()),
-            description : 'description',
-            state : 'open',
-            title : 'Project 1',
-            access : 'public',
+    public saveProject(title: string, description: string, access: string): Promise<any> {
+        const data: Project = {
             id: '',
+            create_date : String(new Date()),
+            description : description,
+            title : title,
+            access : access,
+            issues_count : 12,
+            users: []
+        };
+        data.users[this.auth.getUID] = {
+            user_id: this.auth.getUID,
+            role: projectRoles.creator
         };
         const ref = this.db.ref('projects');
         const postRef = ref.push();

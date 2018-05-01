@@ -1,3 +1,4 @@
+import { accessTypes } from './../../environments/const-variables/access-types';
 import { routingUrl } from './../../environments/const-variables/routing-url';
 import { DataProjectsService } from './../../services/data-provider/data-projects.service';
 import { User } from 'firebase/app';
@@ -21,7 +22,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
         this.searchSub = dataProvider.searchProjects().subscribe(projects => {
             this.projects = projects;
         });
-        dataProvider.saveProject().then();
+        dataProvider.saveProject('Project 1', 'description', accessTypes[0]).then();
     }
 
     ngOnInit() {

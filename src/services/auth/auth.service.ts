@@ -17,6 +17,11 @@ export class AuthService {
     private db: firebase.database.Database = firebase.database();
     private authEvents: ReplaySubject<AuthEvents> = new ReplaySubject(1);
     private user: firebase.User;
+    private UID: string;
+
+    get getUID(): string {
+        return this.UID;
+    }
 
     constructor(
         private fireAuth: AngularFireAuth,
@@ -28,6 +33,7 @@ export class AuthService {
                 if (user) {
                     console.log('%cuser is set to %o', 'color:darkgreen', user);
                     this.user = user;
+                    this.UID = user.uid;
                     this.authEvents.next(AuthEvents.AUTHENTICATED);
                 } else {
                     console.log('%cuser is not set', 'color:darkred');
