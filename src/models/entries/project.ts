@@ -1,3 +1,4 @@
+import { UserRole } from './user-role';
 export interface Project {
     id: string;
     title: string;
@@ -5,5 +6,5 @@ export interface Project {
     create_date: string;
     issues_count: number;
     access: string;
-    users_id: string[];
+    users: UserRole[];
 }

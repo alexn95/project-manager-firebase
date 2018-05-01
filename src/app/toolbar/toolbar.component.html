@@ -1,14 +1,14 @@
 <mat-toolbar class="toolbar mat-elevation-z5" color="primary">
-    <a [routerLink]="logoNav"  routerLinkActive="active" mat-button class="logo">
+    <a [routerLink]="logoNav"  routerLinkActive="active" mat-button class="logo link">
         <span>Task Manager</span>
     </a>
-    <a [routerLink]="projectsNav" routerLinkActive="active"  mat-button class="toolbar__button">
+    <a [routerLink]="projectsNav" routerLinkActive="active"  mat-button class="toolbar__button link">
         <span>Agile Boards</span>
     </a>
-    <a [routerLink]="agileNav" routerLinkActive="active" mat-button class="toolbar__button">
+    <a [routerLink]="agileNav" routerLinkActive="active" mat-button class="toolbar__button link">
         <span>Projects</span>
     </a>
     <span class="toolbar__space"></span>
-    <button class="toolbar__button"  mat-button type="button" (click)="logout()">{{ userAction }}</button>
+    <button class="toolbar__button link"  mat-button type="button" (click)="logout()">{{ userAction }}</button>
 </mat-toolbar>
 

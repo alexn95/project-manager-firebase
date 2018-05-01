@@ -70,15 +70,31 @@ export class AuthService {
             });
     }
 
-    public signup(email: string, password: string): void {
-        this.fireAuth.auth.createUserWithEmailAndPassword(email, password)
+    public signup(email: string, password: string, firstName: string, secondName: string): Observable<void> {
+        return new Observable(observer => {
+            this.fireAuth.auth.createUserWithEmailAndPassword(email, password)
             .then(result => {
-                this.snackBar.open(snackBarMsgs.signup.success);
-                this.router.navigateByUrl(routingUrl.loginPage);
+                this.createUser(result.uid, email, firstName, secondName).then( () => {
+                    this.snackBar.open(snackBarMsgs.signup.success);
+                    this.router.navigateByUrl(routingUrl.loginPage);
+                    observer.next();
+                });
             })
             .catch((error: Error) => {
                 this.snackBar.openMsg(error.message, snackBarMsgs.default);
+                observer.next();
             });
+        });
+    }
+
+    private createUser(id: string, email: string, firstName: string, secondName: string): Promise<any> {
+        const ref = this.db.ref('users/' + id);
+        return ref.set({
+            id: id,
+            email: email,
+            firstName: firstName,
+            secondName: secondName,
+        });
     }
 
     public logout(): void {

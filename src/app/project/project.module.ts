@@ -9,7 +9,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {    MatToolbarModule, MatButtonModule, MatInputModule, MatCheckboxModule,
             MatSelectModule,
-            MatSidenavModule, } from '@angular/material';
+            MatSidenavModule,
+            MatSortModule,
+            MatTableModule, } from '@angular/material';
 import { ProjectDetailsComponent } from './project-details/project-details.component';
 import { ProjectMenuComponent } from './project-menu/project-menu.component';
 
@@ -26,6 +28,8 @@ import { ProjectMenuComponent } from './project-menu/project-menu.component';
         MatCheckboxModule,
         MatSelectModule,
         MatSidenavModule,
+        MatSortModule,
+        MatTableModule,
     ],
     declarations: [
         ProjectComponent,

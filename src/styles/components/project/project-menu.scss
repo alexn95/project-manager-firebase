@@ -2,13 +2,12 @@ $width: 100%;
 
 .project-menu {
     
-    margin: 0 15px;
+    margin: 0 15px 0 30px;
     &__title {
         font-size: 25px;
         width: $width;
         white-space: nowrap; 
         overflow: hidden;
-        // text-overflow: ellipsis;
     }
     &__description {
         width: $width;

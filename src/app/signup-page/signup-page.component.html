@@ -2,7 +2,7 @@
         <span class="logo auth-container_logo">Task Manager</span>
         <span class="auth-container_header">Sign up page</span>
     <form [formGroup]="signupForm" (ngSubmit)="signup()" class="signup-form form">
-        <mat-form-field class="form__row" >
+        <mat-form-field class="signup-form__input form__row" >
             <input matInput placeholder="Email" [formControl]="email" 
                 [errorStateMatcher]="errorMatcher">
             <mat-hint>Errors appear instantly!</mat-hint>
@@ -14,7 +14,31 @@
             </mat-error>
         </mat-form-field> 
 
-        <mat-form-field class="form__row" >
+        <mat-form-field class="signup-form__input form__row" >
+            <input matInput placeholder="First name" [formControl]="firstName" 
+                [errorStateMatcher]="errorMatcher">
+            <mat-hint>Errors appear instantly!</mat-hint>
+            <mat-error *ngIf="firstName.hasError('required')">
+                First name is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="firstName.hasError('maxlength') && !email.hasError('required')">
+                First name can not be longer than 50 characters.
+            </mat-error>
+        </mat-form-field> 
+
+        <mat-form-field class="signup-form__input form__row" >
+            <input matInput placeholder="Second name" [formControl]="secondName" 
+                [errorStateMatcher]="errorMatcher">
+            <mat-hint>Errors appear instantly!</mat-hint>
+            <mat-error *ngIf="secondName.hasError('required')">
+                Second name is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="secondName.hasError('maxlength') && !email.hasError('required')">
+                Second name can not be longer than 50 characters.
+            </mat-error>
+        </mat-form-field> 
+
+        <mat-form-field class="signup-form__input form__row" >
             <input matInput placeholder="Password" type="password" [formControl]="password"
                 [errorStateMatcher]="errorMatcher">
             <mat-hint>Errors appear instantly!</mat-hint>
@@ -26,7 +50,7 @@
             </mat-error>
         </mat-form-field>
 
-        <mat-form-field class="form__row" >
+        <mat-form-field class="signup-form__input form__row" >
             <input matInput placeholder="Password confirm" type="password" [formControl]="passwordConfirm"
                 [errorStateMatcher]="errorMatcher">
             <mat-hint>Errors appear instantly!</mat-hint>
@@ -44,8 +68,8 @@
             </mat-error>
         </mat-form-field>
 
-        <div class="form__action-row_direction_row margin_top_20">
-            <button type="submit" [disabled]="!signupForm.valid" mat-raised-button color="primary">
+        <div class="form__action-row_direction_column margin_top_20">
+            <button type="submit" [disabled]="!signupForm.valid || isDisableSubmit" mat-raised-button color="primary">
                 Sign up
             </button>   
         </div> 

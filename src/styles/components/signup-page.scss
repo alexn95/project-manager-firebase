@@ -4,6 +4,9 @@ $width: 350px;
     width: 95%;
     max-width: $width;
     padding: 0 0 100px 0;
+    &__input {
+        padding: 5px 0px;
+    }
 }
 
 app-signup-page {

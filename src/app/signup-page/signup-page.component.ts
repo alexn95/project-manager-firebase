@@ -12,30 +12,47 @@ export class SignupPageComponent implements OnInit {
 
     public errorMatcher = new FormErrorStateMatcher();
     public email: FormControl;
+    public firstName: FormControl;
+    public secondName: FormControl;
     public password: FormControl;
     public passwordConfirm: FormControl;
     public signupForm: FormGroup;
+
+    public isDisableSubmit = false;
 
     constructor(
         public authSrervice: AuthService
     ) {
         this.email = new FormControl('', [
             Validators.required,
-            Validators.email
+            Validators.email,
+            Validators.maxLength(100)
+        ]);
+        this.firstName = new FormControl('', [
+            Validators.required,
+            Validators.maxLength(50)
+        ]);
+        this.secondName = new FormControl('', [
+            Validators.required,
+            Validators.maxLength(50)
         ]);
         this.password = new FormControl('', [
             Validators.required,
-            Validators.minLength(6)
+            Validators.minLength(6),
+            Validators.maxLength(50)
         ]);
         this.passwordConfirm = new FormControl('', [
             Validators.required,
             Validators.minLength(6),
+            Validators.maxLength(50),
             confirmPasswordValidator(this.password)
         ]);
         this.signupForm = new FormGroup({
             emial: this.email,
             password: this.password,
-            passwordConfirm: this.passwordConfirm
+            passwordConfirm: this.passwordConfirm,
+            firstName: this.firstName,
+            secondName: this.secondName,
         });
 
     }
@@ -44,7 +61,9 @@ export class SignupPageComponent implements OnInit {
     }
 
     public signup(): void {
-        this.authSrervice.signup(this.email.value, this.password.value);
+        this.isDisableSubmit = true;
+        this.authSrervice.signup(this.email.value, this.password.value, this.firstName.value, this.secondName.value)
+            .subscribe(() => this.isDisableSubmit = false);
     }
 
 }
