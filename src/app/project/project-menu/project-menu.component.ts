@@ -1,7 +1,8 @@
+import { routingUrl } from './../../../environments/const-variables/routing-url';
 import { matDialogOptions } from './../../../environments/const-variables/mat-dialog-options';
 import { entities } from './../../../environments/const-variables/enities';
 import { DeleteComponent } from './../../delete/delete.component';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { ProjectService } from './../project.service';
 import { Project } from './../../../models/entries/project';
@@ -21,6 +22,7 @@ export class ProjectMenuComponent implements OnInit, OnDestroy {
 
     constructor(
         private router: Router,
+        private activatedRoute: ActivatedRoute,
         private service: ProjectService,
         private projectDeleteModal: MatDialog,
     ) {
@@ -47,10 +49,30 @@ export class ProjectMenuComponent implements OnInit, OnDestroy {
     }
 
     public showUsers(): void {
-        this.service.showUsers();
+        this.router.navigate([
+            {
+                outlets: {
+                    content: ['users']
+                }
+            }
+        ],
+        {
+            relativeTo: this.activatedRoute
+        }
+        );
     }
 
     public showDetails(): void {
-        this.service.showDetails();
+        this.router.navigate([
+            {
+                outlets: {
+                    content: ['details']
+                }
+            }
+        ],
+        {
+            relativeTo: this.activatedRoute
+        }
+        );
     }
 }

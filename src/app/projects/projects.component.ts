@@ -1,3 +1,4 @@
+import { routingUrl } from './../../environments/const-variables/routing-url';
 import { DataProjectsService } from './../../services/data-provider/data-projects.service';
 import { User } from 'firebase/app';
 import { Component, OnInit, OnDestroy } from '@angular/core';

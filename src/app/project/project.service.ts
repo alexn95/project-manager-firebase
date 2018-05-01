@@ -1,4 +1,3 @@
-import { Content } from './../../environments/const-variables/content';
 import { DataProjectsService } from './../../services/data-provider/data-projects.service';
 import { Observable } from 'rxjs/Observable';
 import { Project } from './../../models/entries/project';
@@ -11,13 +10,11 @@ export class ProjectService {
 
     private project: Project;
     public projectSet: EventEmitter<Project>;
-    public contentChange: EventEmitter<Content>;
 
     constructor(
         private dataProvider: DataProjectsService,
     ) {
         this.projectSet = new EventEmitter<Project>();
-        this.contentChange = new EventEmitter<Content>();
     }
 
 
@@ -35,14 +32,6 @@ export class ProjectService {
             this.project = project;
             this.projectSet.emit(project);
         });
-    }
-
-    public showUsers(): void {
-        this.contentChange.emit(Content.users);
-    }
-
-    public showDetails(): void {
-        this.contentChange.emit(Content.details);
     }
 
 }

@@ -1,5 +1,8 @@
 <div class="delete-modal">
-    <p class="delete-modal__info">Delete  {{ title }} ?</p>
+    <p class="delete-modal__info">
+        <span>Delete </span> 
+        <span class="delete-modal__info_title">{{ title }}</span>  ?
+    </p>
     <div class="delete-modal__action-row">
         <button class="delete-modal__button" mat-icon-button (click)="delete()" >
             <mat-icon color="warn">delete_forever</mat-icon>

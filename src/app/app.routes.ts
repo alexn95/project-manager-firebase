@@ -1,3 +1,5 @@
+import { ProjectUsersComponent } from './project/project-users/project-users.component';
+import { ProjectDetailsComponent } from './project/project-details/project-details.component';
 import { routingUrl } from './../environments/const-variables/routing-url';
 import { ProjectComponent } from './project/project.component';
 import { HomeComponent } from './home/home.component';
@@ -22,6 +24,23 @@ const routes: Routes = [
         path: routingUrl.project,
         component: ProjectComponent,
         canActivate: [AuthGuardService],
+        children : [
+            {
+                outlet: routingUrl.contentOutlet,
+                path: '',
+                component: ProjectDetailsComponent
+            },
+            {
+                outlet: routingUrl.contentOutlet,
+                path: routingUrl.contentDetails,
+                component: ProjectDetailsComponent
+            },
+            {
+                outlet: routingUrl.contentOutlet,
+                path: routingUrl.contentUsers,
+                component: ProjectUsersComponent,
+            }
+        ]
     },
     {
         path: routingUrl.projects,

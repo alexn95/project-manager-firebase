@@ -1,7 +1,12 @@
 export const routingUrl = {
     home: '',
     projects: 'projects',
-    project: 'project/:id',
     loginPage: 'login',
-    signupPage: 'signup'
+    signupPage: 'signup',
+
+    project: 'project/:id',
+
+    contentOutlet: 'content',
+    contentDetails: 'details',
+    contentUsers: 'users',
 };

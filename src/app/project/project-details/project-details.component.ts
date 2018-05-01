@@ -44,6 +44,11 @@ export class ProjectDetailsComponent implements OnInit, OnDestroy {
             this.project = project;
             this.initProjectForm();
         });
+        const currentProject = this.service.getProject;
+        if (currentProject) {
+            this.project = currentProject;
+            this.initProjectForm();
+        }
     }
 
     ngOnDestroy() {

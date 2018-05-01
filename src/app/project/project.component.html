@@ -3,8 +3,7 @@
         <app-project-menu></app-project-menu>
     </mat-sidenav>
     <mat-sidenav-content class="project-sidenav-content">
-       <app-project-details *ngIf="isShowDetails()"></app-project-details>
-       <app-project-users *ngIf="isShowUsers()"></app-project-users>
+        <router-outlet name="content"></router-outlet>
     </mat-sidenav-content>
 </mat-sidenav-container>
 
