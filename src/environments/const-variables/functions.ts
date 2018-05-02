@@ -1,3 +1,6 @@
+const rootURL = 'https://us-central1-task-manager-free.cloudfunctions.net';
+
 export const functions = {
-    searchProjects: 'https://us-central1-task-manager-free.cloudfunctions.net/searchProjects'
+    searchProjects: rootURL + '/searchProjects',
+    getUserByEmail: rootURL + '/getUserByEmail',
 };

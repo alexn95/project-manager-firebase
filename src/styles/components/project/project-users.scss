@@ -21,9 +21,31 @@ $min-width: 500px;
     min-width: $min-width;
     padding: 10px;
 
-    &__filter {
-        width: 90%;
+    &__header {
+        padding: 0 0 10px 20px;
+        font-size: 25px;
+        align-self: left;
     }
+
+    &__action-row {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+    }
+
+    &__filter {
+        margin-left: 20px;
+        min-width: 200px;
+        width: 80%;
+    }
+
+    &__invite-user {
+        margin-left: 30px;
+        margin-bottom: 10px; 
+        display: flex;
+        align-items: center;
+    }
+
     &__table {
         background-color: #FAFAFA;
         width: 100%;
@@ -42,12 +64,13 @@ $min-width: 500px;
         min-width: 150px;
     }
     &-role {
+        margin-right: 20px; 
         max-width: 100px;
-        min-width: 70px;
+        min-width: 100px;
     }
-    &-action {
+    &-remove {
         max-width: 100px;
-        min-width: 70px;
+        min-width: 100px;
     }
 }
 

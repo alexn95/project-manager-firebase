@@ -1,27 +1,42 @@
 <div class="project-users-container container">
     <div class="project-users">
-        <mat-form-field class="project-users__filter">
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-        </mat-form-field>
+        <span class="project-users__header">Project users</span>
+        <div class="project-users__action-row">
+            <mat-form-field class="project-users__filter">
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+            </mat-form-field>
+            <div class="project-users__invite-user">
+                <button class="link" (click)='inviteUsers()' mat-raised-button color="primary"> Invite user </button>
+            </div>
+            
+        </div>
         <mat-table class="project-users__table" [dataSource]="dataSource" matSort>
-            <ng-container class="project-users__table_email" matColumnDef="email">
+            <ng-container matColumnDef="email">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
                 <mat-cell *matCellDef="let row"> {{ row.email }} </mat-cell>
             </ng-container>
-            <ng-container class="project-users__table_name" matColumnDef="name">
+            <ng-container matColumnDef="name">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
                 <mat-cell *matCellDef="let row"> {{ row.name }} </mat-cell>
             </ng-container>
-            <ng-container class="project-users__table_role" matColumnDef="role">
+            <ng-container matColumnDef="role">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Role </mat-header-cell>
-                <mat-cell *matCellDef="let row"> {{ row.role }} </mat-cell>
+                <mat-cell *matCellDef="let row">
+                    <span *ngIf="isCreator(row.role)">{{ creatorRole }}</span>
+                    <mat-select *ngIf="!isCreator(row.role)" [(value)] = "row.role" 
+                        (change)="changeRole($event.value, row.user_id)">
+                        <mat-option *ngFor="let role of roles" [value]="role.value">
+                            {{ role.role }}
+                        </mat-option>
+                    </mat-select>
+                </mat-cell>
             </ng-container>
-            <ng-container class="project-users__table_action" matColumnDef="action">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Action </mat-header-cell>
+            <ng-container matColumnDef="remove">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> </mat-header-cell>
                 <mat-cell *matCellDef="let row"> 
-                    <a class="link">
-                        action
-                    </a>
+                    <div [ngClass]="{'link': true, 'remove-link': !isCreator(row.role), 'disabled-link': isCreator(row.role)}">
+                        remove user
+                    </div>
                 </mat-cell>
             </ng-container>
 

@@ -11,3 +11,16 @@
 .link:hover {
     color: orange ;
 }
+
+.remove-link:hover {
+    color: red;
+}
+
+.disabled-link {
+    color: #999;
+    cursor: auto;
+}
+
+.disabled-link:hover {
+    color: #999;
+}

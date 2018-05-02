@@ -1,0 +1,26 @@
+.invite-users {
+    overflow: hidden;
+    &__header {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    &__form {
+        overflow: hidden;
+    }
+
+    &__input {
+        width: 100%;
+    }
+
+    &__action-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        width: 100%;
+    }
+
+    &__button {
+        margin: 0 10px !important;
+    }
+}

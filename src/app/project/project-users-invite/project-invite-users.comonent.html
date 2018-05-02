@@ -1,0 +1,29 @@
+<div class="invite-users">
+    <div class="invite-users__header"> Invite user</div>
+    <form [formGroup]="inviteForm" (ngSubmit)="invite()" class="form invite-users__form">
+        <mat-form-field class="invite-users__input">
+            <input matInput placeholder="Email" [formControl]="email"  
+                [errorStateMatcher]="errorMatcher">
+            <mat-icon matSuffix>search</mat-icon>
+            <mat-error *ngIf="!hasUser">
+                User with such an email does not exist.
+            </mat-error>
+            <mat-error *ngIf="email.hasError('maxlength')">
+                Email can not be longer than 100 characters.
+            </mat-error>
+           
+        </mat-form-field>
+
+        <div class="invite-users__action-row">
+            <button class="invite-users__button"
+                type="submit" [disabled]="!inviteForm.valid || !hasUser" mat-raised-button color="primary">
+                Submit
+            </button>
+            <button class="invite-users__button"
+                type="button" mat-raised-button color="primary" (click)="cancel()">
+                Cancel 
+            </button>
+        </div>
+    </form>
+</div>
+

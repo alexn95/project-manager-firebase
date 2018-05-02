@@ -28,18 +28,10 @@ export class DataProjectsService {
             id: '1',
             title: 'proj1'
         };
-        return new Observable(observer => {
-            this.http.post(functions.searchProjects, params)
-            .map((res) => res.json())
-            .subscribe((projects) => {
-                if (projects) {
-                    const result = Object.keys(projects).map(key => projects[key]);
-                    console.log(result);
-                    observer.next(result);
-                } else {
-                    observer.next([]);
-                }
-            });
+        return this.http.post(functions.searchProjects, params)
+        .map((res) => {
+            const json = res.json();
+            return json ? Object.keys(json).map(key => json[key]) : [];
         });
     }
 
@@ -78,6 +70,19 @@ export class DataProjectsService {
     public deleteProject(id: string): Promise<any> {
         const ref = this.db.ref('projects/' + id);
         return ref.remove();
+    }
+
+    public changeUserRole(userId: string, projectId: string, role: number): Promise<any> {
+        const ref = this.db.ref('projects/' + projectId + '/users/' + userId + '/role');
+        return ref.set(role);
+    }
+
+    public joinUser(userId: string, projectId: string): Promise<any> {
+        const ref = this.db.ref('projects/' + projectId + '/users/' + userId);
+        return ref.set({
+            role: 2,
+            user_id: userId
+        });
     }
 
 }

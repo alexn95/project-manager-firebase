@@ -1,3 +1,4 @@
+import { ProjectInviteUsersComponent } from './project-users-invite/project-invite-users.comonent';
 import { ProjectUsersComponent } from './project-users/project-users.component';
 import { DeleteComponent } from './../delete/delete.component';
 import { ProjectService } from './project.service';
@@ -11,7 +12,8 @@ import {    MatToolbarModule, MatButtonModule, MatInputModule, MatCheckboxModule
             MatSelectModule,
             MatSidenavModule,
             MatSortModule,
-            MatTableModule, } from '@angular/material';
+            MatTableModule,
+            MatIconModule, } from '@angular/material';
 import { ProjectDetailsComponent } from './project-details/project-details.component';
 import { ProjectMenuComponent } from './project-menu/project-menu.component';
 import { DataUsersService } from '../../services/data-provider/data-users.service';
@@ -31,25 +33,30 @@ import { DataUsersService } from '../../services/data-provider/data-users.servic
         MatSidenavModule,
         MatSortModule,
         MatTableModule,
+        MatCheckboxModule,
+        MatIconModule,
     ],
     declarations: [
         ProjectComponent,
         ProjectDetailsComponent,
         ProjectMenuComponent,
         ProjectUsersComponent,
+        ProjectInviteUsersComponent,
     ],
     exports: [
         ProjectComponent,
         ProjectDetailsComponent,
         ProjectMenuComponent,
         ProjectUsersComponent,
+        ProjectInviteUsersComponent,
     ],
     providers: [
         ProjectService,
         DataUsersService
     ],
     entryComponents: [
-        DeleteComponent
+        DeleteComponent,
+        ProjectInviteUsersComponent
     ]
 })
 export class ProjectModule {
