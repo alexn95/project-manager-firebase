@@ -13,7 +13,7 @@ export class SignupPageComponent implements OnInit {
     public errorMatcher = new FormErrorStateMatcher();
     public email: FormControl;
     public firstName: FormControl;
-    public secondName: FormControl;
+    public lastName: FormControl;
     public password: FormControl;
     public passwordConfirm: FormControl;
     public signupForm: FormGroup;
@@ -32,7 +32,7 @@ export class SignupPageComponent implements OnInit {
             Validators.required,
             Validators.maxLength(50)
         ]);
-        this.secondName = new FormControl('', [
+        this.lastName = new FormControl('', [
             Validators.required,
             Validators.maxLength(50)
         ]);
@@ -52,7 +52,7 @@ export class SignupPageComponent implements OnInit {
             password: this.password,
             passwordConfirm: this.passwordConfirm,
             firstName: this.firstName,
-            secondName: this.secondName,
+            lastName: this.lastName,
         });
 
     }
@@ -62,7 +62,7 @@ export class SignupPageComponent implements OnInit {
 
     public signup(): void {
         this.isDisableSubmit = true;
-        this.authSrervice.signup(this.email.value, this.password.value, this.firstName.value, this.secondName.value)
+        this.authSrervice.signup(this.email.value, this.password.value, this.firstName.value, this.lastName.value)
             .subscribe(() => this.isDisableSubmit = false);
     }
 

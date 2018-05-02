@@ -22,7 +22,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
         this.searchSub = dataProvider.searchProjects().subscribe(projects => {
             this.projects = projects;
         });
-        dataProvider.saveProject('Project 1', 'description', accessTypes[0]).then();
+        // dataProvider.saveProject('Project 1', 'description', accessTypes[0]).then();
     }
 
     ngOnInit() {

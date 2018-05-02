@@ -1,5 +1,11 @@
 export enum projectRoles {
     creator,
     admin,
-    user
+    developer
 }
+
+export const projectRolesArray = [
+    'creator',
+    'admin',
+    'developer'
+];

@@ -1,11 +1,53 @@
-$width: 800px;
+$max-width: 1000px;
+$min-width: 500px;
 
 .project-users-container {
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 30px 10px 10px 10px;
+}
+
+.project-users {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 10px;
-    
+    overflow: hidden;
+
+    width: 90%;
+    max-width: $max-width;
+    min-width: $min-width;
+    padding: 10px;
+
+    &__filter {
+        width: 90%;
+    }
+    &__table {
+        background-color: #FAFAFA;
+        width: 100%;
+        overflow-x: hidden;
+        overflow-y: auto;
+        max-height: 80%;
+    }
+}
+
+.mat-column {
+    &-email {
+        min-width: 150px;
+    }
+    &-name {
+        max-width: 300px;
+        min-width: 150px;
+    }
+    &-role {
+        max-width: 100px;
+        min-width: 70px;
+    }
+    &-action {
+        max-width: 100px;
+        min-width: 70px;
+    }
 }
 

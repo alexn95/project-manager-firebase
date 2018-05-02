@@ -27,14 +27,14 @@
         </mat-form-field> 
 
         <mat-form-field class="signup-form__input form__row" >
-            <input matInput placeholder="Second name" [formControl]="secondName" 
+            <input matInput placeholder="Last name" [formControl]="lastName" 
                 [errorStateMatcher]="errorMatcher">
             <mat-hint>Errors appear instantly!</mat-hint>
-            <mat-error *ngIf="secondName.hasError('required')">
-                Second name is <strong>required</strong>
+            <mat-error *ngIf="lastName.hasError('required')">
+                Last name is <strong>required</strong>
             </mat-error>
-            <mat-error *ngIf="secondName.hasError('maxlength') && !email.hasError('required')">
-                Second name can not be longer than 50 characters.
+            <mat-error *ngIf="lastName.hasError('maxlength') && !email.hasError('required')">
+                Last name can not be longer than 50 characters.
             </mat-error>
         </mat-form-field> 
 

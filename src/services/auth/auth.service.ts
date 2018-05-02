@@ -8,6 +8,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { AngularFireAuth, AngularFireAuthModule } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { User } from '../../models/entries/user';
 
 
 
@@ -76,11 +77,11 @@ export class AuthService {
             });
     }
 
-    public signup(email: string, password: string, firstName: string, secondName: string): Observable<void> {
+    public signup(email: string, password: string, firstName: string, lastName: string): Observable<void> {
         return new Observable(observer => {
             this.fireAuth.auth.createUserWithEmailAndPassword(email, password)
             .then(result => {
-                this.createUser(result.uid, email, firstName, secondName).then( () => {
+                this.createUser(result.uid, email, firstName, lastName).then( () => {
                     this.snackBar.open(snackBarMsgs.signup.success);
                     this.router.navigateByUrl(routingUrl.loginPage);
                     observer.next();
@@ -93,14 +94,15 @@ export class AuthService {
         });
     }
 
-    private createUser(id: string, email: string, firstName: string, secondName: string): Promise<any> {
+    private createUser(id: string, email: string, firstName: string, lastName: string): Promise<any> {
         const ref = this.db.ref('users/' + id);
-        return ref.set({
+        const user: User = {
             id: id,
             email: email,
-            firstName: firstName,
-            secondName: secondName,
-        });
+            first_name: firstName,
+            last_name: lastName
+        }
+        return ref.set(user);
     }
 
     public logout(): void {

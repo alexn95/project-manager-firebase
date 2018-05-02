@@ -14,6 +14,7 @@ import {    MatToolbarModule, MatButtonModule, MatInputModule, MatCheckboxModule
             MatTableModule, } from '@angular/material';
 import { ProjectDetailsComponent } from './project-details/project-details.component';
 import { ProjectMenuComponent } from './project-menu/project-menu.component';
+import { DataUsersService } from '../../services/data-provider/data-users.service';
 
 @NgModule({
     imports: [
@@ -44,7 +45,8 @@ import { ProjectMenuComponent } from './project-menu/project-menu.component';
         ProjectUsersComponent,
     ],
     providers: [
-        ProjectService
+        ProjectService,
+        DataUsersService
     ],
     entryComponents: [
         DeleteComponent
