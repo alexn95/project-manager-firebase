@@ -1,10 +1,10 @@
 import { routingUrl } from './../../environments/const-variables/routing-url';
 import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
-import { FormErrorStateMatcher } from './../../models/form-error-state-matcher';
 import { AuthService } from './../../services/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import * as firebase from 'firebase/app';
+import { FormErrorStateMatcher } from '../../services/validators/form-error-state-matcher';
 
 @Component({
     selector: 'app-login-page',

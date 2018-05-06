@@ -1,12 +1,14 @@
 export const routingUrl = {
-    home: '',
+    home: 'home',
     projects: 'projects',
-    loginPage: 'login',
-    signupPage: 'signup',
-
-    project: 'project/:id',
+    projectId: '/:id',
 
     contentOutlet: 'content',
     contentDetails: 'details',
     contentUsers: 'users',
+
+    agileBoards: 'agile-boards',
+
+    loginPage: 'login',
+    signupPage: 'signup',
 };

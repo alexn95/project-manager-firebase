@@ -1,0 +1,11 @@
+
+.mat-icon {
+    &_color {
+        &_green {
+            color: green;
+        }
+        &_red {
+            color: red;
+        }
+    }
+}

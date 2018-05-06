@@ -19,7 +19,6 @@ export class ProjectMenuComponent implements OnInit, OnDestroy {
     public project: Project;
     private projectSetSub: Subscription;
 
-
     constructor(
         private router: Router,
         private activatedRoute: ActivatedRoute,
@@ -48,31 +47,12 @@ export class ProjectMenuComponent implements OnInit, OnDestroy {
         });
     }
 
-    public showUsers(): void {
-        this.router.navigate([
-            {
-                outlets: {
-                    content: ['users']
-                }
-            }
-        ],
-        {
-            relativeTo: this.activatedRoute
-        }
-        );
+    public getDetailsUrl(): {} {
+        return { outlets: {  content : routingUrl.contentDetails  } };
     }
 
-    public showDetails(): void {
-        this.router.navigate([
-            {
-                outlets: {
-                    content: ['details']
-                }
-            }
-        ],
-        {
-            relativeTo: this.activatedRoute
-        }
-        );
+    public getUsersUrl(): {} {
+        return { outlets: {  content : routingUrl.contentUsers  } };
     }
+
 }

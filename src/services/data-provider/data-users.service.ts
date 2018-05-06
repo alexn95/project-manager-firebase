@@ -20,7 +20,7 @@ export class DataUsersService {
     }
 
     public inviteToProject(userId: string, projectId: string): Promise<any> {
-        const invite: Invite = { project_id: projectId};
+        const invite: Invite = { project_id: projectId };
         return this.db.ref('users/' + userId + '/invites/' + projectId).set(invite);
     }
 

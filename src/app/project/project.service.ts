@@ -2,6 +2,7 @@ import { DataProjectsService } from './../../services/data-provider/data-project
 import { Observable } from 'rxjs/Observable';
 import { Project } from './../../models/entries/project';
 import { Injectable, EventEmitter } from '@angular/core';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 
 
@@ -16,7 +17,6 @@ export class ProjectService {
     ) {
         this.projectSet = new EventEmitter<Project>();
     }
-
 
     get getProject(): Project {
         return this.project;

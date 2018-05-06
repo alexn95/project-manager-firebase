@@ -1,8 +1,9 @@
 import { AuthService } from './../../services/auth/auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { FormErrorStateMatcher } from './../../models/form-error-state-matcher';
+
 import { Component, OnInit } from '@angular/core';
-import { confirmPasswordValidator } from '../../models/confirm-password-validator';
+import { FormErrorStateMatcher } from '../../services/validators/form-error-state-matcher';
+import { confirmPasswordValidator } from '../../services/validators/confirm-password-validator';
 
 @Component({
     selector: 'app-signup-page',

@@ -1,16 +1,21 @@
+import { UserProject } from './../project-users/user-project.model';
+import { UserSearchStatus } from './user-search.model';
 import { User } from './../../../models/entries/user';
 import { DataUsersService } from './../../../services/data-provider/data-users.service';
 import { Subscription } from 'rxjs/Subscription';
-import { FormErrorStateMatcher } from './../../../models/form-error-state-matcher';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { snackBarMsgs } from './../../../environments/const-variables/snack-bar-msgs';
 import { SnackBarService } from './../../../services/snack-bar/snack-bar.service';
 import { routingUrl } from './../../../environments/const-variables/routing-url';
 import { entities } from './../../../environments/const-variables/enities';
 import { Router } from '@angular/router';
-import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
+import { Component, OnInit, Inject, OnDestroy, EventEmitter } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import 'rxjs/add/operator/debounceTime';
+import { hasUserValidator } from '../../../services/validators/has-user-validator';
+import { confirmPasswordValidator } from '../../../services/validators/confirm-password-validator';
+import { FormErrorStateMatcher } from '../../../services/validators/form-error-state-matcher';
+import { ProjectService } from '../project.service';
 
 @Component({
     selector: 'app-invite-users-component',
@@ -21,8 +26,9 @@ export class ProjectInviteUsersComponent implements OnInit, OnDestroy {
     public inviteForm: FormGroup;
     public email: FormControl;
     public errorMatcher = new FormErrorStateMatcher();
+    public status: UserSearchStatus;
+    public users: UserProject[];
 
-    public hasUser: boolean;
     private invitedUser: User;
     private searchSub: Subscription;
 
@@ -31,9 +37,11 @@ export class ProjectInviteUsersComponent implements OnInit, OnDestroy {
         private router: Router,
         private dialogRef: MatDialogRef<ProjectInviteUsersComponent>,
         private usersService: DataUsersService,
+        private service: ProjectService,
         @Inject(MAT_DIALOG_DATA) private data: any,
     ) {
-        this.hasUser = false;
+        this.status = UserSearchStatus.none;
+        this.users = data.users;
     }
 
     ngOnInit() {
@@ -46,8 +54,8 @@ export class ProjectInviteUsersComponent implements OnInit, OnDestroy {
 
     private initForm(): void {
         this.email = new FormControl('', [
+            Validators.maxLength(100),
             Validators.required,
-            Validators.maxLength(100)
         ]);
         this.inviteForm = new FormGroup({
             email: this.email
@@ -55,23 +63,33 @@ export class ProjectInviteUsersComponent implements OnInit, OnDestroy {
         this.searchSub = this.inviteForm.valueChanges
         .debounceTime(800)
         .subscribe(() => {
-            this.usersService.getUserByEmail(this.email.value)
-            .subscribe((user: User) => {
-                if (user) {
+            this.searchUser();
+        });
+    }
+
+    private searchUser(): void {
+        this.status = UserSearchStatus.searched;
+        this.usersService.getUserByEmail(this.email.value)
+        .subscribe((user: User) => {
+            if (user) {
+                if (this.users.filter(projectUser => projectUser.user_id === user.id).length === 0) {
                     this.invitedUser = user;
-                    this.hasUser = true;
+                    this.status = UserSearchStatus.found;
                 } else {
+                    this.status = UserSearchStatus.inProject;
                     this.invitedUser = null;
-                    this.hasUser = false;
                 }
-            });
+            } else {
+                this.invitedUser = null;
+                this.status = UserSearchStatus.notFounnd;
+            }
         });
     }
 
 
     public invite(): void {
         this.usersService.inviteToProject(this.invitedUser.id, this.data.projectId).then(() => {
-
+            this.snackBar.open(snackBarMsgs.userInviteSuccess);
             this.dialogRef.close();
         });
     }

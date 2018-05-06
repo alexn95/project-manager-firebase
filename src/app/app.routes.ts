@@ -12,6 +12,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { AppComponent } from './app.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import { AgileBoardsComponent } from './agile-boards/agile-boards.component';
 
 
 
@@ -21,7 +22,12 @@ const routes: Routes = [
         component: HomeComponent
     },
     {
-        path: routingUrl.project,
+        path: routingUrl.projects,
+        component: ProjectsComponent,
+        canActivate: [AuthGuardService],
+    },
+    {
+        path: routingUrl.projects + routingUrl.projectId,
         component: ProjectComponent,
         canActivate: [AuthGuardService],
         children : [
@@ -43,8 +49,8 @@ const routes: Routes = [
         ]
     },
     {
-        path: routingUrl.projects,
-        component: ProjectsComponent,
+        path: routingUrl.agileBoards,
+        component: AgileBoardsComponent,
         canActivate: [AuthGuardService],
     },
     {

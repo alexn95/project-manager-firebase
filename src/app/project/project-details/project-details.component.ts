@@ -4,7 +4,7 @@ import { ProjectService } from './../project.service';
 import { SnackBarService } from './../../../services/snack-bar/snack-bar.service';
 import { Project } from './../../../models/entries/project';
 import { DataProjectsService } from './../../../services/data-provider/data-projects.service';
-import { FormErrorStateMatcher } from './../../../models/form-error-state-matcher';
+
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
@@ -12,6 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import { FormErrorStateMatcher } from '../../../services/validators/form-error-state-matcher';
 
 
 @Component({

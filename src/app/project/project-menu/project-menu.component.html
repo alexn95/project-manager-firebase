@@ -7,14 +7,12 @@
     </div>
     <div class="project-menu__border"></div>
     <div class="project-menu__item">
-        <button class="link" mat-raised-button color="primary" (click)="showDetails()">
-            Details
-        </button>
+        <a [routerLink]="[getDetailsUrl()]" routerLinkActive="link__active "  mat-raised-button 
+            class="link" color="primary">Details</a>
     </div>
     <div class="project-menu__item">
-        <button class="link" mat-raised-button color="primary" (click)="showUsers()">
-            Users
-        </button>
+        <a [routerLink]="[getUsersUrl()]" routerLinkActive="link__active " mat-raised-button
+            class="link" color="primary" >Users</a>
     </div>
     <div class="project-menu__border"></div>
     <div class="project-menu__item project-menu__item_primary">

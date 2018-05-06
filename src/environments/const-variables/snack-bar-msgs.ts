@@ -47,6 +47,11 @@ export const snackBarMsgs = {
         message: 'Project was deleted.',
         action: 'close',
         config: { duration: timeToClose }
+    },
+    userInviteSuccess: {
+        message: 'User was invited.',
+        action: 'close',
+        config: { duration: timeToClose }
     }
 };
 

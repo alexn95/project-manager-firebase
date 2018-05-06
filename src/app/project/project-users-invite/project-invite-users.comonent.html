@@ -1,25 +1,34 @@
 <div class="invite-users">
     <div class="invite-users__header"> Invite user</div>
     <form [formGroup]="inviteForm" (ngSubmit)="invite()" class="form invite-users__form">
-        <mat-form-field class="invite-users__input">
-            <input matInput placeholder="Email" [formControl]="email"  
-                [errorStateMatcher]="errorMatcher">
-            <mat-icon matSuffix>search</mat-icon>
-            <mat-error *ngIf="!hasUser">
-                User with such an email does not exist.
+        <mat-form-field class="invite-users__form-field">
+            <div class="invite-users__input-row">
+                <input matInput placeholder="Email" [formControl]="email"  
+                    [errorStateMatcher]="errorMatcher">
+                <mat-icon matSuffix *ngIf="status === 0">search</mat-icon>  
+                <mat-icon matSuffix *ngIf="status === 2" matTooltip="User found" matTooltipPosition="above"
+                    class="mat-icon_color_green">done </mat-icon>
+                <mat-icon matSuffix *ngIf="status === 3"  matTooltip="User not found" matTooltipPosition="above"
+                    class="mat-icon_color_red">error_outline </mat-icon>
+                <mat-icon matSuffix *ngIf="status === 4"  matTooltip="User already in project" matTooltipPosition="above"
+                    class="mat-icon_color_red">error_outline </mat-icon>
+                <mat-progress-spinner *ngIf="status === 1" [diameter]="24" mode="indeterminate"></mat-progress-spinner>
+            </div>
+            <mat-error *ngIf="email.hasError('required')">
+                Email is required.
             </mat-error>
             <mat-error *ngIf="email.hasError('maxlength')">
                 Email can not be longer than 100 characters.
             </mat-error>
-           
+            
         </mat-form-field>
-
+        
         <div class="invite-users__action-row">
-            <button class="invite-users__button"
-                type="submit" [disabled]="!inviteForm.valid || !hasUser" mat-raised-button color="primary">
-                Submit
+            <button
+                type="submit" [disabled]="!inviteForm.valid || status !== 2" mat-raised-button color="primary">
+                Invite
             </button>
-            <button class="invite-users__button"
+            <button
                 type="button" mat-raised-button color="primary" (click)="cancel()">
                 Cancel 
             </button>

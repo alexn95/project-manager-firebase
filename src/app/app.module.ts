@@ -1,3 +1,4 @@
+import { AgileBoardsModule } from './agile-boards/agile-boards.module';
 import { DeleteModule } from './delete/delete.module';
 import { GlobalErrorHandler } from './../services/error-handler/error-handler.service';
 import { ServicesModule } from './../services/services.module';
@@ -51,6 +52,7 @@ import { ProjectComponent } from './project/project.component';
         HomeModule,
         ProjectModule,
         DeleteModule,
+        AgileBoardsModule,
 
         // MATERIAL
         MatSnackBarModule

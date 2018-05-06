@@ -14,6 +14,8 @@ import { Subscription } from 'rxjs/Subscription';
 export class ProjectsComponent implements OnInit, OnDestroy {
 
     public projects: Project[];
+    public projectsUrl = routingUrl.projects;
+
     private searchSub: Subscription;
 
     constructor(

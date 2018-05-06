@@ -28,7 +28,7 @@ export class ToolbarComponent implements OnInit {
         );
         this.logoNav =  routingUrl.home;
         this.projectsNav = routingUrl.projects;
-        this.agileNav = routingUrl.projects;
+        this.agileNav = routingUrl.agileBoards;
         authSrervice.getAuthEvents.subscribe(
             (authEvent: AuthEvents) =>
                 this.userAction = authEvent === AuthEvents.AUTHENTICATED ? 'log out' : 'log in'
