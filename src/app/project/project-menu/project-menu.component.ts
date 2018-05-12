@@ -1,3 +1,4 @@
+import { projectRoles } from './../../../environments/const-variables/project-roles';
 import { routingUrl } from './../../../environments/const-variables/routing-url';
 import { matDialogOptions } from './../../../environments/const-variables/mat-dialog-options';
 import { entities } from './../../../environments/const-variables/enities';
@@ -17,6 +18,8 @@ import { MatDialog } from '@angular/material';
 export class ProjectMenuComponent implements OnInit, OnDestroy {
 
     public project: Project;
+    public userRole: projectRoles;
+
     private projectSetSub: Subscription;
 
     constructor(
@@ -31,6 +34,7 @@ export class ProjectMenuComponent implements OnInit, OnDestroy {
         this.projectSetSub = this.service.projectSet.subscribe((project: Project) => {
             this.project = project;
         });
+        this.userRole = this.service.getUserRole;
     }
 
     ngOnDestroy() {
@@ -53,6 +57,14 @@ export class ProjectMenuComponent implements OnInit, OnDestroy {
 
     public getUsersUrl(): {} {
         return { outlets: {  content : routingUrl.contentUsers  } };
+    }
+
+    public isCreator(): boolean {
+        return this.userRole === projectRoles.creator;
+    }
+
+    public isAdmin(): boolean {
+        return this.userRole === projectRoles.admin || this.userRole === projectRoles.creator;
     }
 
 }

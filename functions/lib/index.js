@@ -15,7 +15,6 @@ exports.searchProjects = functions.https.onRequest((request, response) => {
 exports.getUserByEmail = functions.https.onRequest((request, response) => {
     response.header("Access-Control-Allow-Origin", "*");
     response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    console.log(request);
     dataFunctions.getUserByEmail(request.body).subscribe((res) => response.status(200).send(res));
 });
 //# sourceMappingURL=index.js.map

@@ -74,7 +74,8 @@ export class ProjectUsersComponent implements OnInit, OnDestroy {
     }
 
     public changeRole(role: number, userId: string): void {
-        this.projectsService.changeUserRole(userId, this.project.id, role).then();
+        this.projectsService.changeUserRole(userId, this.project.id, role)
+            .then(() => this.service.setUserRole = role);
     }
 
     public inviteUsers(): void {

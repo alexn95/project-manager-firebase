@@ -14,6 +14,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 export class ProjectComponent implements OnInit, OnDestroy {
 
     private initProjectSub: Subscription;
+    public loading: boolean;
 
     constructor(
         private service: ProjectService,
@@ -22,8 +23,11 @@ export class ProjectComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        this.loading = true;
         this.initProjectSub = this.route.params.subscribe(params => {
-            this.service.initProject(params['id']);
+            this.service.initProject(params['id']).then(() => {
+                this.loading = false;
+            });
         });
     }
 
