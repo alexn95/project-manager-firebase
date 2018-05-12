@@ -1,0 +1,18 @@
+<mat-card class="issue-card">
+    <div class="issue-card__header-row">
+        <div class="issue-card__number">
+            # {{ issue.number }}
+        </div>
+        <div class="issue-card__priority" matTooltip="Priority: {{ issue.priority }}" matTooltipPosition="above">
+            {{ issue.priority }}
+        </div>
+        <div class="issue-card__type"  matTooltip="Type: {{ issue.type }}" matTooltipPosition="above">
+            {{ issue.type }}
+        </div>
+
+    </div>
+    <div class="issue-card__summary">
+        {{ issue.summary }}
+    </div>
+   
+</mat-card>

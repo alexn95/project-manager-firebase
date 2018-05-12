@@ -1,0 +1,53 @@
+@import './../../node_modules/dragula/dist/dragula.min.css';
+
+.agile-boards {
+    &__container {
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 auto;
+        // background-color: #FFFFFF;
+    }
+
+    &__actions-row {
+        padding: 10px;
+    }
+    &__table {
+        display: flex;
+        flex: 1 1 auto;
+        flex-direction: row;
+        overflow-y: auto;
+    }
+
+    &__column {
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 auto;
+        width: 200px;
+        
+        margin: 5px;
+        &_header {
+            background-color: #F0F0F0;
+            padding: 10px;
+            border-radius: 2px;
+            margin-bottom: 10px;
+            border: 1px solid #BBBBBB;
+        }
+        &_content {
+            background-color: #F0F0F0;
+            padding: 10px;
+            border-radius: 2px;
+            flex: 1 1 auto;
+            border: 1px solid #BBBBBB;
+        }
+
+    }
+
+}
+
+
+
+app-agile-boards {
+    display: flex;
+    flex: 1;
+    margin: 10px 0;
+}

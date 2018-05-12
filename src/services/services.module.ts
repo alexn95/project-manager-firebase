@@ -1,3 +1,4 @@
+import { DataIssuesService } from './data-provider/data-issues.service';
 import { DataProjectsService } from './data-provider/data-projects.service';
 import { DataProviderService } from './data-provider/data-provider.service';
 import { AuthService } from './auth/auth.service';
@@ -12,6 +13,7 @@ import { SnackBarService } from './snack-bar/snack-bar.service';
         HttpModule
     ],
     providers: [
+        DataIssuesService,
         AuthService,
         DataProviderService,
         DataProjectsService,

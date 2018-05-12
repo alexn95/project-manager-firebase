@@ -1,0 +1,47 @@
+.issue-card {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    margin: 0 0 10px 0;
+    padding: 10px !important;
+
+    height: 80px;
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid #BBBBBB;
+    max-width: 95%;
+
+    &__header-row {
+        display: flex;
+        flex-direction: row;
+        color: #999;
+        font-size: 12px;
+        
+    }
+    &__number {
+        margin-right: 10px;
+    }
+
+    &__type {
+        margin-right: 10px;
+    }
+
+    &__priority {
+        margin-right: 10px;
+    }
+
+    &__summary {
+        margin: 5px 0;
+        white-space: nowrap; 
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+}
+
+app-issue-card {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex: 1;
+}

@@ -1,1 +1,30 @@
- agile boards
+<div class="container agile-boards__container">
+    <div class="agile-boards__actions-row"> actions </div>
+    <div class="agile-boards__table wrapper">
+        <div class="agile-boards__column">
+            <div class="agile-boards__column_header">Open</div>
+            <div class="agile-boards__column_content" [dragula]='"first-bag"'>
+                <app-issue-card *ngFor="let issues of openIssues" [issue]="issues" [dragula]='"first-bag"'></app-issue-card>
+            </div>
+        </div>
+        <div class="agile-boards__column">
+            <div class="agile-boards__column_header">In Progress</div>
+            <div class="agile-boards__column_content" [dragula]='"first-bag"'>
+                <app-issue-card *ngFor="let issues of inProgressIssues" [issue]="issues" [dragula]='"first-bag"'></app-issue-card>
+            </div>
+        </div>
+        <div class="agile-boards__column">
+            <div class="agile-boards__column_header">To Verify</div>
+            <div class="agile-boards__column_content" [dragula]='"first-bag"'>
+                <app-issue-card *ngFor="let issues of toVerifyIssues" [issue]="issues" [dragula]='"first-bag"'></app-issue-card>
+            </div>
+        </div>
+        <div class="agile-boards__column">
+            <div class="agile-boards__column_header">Done</div>
+            <div class="agile-boards__column_content" [dragula]='"first-bag"'>
+                <app-issue-card *ngFor="let issues of doneIssues" [issue]="issues" [dragula]='"first-bag"'></app-issue-card>
+            </div>
+        </div>
+    </div>
+    
+</div>
