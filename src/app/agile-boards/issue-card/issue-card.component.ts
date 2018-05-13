@@ -33,8 +33,8 @@ export class IssueCardComponent implements OnInit {
     }
 
     private initIssueUser(): void {
-        if (this.issue.assigne_user_id) {
-            this.userService.getUserById(this.issue.assigne_user_id)
+        if (this.issue.assigned_user_id) {
+            this.userService.getUserById(this.issue.assigned_user_id)
                 .then( (user) => {
                     this.assignUser = user.first_name + ' ' + user.last_name;
                     this.assignUserTooltip = 'Assigned to ' + user.first_name + ' ' + user.last_name;

@@ -3,14 +3,18 @@ export interface Issue {
     number: number;
     summary: string;
     description: string;
-    create_date: string;
-    author_id: string;
     priority: string;
     type: string;
     state: number;
-    assigne_user_id: string;
+    assigned_user_id: string;
     project_id: string;
     sprint_id: string;
     days: number;
     comments: Comment[];
+
+    create_date: string;
+    author_id: string;
+
+    update_date: string;
+    update_user_id: string;
 }

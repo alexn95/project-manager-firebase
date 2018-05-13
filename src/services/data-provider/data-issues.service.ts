@@ -33,7 +33,7 @@ export class DataIssuesService {
             priority: 'normal',
             type: 'task',
             state: state,
-            assigne_user_id: null,
+            assigned_user_id: null,
             project_id: '-LBQWhEeuVEc_l0IFAs6',
             sprint_id: '1',
             days: null,
