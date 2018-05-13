@@ -9,8 +9,14 @@
     }
 
     &__actions-row {
+        margin: 0 10px;
         padding: 10px;
     }
+
+    &__select-project {
+        width: 200px;
+    }
+
     &__table {
         display: flex;
         flex: 1 1 auto;

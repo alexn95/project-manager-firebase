@@ -1,7 +1,7 @@
 <mat-card class="issue-card" [ngClass]="getIssueClasses()" (dblclick)="openIssue()">
     <div class="issue-card__header-row">
         <div class="issue-card__number" [ngClass]="getNumberClasses()">
-            # {{ issue.number }}
+            {{ projectCode }}-{{ issue.number }}
         </div>
         <div class="issue-card__priority" matTooltip="Priority: {{ issue.priority }}" matTooltipPosition="above">
             {{ issue.priority }}

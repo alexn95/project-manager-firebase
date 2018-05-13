@@ -28,14 +28,7 @@
                 <mat-error *ngIf="code.hasError('maxlength')">
                     Code can not be longer than 20 characters.
                 </mat-error>
-            </mat-form-field>
-            <mat-form-field class="project-details-form__access project-details-form__input">
-                <mat-select placeholder="Access"  [formControl]="access" >
-                    <mat-option *ngFor="let access of accessTypes" [value]="access">
-                        {{ access }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>    
+            </mat-form-field>  
         </div>
 
         <mat-form-field class="form__row project-details-form__input">

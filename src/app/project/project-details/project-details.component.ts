@@ -1,5 +1,4 @@
 import { snackBarMsgs } from './../../../environments/const-variables/snack-bar-msgs';
-import { accessTypes } from './../../../environments/const-variables/access-types';
 import { ProjectService } from './../project.service';
 import { SnackBarService } from './../../../services/snack-bar/snack-bar.service';
 import { Project } from './../../../models/entries/project';
@@ -28,10 +27,8 @@ export class ProjectDetailsComponent implements OnInit, OnDestroy {
     public projectForm: FormGroup;
     public title: FormControl;
     public description: FormControl;
-    public access: FormControl;
     public code: FormControl;
 
-    public accessTypes = accessTypes;
 
     constructor(
         private route: ActivatedRoute,
@@ -65,7 +62,6 @@ export class ProjectDetailsComponent implements OnInit, OnDestroy {
         this.description = new FormControl(this.project.description, [
             Validators.maxLength(1000)
         ]);
-        this.access = new FormControl(this.project.access, []);
         this.code = new FormControl(this.project.code, [
             Validators.required,
             Validators.maxLength(20)
@@ -73,7 +69,6 @@ export class ProjectDetailsComponent implements OnInit, OnDestroy {
         this.projectForm = new FormGroup({
             title: this.title,
             description: this.description,
-            access: this.access,
             code: this.code
         });
     }
@@ -82,14 +77,12 @@ export class ProjectDetailsComponent implements OnInit, OnDestroy {
     public isChangeExist(): boolean {
         return  this.project.title !== this.title.value ||
                 this.project.description !== this.description.value ||
-                this.project.access !== this.access.value ||
                 this.project.code !== this.code.value;
     }
 
     public updateProject(): void {
         this.project.title = this.title.value;
         this.project.description = this.description.value;
-        this.project.access = this.access.value;
         this.project.code = this.code.value;
         this.dataProvider.updateProject(this.project).then(() =>  this.snackNar.open(snackBarMsgs.updateProjectSuccess));
     }
@@ -97,7 +90,6 @@ export class ProjectDetailsComponent implements OnInit, OnDestroy {
     public cancel(): void {
         this.title.setValue(this.project.title);
         this.description.setValue(this.project.description);
-        this.access.setValue(this.project.access);
         this.code.setValue(this.project.code);
     }
 

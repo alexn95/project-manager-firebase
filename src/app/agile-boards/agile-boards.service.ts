@@ -1,3 +1,6 @@
+import { errorMessages } from './../../environments/const-variables/error-messages';
+import { UserProjectData } from './../../models/entries/user-project';
+import { Project } from './../../models/entries/project';
 import { DataIssuesService } from './../../services/data-provider/data-issues.service';
 
 import { issuesStatesArray, IssuesStates } from './../../environments/const-variables/issues-constans';
@@ -14,10 +17,48 @@ export class AgileBoardsService {
 
     public issues: Issue[];
 
+    public projects: Project[];
+    public choicedProject: Project;
+
     constructor(
+        private projectService: DataProjectsService,
         private dragulaService: DragulaService,
         private issuesService: DataIssuesService,
+        private auth: AuthService,
     ) {
+    }
+
+    public init(): Observable<void> {
+        return new Observable(observer => {
+            this.initProjects().subscribe(() => {
+                console.log(this.projects);
+                if (this.projects.length > 0) {
+                    this.initChoicedProject(this.projects[0])
+                    .then(() => observer.next());
+                }
+            });
+        });
+    }
+
+    public initChoicedProject(project: Project): Promise<void> {
+        this.choicedProject = project;
+        return this.issuesService.getProjectIssues(project.id).then((issues) => {
+            this.issues = issues;
+        });
+    }
+
+    private initProjects(): Observable<void[]> {
+        this.projects = new Array<Project>();
+        return Observable.of(this.auth.getUserProjectsData)
+        .mergeMap(userProjects => {
+            return Observable.forkJoin(
+                userProjects.map(userProject =>
+                    this.projectService.getProjectById(userProject.project_id).then(project => {
+                        this.projects.push(project);
+                    })
+                )
+            );
+        });
     }
 
     private getClass(args: any): string {
@@ -38,7 +79,7 @@ export class AgileBoardsService {
                 return IssuesStates.done;
             default:
                 console.log(this.getClass(args));
-                throw new Error('Undefinde issues state error.');
+                throw new Error(errorMessages.inalidIssuesStateError);
         }
     }
 

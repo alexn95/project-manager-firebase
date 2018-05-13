@@ -1,3 +1,5 @@
+import { AgileBoardsService } from './../agile-boards.service';
+import { Project } from './../../../models/entries/project';
 import { DataUsersService } from './../../../services/data-provider/data-users.service';
 import { issuesPriorityArray, IssuesPrioroty, IssuesStates } from './../../../environments/const-variables/issues-constans';
 import { Component, OnInit, Input } from '@angular/core';
@@ -12,16 +14,22 @@ import { User } from '../../../models/entries/user';
 export class IssueCardComponent implements OnInit {
 
     @Input() issue: Issue;
+    private project: Project;
+
     public assignUser = 'Loading ... ';
     public assignUserTooltip = 'Loading ... ';
+    public projectCode: string;
 
     constructor(
         private userService: DataUsersService,
+        private service: AgileBoardsService,
     ) {
     }
 
     ngOnInit() {
         this.initIssueUser();
+        this.project = this.service.choicedProject;
+        this.projectCode = this.project.code;
     }
 
     private initIssueUser(): void {

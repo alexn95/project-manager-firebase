@@ -1,3 +1,4 @@
+import { errorMessages } from './../../environments/const-variables/error-messages';
 import { projectRoles } from './../../environments/const-variables/project-roles';
 import { AuthService } from './../auth/auth.service';
 import { Observable } from 'rxjs/Observable';
@@ -35,14 +36,13 @@ export class DataProjectsService {
         });
     }
 
-    public saveProject(title: string, description: string, code: string, access: string): Promise<any> {
+    public saveProject(title: string, description: string, code: string): Promise<any> {
         const data: Project = {
             id: '',
             code: code,
             create_date : String(new Date()),
             description : description,
             title : title,
-            access : access,
             issues_count : 12,
             users: []
         };
@@ -64,6 +64,9 @@ export class DataProjectsService {
     public getProjectById(id: string): Promise<Project> {
         const ref = this.db.ref('projects/' + id);
         return ref.once('value').then((project) => {
+            if (!project.val()) {
+                throw new Error(errorMessages.projectNotFoundError);
+            }
             return project.val();
         });
     }

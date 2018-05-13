@@ -6,6 +6,5 @@ export interface Project {
     description: string;
     create_date: string;
     issues_count: number;
-    access: string;
     users: UserRole[];
 }

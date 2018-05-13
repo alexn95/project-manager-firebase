@@ -1,3 +1,5 @@
+import { UserProjectData } from './../../models/entries/user-project';
+import { UserProject } from './../../app/project/project-users/user-project.model';
 import { snackBarMsgs } from './../../environments/const-variables/snack-bar-msgs';
 import { routingUrl } from './../../environments/const-variables/routing-url';
 import { Observable } from 'rxjs/Observable';
@@ -18,10 +20,20 @@ export class AuthService {
     private db: firebase.database.Database = firebase.database();
     private authEvents: ReplaySubject<AuthEvents> = new ReplaySubject(1);
     private user: firebase.User;
+    private dbUser: User;
     private UID: string;
 
     get getUID(): string {
         return this.UID;
+    }
+
+    get getUser(): User {
+        return this.dbUser;
+    }
+
+    get getUserProjectsData(): UserProjectData[] {
+        const projects = this.dbUser.projects;
+        return projects ? Object.keys(projects).map(key => projects[key]) : [];
     }
 
     constructor(
@@ -35,7 +47,10 @@ export class AuthService {
                     console.log('%cuser is set to %o', 'color:darkgreen', user);
                     this.user = user;
                     this.UID = user.uid;
-                    this.authEvents.next(AuthEvents.AUTHENTICATED);
+                    this.getUserById(user.uid).then((dbUser: User) => {
+                        this.dbUser = dbUser;
+                        this.authEvents.next(AuthEvents.AUTHENTICATED);
+                    });
                 } else {
                     console.log('%cuser is not set', 'color:darkred');
                     this.authEvents.next(AuthEvents.NOT_AUTHENTICATED);
@@ -101,7 +116,7 @@ export class AuthService {
             email: email,
             first_name: firstName,
             last_name: lastName
-        }
+        };
         return ref.set(user);
     }
 
@@ -116,6 +131,10 @@ export class AuthService {
                 this.authEvents.next(AuthEvents.AUTH_ERROR);
                 this.router.navigateByUrl(routingUrl.loginPage);
             });
+    }
+
+    private getUserById(id: string): Promise<User> {
+        return this.db.ref('users/' + id).once('value').then(user => user.val());
     }
 
 }
