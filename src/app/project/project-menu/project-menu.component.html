@@ -15,16 +15,16 @@
             class="link" color="primary" >Users</a>
     </div>
     <div class="project-menu__border"></div>
-    <div class="project-menu__item project-menu__item_primary">
+    <a [routerLink]="getIssuesUrl()" class="project-menu__item project-menu__item_primary" >
         <button  mat-button color="primary">
-            {{ project.issues_count }} ussues
+            {{ project.issues_count }} issues
         </button>
-    </div>
-    <div class="project-menu__item project-menu__item_primary">
+    </a>
+    <a [routerLink]="getCreateIssuesUrl()" class="project-menu__item project-menu__item_primary">
         <button  mat-button color="primary">
             Create issues
         </button>
-    </div>
+    </a>
     <div *ngIf="isAdmin()" class="project-menu__item project-menu__item_primary">
         <button  mat-button color="primary">
             Invaite user

@@ -59,6 +59,14 @@ export class ProjectMenuComponent implements OnInit, OnDestroy {
         return { outlets: {  content : routingUrl.contentUsers  } };
     }
 
+    public getIssuesUrl(): Array<string> {
+        return ['/' + routingUrl.agileBoards, this.project.id];
+    }
+
+    public getCreateIssuesUrl(): Array<string> {
+        return ['/' + routingUrl.agileBoards, this.project.id];
+    }
+
     public isCreator(): boolean {
         return this.userRole === projectRoles.creator;
     }

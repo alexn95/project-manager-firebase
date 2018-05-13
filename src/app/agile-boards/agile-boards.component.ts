@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { FormGroup, FormControl } from '@angular/forms';
 import { errorMessages } from './../../environments/const-variables/error-messages';
@@ -32,34 +33,50 @@ export class AgileBoardsComponent implements OnInit, OnDestroy {
     constructor(
         private service: AgileBoardsService,
         private issuesService: DataIssuesService,
-        private dragulaService: DragulaService
+        private dragulaService: DragulaService,
+        private route: ActivatedRoute,
     ) {
     }
 
     ngOnInit() {
-        // this.issuesService.saveIssues('TaskTaskTaskTaskTaskTaskTaskTaskTaskTaskTaskTaskTaskTaskTaskTaskTaskTaskTaskTaskTask', 'desc', 3);
+        // this.issuesService.saveIssues('TaskTaskTaskTas askTaskTask askTaskTask', 'desc', 3);
         this.selectProject = new FormControl();
-        this.service.init().subscribe(() => {
-            this.initProject();
-            this.choicedProject = this.service.choicedProject;
-            this.selectProject.setValue(this.choicedProject, { emitEvent: true });
+        this.service.initProjects().switchMap(() => {
+            return this.route.params;
+        }).subscribe((params) => {
+            this.initProject(params['id']);
         });
-        this.service.updateIssueState();
+
+        this.service.onChangeIssueState();
+
         this.selectProjectSub$ = this.selectProject.valueChanges
         .subscribe((project) => {
-            this.service.initChoicedProject(project).then(() => {
-                this.initProject();
+            this.service.initChoicedProject(project.id).then(() => {
+                this.initProjectData();
             });
         });
+
     }
 
     ngOnDestroy () {
         this.selectProjectSub$.unsubscribe();
     }
 
-    private initProject(): void {
-        this.issues = this.service.issues;
+    private initProject(id: string): void {
         this.projects = this.service.projects;
+        if (this.projects.length > 0) {
+            this.service.initChoicedProject(id)
+            .then(() => {
+                this.projects = this.service.projects;
+                this.initProjectData();
+                this.selectProject.setValue(this.choicedProject, { emitEvent: true });
+            });
+        }
+    }
+
+    private initProjectData(): void {
+        this.choicedProject = this.service.choicedProject;
+        this.issues = this.service.issues;
         this.issuesForState(this.issues);
     }
 

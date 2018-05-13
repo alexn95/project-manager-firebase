@@ -1,3 +1,5 @@
+import { snackBarMsgs } from './../../environments/const-variables/snack-bar-msgs';
+import { SnackBarService } from './../../services/snack-bar/snack-bar.service';
 import { errorMessages } from './../../environments/const-variables/error-messages';
 import { UserProjectData } from './../../models/entries/user-project';
 import { Project } from './../../models/entries/project';
@@ -25,29 +27,26 @@ export class AgileBoardsService {
         private dragulaService: DragulaService,
         private issuesService: DataIssuesService,
         private auth: AuthService,
+        private snackBar: SnackBarService,
     ) {
     }
 
-    public init(): Observable<void> {
-        return new Observable(observer => {
-            this.initProjects().subscribe(() => {
-                console.log(this.projects);
-                if (this.projects.length > 0) {
-                    this.initChoicedProject(this.projects[0])
-                    .then(() => observer.next());
-                }
-            });
-        });
-    }
-
-    public initChoicedProject(project: Project): Promise<void> {
-        this.choicedProject = project;
-        return this.issuesService.getProjectIssues(project.id).then((issues) => {
+    public initChoicedProject(id: string): Promise<void> {
+        const project = this.projects.filter(pr => pr.id === id)[0];
+        if (project) {
+            this.choicedProject = project;
+        } else {
+            if (id) {
+                this.snackBar.open(snackBarMsgs.projectNotFound);
+            }
+            this.choicedProject = this.projects[0];
+        }
+        return this.issuesService.getProjectIssues(this.choicedProject.id).then((issues) => {
             this.issues = issues;
         });
     }
 
-    private initProjects(): Observable<void[]> {
+    public initProjects(): Observable<void[]> {
         this.projects = new Array<Project>();
         return Observable.of(this.auth.getUserProjectsData)
         .mergeMap(userProjects => {
@@ -83,7 +82,7 @@ export class AgileBoardsService {
         }
     }
 
-    public updateIssueState(): void {
+    public onChangeIssueState(): void {
         this.dragulaService.drop.subscribe((args) => {
             // tslint:disable-next-line:prefer-const
             const [targetE, targetEl] = args.slice(1);

@@ -1,21 +1,22 @@
 const timeToClose = 5000;
+const actionClose = 'close';
 
 export const snackBarMsgs = {
     error:
         {
-            action: 'close',
+            action: actionClose,
             config: { duration: timeToClose }
         },
     default:
         {
-            action: 'close',
+            action: actionClose,
             config: { duration: timeToClose }
         },
     signup: {
         success:
             {
                 message: 'New user was created.',
-                action: 'close',
+                action: actionClose,
                 config: { duration: timeToClose }
             },
     },
@@ -23,34 +24,39 @@ export const snackBarMsgs = {
         success:
             {
                 message: 'You are authorized.',
-                action: 'close',
+                action: actionClose,
                 config: { duration: timeToClose }
             },
         incorrectData:
             {
                 message: 'Incorrect email or password.',
-                action: 'close',
+                action: actionClose,
                 config: { duration: timeToClose }
             },
     },
     mustLogin: {
             message: 'To use our aplication you must login.',
-            action: 'close',
+            action: actionClose,
             config: { duration: timeToClose }
     },
     updateProjectSuccess: {
         message: 'Project was updated.',
-        action: 'close',
+        action: actionClose,
         config: { duration: timeToClose }
     },
     deleteProjectSuccess: {
         message: 'Project was deleted.',
-        action: 'close',
+        action: actionClose,
         config: { duration: timeToClose }
     },
     userInviteSuccess: {
         message: 'User was invited.',
-        action: 'close',
+        action: actionClose,
+        config: { duration: timeToClose }
+    },
+    projectNotFound: {
+        message: 'Project with this id not exist or you have no access to open it.',
+        action: actionClose,
         config: { duration: timeToClose }
     }
 };

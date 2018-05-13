@@ -14,6 +14,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
 
     public projects: Project[];
     public projectsUrl = routingUrl.projects;
+    public agileBoardsUrl = routingUrl.agileBoards;
 
     private searchSub: Subscription;
 

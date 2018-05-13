@@ -54,6 +54,11 @@ const routes: Routes = [
         canActivate: [AuthGuardService],
     },
     {
+        path: routingUrl.agileBoards + routingUrl.projectId,
+        component: AgileBoardsComponent,
+        canActivate: [AuthGuardService],
+    },
+    {
         path: routingUrl.signupPage,
         component: SignupPageComponent
     },
