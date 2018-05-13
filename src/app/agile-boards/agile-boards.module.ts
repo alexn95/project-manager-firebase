@@ -1,3 +1,4 @@
+import { AgileBoardsService } from './agile-boards.service';
 import { IssueCardComponent } from './issue-card/issue-card.component';
 import { AgileBoardsComponent } from './agile-boards.component';
 import { ServicesModule } from './../../services/services.module';
@@ -32,6 +33,7 @@ import { DragulaModule } from 'ng2-dragula';
         IssueCardComponent
     ],
     providers: [
+        AgileBoardsService
     ]
 })
 export class AgileBoardsModule {

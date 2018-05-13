@@ -34,4 +34,5 @@ export class ProjectsComponent implements OnInit, OnDestroy {
         this.searchSub.unsubscribe();
     }
 
+
 }

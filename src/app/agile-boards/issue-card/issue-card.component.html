@@ -1,6 +1,6 @@
-<mat-card class="issue-card">
+<mat-card class="issue-card" [ngClass]="getIssueClasses()" (dblclick)="openIssue()">
     <div class="issue-card__header-row">
-        <div class="issue-card__number">
+        <div class="issue-card__number" [ngClass]="getNumberClasses()">
             # {{ issue.number }}
         </div>
         <div class="issue-card__priority" matTooltip="Priority: {{ issue.priority }}" matTooltipPosition="above">
@@ -9,10 +9,17 @@
         <div class="issue-card__type"  matTooltip="Type: {{ issue.type }}" matTooltipPosition="above">
             {{ issue.type }}
         </div>
-
     </div>
-    <div class="issue-card__summary">
-        {{ issue.summary }}
+    <div class="issue-card__content-row">
+        <div class="issue-card__summary link" (click)="openIssue()" color="primary">
+            {{ issue.summary }}
+        </div>
     </div>
+    <div class="issue-card__footer-row">
+        <div class="issue-card__assigne" matTooltip="{{ assignUserTooltip }}" matTooltipPosition="above">
+            {{ assignUser }}
+        </div>
+    </div>
+    
    
 </mat-card>

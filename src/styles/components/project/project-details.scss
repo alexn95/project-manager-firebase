@@ -12,6 +12,7 @@ $width: 600px;
 
 .project-details-form {
     max-width: $width;
+    width: 90%;
     padding: 0 0 100px 0;
 
     &__header {
@@ -24,12 +25,16 @@ $width: 600px;
     }
 
     &__title {
-        margin-right: 10px; 
         width: 350px;
     }
 
+    &__code {
+        width: 350px;
+        margin-right: 10px;
+    }
+
     &__access {
-        width: 240px;
+        width: 180px;
     }
 
     &__create-date {

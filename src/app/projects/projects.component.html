@@ -1,11 +1,15 @@
 <mat-card class="project-card" *ngFor="let project of projects">
-    <a routerLink="/{{ projectsUrl }}/{{ project.id }}" class="project-card__header link" >{{ project.title }}</a>
+    <div class="project-card__sub-row">
+        <a routerLink="/{{ projectsUrl }}/{{ project.id }}" class="project-card__header link" >{{ project.title }}</a>
+    </div>
     <div class="project-card__desc">{{ project.description }}</div>
-    <div class="project-card__info">State: {{ project.state }}</div>
+    <div class="project-card__info">Project code: {{ project.code }}</div>
     <div class="project-card__info">Access: {{ project.access }}</div>
-    <div class="project-card__info">{{ project.issues_count }} issues</div>
-    <mat-card-actions class="project-card__actions">
-        <button mat-button>Open</button>
-        <button mat-button>Assign to me</button>
-    </mat-card-actions>
+    <div class="project-card__sub-row">
+        <a class="project-card__info link">{{ project.issues_count }} issues</a>
+    </div>
+    <div class="project-card__sub-row">
+        <a class="project-card__info link" >Assign to me</a>
+    </div>
+    
 </mat-card>

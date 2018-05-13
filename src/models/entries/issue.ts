@@ -8,7 +8,7 @@ export interface Issue {
     priority: string;
     type: string;
     state: number;
-    assignee_user_id: string;
+    assigne_user_id: string;
     project_id: string;
     sprint_id: string;
     days: number;

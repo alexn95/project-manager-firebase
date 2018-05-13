@@ -4,6 +4,20 @@
         flex-direction: row;
         width: 100%;
     }
+
+    &__direction_column {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: stretch;
+    }
+
+    &__direction_row {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
     
     &__action-row {
         &_direction_column {

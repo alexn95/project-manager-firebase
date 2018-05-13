@@ -4,6 +4,7 @@
         <div class="project-details-form__create-date">
             <span>{{ project.create_date }}</span>
         </div>
+
         <div class="form__row">
             <mat-form-field class="project-details-form__title project-details-form__input">
                 <input matInput placeholder="Title" [formControl]="title"  
@@ -15,6 +16,19 @@
                     Title can not be longer than 100 characters.
                 </mat-error>
             </mat-form-field>
+        </div>
+
+        <div class="form__direction_row">
+            <mat-form-field class="project-details-form__code project-details-form__input">
+                <input matInput placeholder="Project code" [formControl]="code"  
+                    [errorStateMatcher]="errorMatcher">
+                <mat-error *ngIf="code.hasError('required')">
+                    Code is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="code.hasError('maxlength')">
+                    Code can not be longer than 20 characters.
+                </mat-error>
+            </mat-form-field>
             <mat-form-field class="project-details-form__access project-details-form__input">
                 <mat-select placeholder="Access"  [formControl]="access" >
                     <mat-option *ngFor="let access of accessTypes" [value]="access">
@@ -23,7 +37,7 @@
                 </mat-select>
             </mat-form-field>    
         </div>
-        
+
         <mat-form-field class="form__row project-details-form__input">
             <textarea matInput placeholder="Description" matTextareaAutosize matAutosizeMinRows="1"
             matAutosizeMaxRows="10" [formControl]="description" 

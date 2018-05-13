@@ -16,9 +16,15 @@
     &__info {
         font-size: 14px;
         margin: 7px 0;
+        white-space: nowrap; 
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
-    &__actions {
-        color: #1866C5;
+
+    &__sub-row {
+        display: flex;
+        flex-direction: row;
+        margin: 0;
     }
 }
 

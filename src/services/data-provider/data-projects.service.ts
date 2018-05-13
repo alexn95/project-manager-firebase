@@ -35,9 +35,10 @@ export class DataProjectsService {
         });
     }
 
-    public saveProject(title: string, description: string, access: string): Promise<any> {
+    public saveProject(title: string, description: string, code: string, access: string): Promise<any> {
         const data: Project = {
             id: '',
+            code: code,
             create_date : String(new Date()),
             description : description,
             title : title,

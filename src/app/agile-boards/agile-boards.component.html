@@ -3,26 +3,34 @@
     <div class="agile-boards__table wrapper">
         <div class="agile-boards__column">
             <div class="agile-boards__column_header">Open</div>
-            <div class="agile-boards__column_content" [dragula]='"first-bag"'>
-                <app-issue-card *ngFor="let issues of openIssues" [issue]="issues" [dragula]='"first-bag"'></app-issue-card>
+            <div class="open agile-boards__column_content"  [dragula]='"first-bag"'>
+                <app-issue-card *ngFor="let issue of openIssues" [issue]="issue" 
+                [attr.item-id]="issue.id" [attr.project-id]="issue.project_id">
+                </app-issue-card>
             </div>
         </div>
         <div class="agile-boards__column">
             <div class="agile-boards__column_header">In Progress</div>
-            <div class="agile-boards__column_content" [dragula]='"first-bag"'>
-                <app-issue-card *ngFor="let issues of inProgressIssues" [issue]="issues" [dragula]='"first-bag"'></app-issue-card>
+            <div class="in-progress agile-boards__column_content"  [dragula]='"first-bag"'>
+                <app-issue-card *ngFor="let issue of inProgressIssues" [issue]="issue" 
+                    [attr.item-id]="issue.id" [attr.project-id]="issue.project_id">
+                </app-issue-card>
             </div>
         </div>
-        <div class="agile-boards__column">
+        <div class="agile-boards__column ">
             <div class="agile-boards__column_header">To Verify</div>
-            <div class="agile-boards__column_content" [dragula]='"first-bag"'>
-                <app-issue-card *ngFor="let issues of toVerifyIssues" [issue]="issues" [dragula]='"first-bag"'></app-issue-card>
+            <div class="to-verify agile-boards__column_content" [dragula]='"first-bag"'>
+                <app-issue-card *ngFor="let issue of toVerifyIssues" [issue]="issue"
+                [attr.item-id]="issue.id" [attr.project-id]="issue.project_id">
+                </app-issue-card>
             </div>
         </div>
         <div class="agile-boards__column">
             <div class="agile-boards__column_header">Done</div>
-            <div class="agile-boards__column_content" [dragula]='"first-bag"'>
-                <app-issue-card *ngFor="let issues of doneIssues" [issue]="issues" [dragula]='"first-bag"'></app-issue-card>
+            <div class="done agile-boards__column_content" [dragula]='"first-bag"'>
+                <app-issue-card *ngFor="let issue of doneIssues" [issue]="issue" 
+                [attr.item-id]="issue.id" [attr.project-id]="issue.project_id">
+                </app-issue-card>
             </div>
         </div>
     </div>

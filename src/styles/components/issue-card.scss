@@ -1,13 +1,20 @@
+$color-prioroty-minor: #E6E6E6;
+$color-prioroty-normal: #E6F6CF;
+$color-prioroty-major: yellow;
+$color-prioroty-critical: red;
+
+
 .issue-card {
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
     flex: 1 1 auto;
-    margin: 0 0 10px 0;
+    margin: 0 0 7px 0;
     padding: 10px !important;
+    padding-left: 15px !important;
 
     height: 80px;
     background-color: white;
-    border-radius: 5px;
     border: 1px solid #BBBBBB;
     max-width: 95%;
 
@@ -16,10 +23,23 @@
         flex-direction: row;
         color: #999;
         font-size: 12px;
-        
     }
+
+    &__footer-row {
+        display: flex;
+        flex-direction: row;
+    }
+
+    &__assigne {
+        color: #999;
+        font-size: 12px;
+    }
+
     &__number {
         margin-right: 10px;
+        &_done {
+            text-decoration:line-through
+        }
     }
 
     &__type {
@@ -30,14 +50,84 @@
         margin-right: 10px;
     }
 
+    &__content-row {
+        display: flex;
+        flex-direction: row;
+    }
+
     &__summary {
-        margin: 5px 0;
-        white-space: nowrap; 
+        line-height: 1.3em;
+        height: 2.6em;
+        margin: 10px 0;
+        font-size: 14px;
+        white-space: normal; 
         overflow: hidden;
         text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
     }
 
 }
+
+.issue-card_priority_minor:before {
+    display: block;
+    position: absolute;
+    height: 100%;
+    content: '';
+    width: 6px;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    background-color: $color-prioroty-minor;
+}
+
+.issue-card_priority_normal:before {
+    display: block;
+    position: absolute;
+    height: 100%;
+    content: '';
+    width: 6px;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    background-color: $color-prioroty-normal;
+}
+
+.issue-card_priority_major:before {
+    display: block;
+    position: absolute;
+    height: 100%;
+    content: '';
+    width: 6px;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    background-color: $color-prioroty-major;
+}
+
+.issue-card_priority_critical:before {
+    display: block;
+    position: absolute;
+    height: 100%;
+    content: '';
+    width: 6px;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    background-color: $color-prioroty-critical;
+}
+
+
+
 
 app-issue-card {
     display: flex;

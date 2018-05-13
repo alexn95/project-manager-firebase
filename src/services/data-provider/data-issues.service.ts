@@ -33,7 +33,7 @@ export class DataIssuesService {
             priority: 'normal',
             type: 'task',
             state: state,
-            assignee_user_id: null,
+            assigne_user_id: null,
             project_id: '-LBQWhEeuVEc_l0IFAs6',
             sprint_id: '1',
             days: null,
@@ -59,6 +59,11 @@ export class DataIssuesService {
             const json = res.val();
             return json ? Object.keys(json).map(key => json[key]) : [];
         });
+    }
+
+    public updateIssueState(issue: Issue): Promise<any> {
+        const ref = this.db.ref('issues/' + issue.project_id + '/' + issue.id + '/state');
+        return ref.set(issue.state);
     }
 
 }

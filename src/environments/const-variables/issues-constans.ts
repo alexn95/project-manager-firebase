@@ -11,3 +11,17 @@ export const issuesStatesArray = [
     'to verify',
     'done'
 ];
+
+export enum IssuesPrioroty {
+    minor,
+    normal,
+    major,
+    critical
+}
+
+export const issuesPriorityArray = [
+    'minor',
+    'normal',
+    'major',
+    'critical'
+];

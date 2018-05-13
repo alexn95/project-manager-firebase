@@ -1,8 +1,11 @@
+import { AgileBoardsService } from './agile-boards.service';
+import { DragulaService } from 'ng2-dragula';
+import { IssuesStates, issuesStatesArray } from './../../environments/const-variables/issues-constans';
 import { DataIssuesService } from './../../services/data-provider/data-issues.service';
 import { Issue } from './../../models/entries/issue';
 import { Component, OnInit } from '@angular/core';
 import { DndDropEvent } from 'ngx-drag-drop';
-import { IssuesStates } from '../../environments/const-variables/issues-states';
+
 
 @Component({
     selector: 'app-agile-boards',
@@ -17,17 +20,20 @@ export class AgileBoardsComponent implements OnInit {
     public doneIssues: Issue[];
 
     constructor(
-        private issuesService: DataIssuesService
+        private service: AgileBoardsService,
+        private issuesService: DataIssuesService,
+        private dragulaService: DragulaService
     ) {
     }
 
     ngOnInit() {
         // this.issuesService.saveIssues('TaskTaskTaskTaskTaskTaskTaskTaskTaskTaskTaskTaskTaskTaskTaskTaskTaskTaskTaskTaskTask', 'desc', 3);
         this.issuesService.getProjectIssues('-LBQWhEeuVEc_l0IFAs6').then((issues) => {
-            console.log(issues);
+            this.service.issues = issues;
             this.issues = issues;
             this.issuesForState(issues);
         });
+        this.service.updateIssueState();
     }
 
     private issuesForState(issues: Issue[]): void {
