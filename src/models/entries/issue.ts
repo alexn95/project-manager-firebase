@@ -15,6 +15,6 @@ export interface Issue {
     create_date: string;
     author_id: string;
 
-    update_date: string;
-    update_user_id: string;
+    update_date?: string;
+    update_user_id?: string;
 }

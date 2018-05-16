@@ -1,4 +1,4 @@
-export enum IssuesStates {
+export enum issuesState {
     open,
     inProgress,
     toVerify,
@@ -6,13 +6,13 @@ export enum IssuesStates {
 }
 
 export const issuesStatesArray = [
-    'open',
-    'in progress',
-    'to verify',
-    'done'
+    'Open',
+    'In progress',
+    'To verify',
+    'Done'
 ];
 
-export enum IssuesPrioroty {
+export enum issuesPrioroty {
     minor,
     normal,
     major,
@@ -20,8 +20,18 @@ export enum IssuesPrioroty {
 }
 
 export const issuesPriorityArray = [
-    'minor',
-    'normal',
-    'major',
-    'critical'
+    'Minor',
+    'Normal',
+    'Major',
+    'Critical'
+];
+
+export enum issuesType {
+    task,
+    bug
+}
+
+export const issuesTypeArray = [
+    'Task',
+    'Bug'
 ];

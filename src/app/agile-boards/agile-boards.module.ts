@@ -1,3 +1,4 @@
+import { IssuesCreateComponent } from './../issues-create/issues-create.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AgileBoardsService } from './agile-boards.service';
 import { IssueCardComponent } from './issue-card/issue-card.component';
@@ -37,6 +38,9 @@ import { DragulaModule } from 'ng2-dragula';
     ],
     providers: [
         AgileBoardsService
+    ],
+    entryComponents: [
+        IssuesCreateComponent
     ]
 })
 export class AgileBoardsModule {

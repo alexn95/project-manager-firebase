@@ -22,27 +22,14 @@ export class DataIssuesService {
         private http: Http,
     ) { }
 
-    public saveIssues(summary: string, description: string, state: number): Promise<any> {
-        const data: Issue = {
-            id: null,
-            number: 1,
-            create_date : String(new Date()),
-            description : description,
-            summary : summary,
-            author_id: this.auth.getUID,
-            priority: 'normal',
-            type: 'task',
-            state: state,
-            assigned_user_id: null,
-            project_id: '-LBQWhEeuVEc_l0IFAs6',
-            sprint_id: '1',
-            days: null,
-            comments: []
-        };
-        const ref = this.db.ref('issues/' + data.project_id);
+    public saveIssues(issue: Issue): Promise<any> {
+        issue.number = 1;
+        issue.create_date = String(new Date());
+        issue.author_id = this.auth.getUID;
+        const ref = this.db.ref('issues/' + issue.project_id);
         const postRef = ref.push();
-        data.id = postRef.key;
-        return postRef.set(data);
+        issue.id = postRef.key;
+        return postRef.set(issue);
     }
 
     public getAllIssues(): Promise<any> {

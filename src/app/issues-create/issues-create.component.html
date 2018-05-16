@@ -1,0 +1,81 @@
+<div class="issues-create">
+    <form [formGroup]="issueForm" (ngSubmit)="createIssue()" class="form">
+    <div class="issues-create__content">
+        <div class="issues-create__left-content">
+            <div class="issues-create__header">
+                Create issue
+            </div>
+            <div class="issues-create__form-inputs">
+                <mat-form-field class="issues-create__input">
+                    <input matInput placeholder="Summary" [formControl]="summary"  
+                        [errorStateMatcher]="errorMatcher">
+                    <mat-error *ngIf="summary.hasError('required')">
+                        Title is <strong>required</strong>
+                    </mat-error>
+                    <mat-error *ngIf="summary.hasError('maxlength')">
+                        Title can not be longer than 100 characters.
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="issues-create__input">
+                    <textarea matInput placeholder="Description" matTextareaAutosize matAutosizeMinRows="1"
+                    matAutosizeMaxRows="12" [formControl]="description" 
+                    [errorStateMatcher]="errorMatcher">
+                    </textarea>
+                    <mat-error *ngIf="description.hasError('maxlength')">
+                        Description can not be longer than 1000 characters.
+                    </mat-error>
+                </mat-form-field>   
+            </div>
+            <div class="issues-create__action-row">
+                <button class="issues-create__action-row_button"
+                    type="submit" [disabled]="!isValid()" mat-raised-button color="primary">
+                    Submit
+                </button>
+                <button class="issues-create__action-row_button"
+                    type="button" [disabled]="false" mat-raised-button color="primary" (click)="cancel()">
+                    Cancel 
+                </button>
+            </div>
+        </div>
+        <div class="issues-create__right-content">
+            <div class="issues-create__right-content_row issues-create__project">
+                <span class="issues-create__right-content_column_left">For Project</span> 
+                <span class="issues-create__right-content_column">{{ project.title }}</span>
+            </div>
+            <div class="issues-create__right-content_row">
+                <span class="issues-create__right-content_column_left">Type</span> 
+                <mat-form-field class="issues-create__right-content_column">
+                    <mat-select [formControl]="issueType">
+                        <mat-option *ngFor="let type of issuesTypes" [value]="type">
+                            {{ type }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="issues-create__right-content_row">
+                <span class="issues-create__right-content_column_left">Priority</span> 
+                <mat-form-field class="issues-create__right-content_column">
+                    <mat-select [formControl]="issuePriority">
+                        <mat-option *ngFor="let priority of issuesPriorities" [value]="priority">
+                            {{ priority }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="issues-create__right-content_row">
+                <span class="issues-create__right-content_column_left">Assignee</span> 
+                <mat-form-field class="issues-create__right-content_column">
+                    <mat-select [formControl]="assignee" >
+                        <mat-option [value]="unassigned.id">
+                            {{ unassigned.name }}
+                        </mat-option>
+                        <mat-option *ngFor="let user of issuesUsers" [value]="user.id">
+                            {{ user.name }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+    </form>
+</div>

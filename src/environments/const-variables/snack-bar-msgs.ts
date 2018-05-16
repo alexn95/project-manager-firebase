@@ -58,6 +58,11 @@ export const snackBarMsgs = {
         message: 'Project with this id not exist or you have no access to open it.',
         action: actionClose,
         config: { duration: timeToClose }
+    },
+    issueCreate: {
+        message: 'New issue was created.',
+        action: actionClose,
+        config: { duration: timeToClose }
     }
 };
 

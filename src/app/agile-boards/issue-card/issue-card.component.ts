@@ -1,7 +1,7 @@
 import { AgileBoardsService } from './../agile-boards.service';
 import { Project } from './../../../models/entries/project';
 import { DataUsersService } from './../../../services/data-provider/data-users.service';
-import { issuesPriorityArray, IssuesPrioroty, IssuesStates } from './../../../environments/const-variables/issues-constans';
+import { issuesPriorityArray, issuesPrioroty, issuesState } from './../../../environments/const-variables/issues-constans';
 import { Component, OnInit, Input } from '@angular/core';
 import { DndDropEvent } from 'ngx-drag-drop';
 import { Issue } from '../../../models/entries/issue';
@@ -46,18 +46,18 @@ export class IssueCardComponent implements OnInit {
     }
 
     public getNumberClasses(): {} {
-        return this.issue.state === IssuesStates.done ? 'issue-card__number_done' : '';
+        return this.issue.state === issuesState.done ? 'issue-card__number_done' : '';
     }
 
     public getIssueClasses(): {} {
         switch (this.issue.priority) {
-            case issuesPriorityArray[IssuesPrioroty.minor]:
+            case issuesPriorityArray[issuesPrioroty.minor]:
                 return 'issue-card_priority_minor';
-            case issuesPriorityArray[IssuesPrioroty.normal]:
+            case issuesPriorityArray[issuesPrioroty.normal]:
                 return 'issue-card_priority_normal';
-            case issuesPriorityArray[IssuesPrioroty.major]:
+            case issuesPriorityArray[issuesPrioroty.major]:
                 return 'issue-card_priority_major';
-            case issuesPriorityArray[IssuesPrioroty.critical]:
+            case issuesPriorityArray[issuesPrioroty.critical]:
                 return 'issue-card_priority_critical';
         }
     }

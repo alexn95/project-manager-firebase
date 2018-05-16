@@ -36,7 +36,6 @@ import { hasUserValidator } from '../../services/validators/has-user-validator';
         MatSidenavModule,
         MatSortModule,
         MatTableModule,
-        MatCheckboxModule,
         MatIconModule,
         MatProgressSpinnerModule,
         MatTooltipModule,

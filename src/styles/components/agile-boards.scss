@@ -1,4 +1,9 @@
 @import './../../node_modules/dragula/dist/dragula.min.css';
+$color-active: #FF5A00;
+$border-color: #D1EEFD;
+// $color: #F0F0F0;
+$color: #EAF8FF;
+
 
 .agile-boards {
     &__container {
@@ -6,15 +11,23 @@
         flex-direction: column;
         flex: 1 1 auto;
         // background-color: #FFFFFF;
+        font-size: 14px;
     }
 
     &__actions-row {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
         margin: 0 10px;
-        padding: 10px;
     }
 
     &__select-project {
         width: 200px;
+    }
+
+    &__create-issue {
+        margin: 10px;
+
     }
 
     &__table {
@@ -32,22 +45,46 @@
         
         margin: 5px;
         &_header {
-            background-color: #F0F0F0;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            background-color: $color;
             padding: 10px;
             border-radius: 5px;
             margin-bottom: 10px;
-            // border: 1px solid #BBBBBB;
+            // border: 1px solid $border-color;
         }
+        
         &_content {
-            background-color: #F0F0F0;
+            background-color: $color;
             padding: 10px;
             border-radius: 5px;
             flex: 1 1 auto;
-            // border: 1px solid #BBBBBB;
+            // border: 1px solid $border-color;
         }
 
     }
 
+    &__add-card {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        &_text {
+            margin-right: 7px;
+            display: none;
+        }
+    }
+
+}
+
+.agile-boards__column_header:hover .agile-boards__add-card_text {
+    display: block;
+}
+
+.agile-boards__add-card:hover {
+    cursor: pointer;
+    color: $color-active;
 }
 
 

@@ -1,3 +1,6 @@
+import { ProjectUser } from './../../models/entries/project-user';
+import { UserRole } from './../../models/entries/user-role';
+import { DataUsersService } from './../../services/data-provider/data-users.service';
 import { snackBarMsgs } from './../../environments/const-variables/snack-bar-msgs';
 import { SnackBarService } from './../../services/snack-bar/snack-bar.service';
 import { errorMessages } from './../../environments/const-variables/error-messages';
@@ -5,25 +8,29 @@ import { UserProjectData } from './../../models/entries/user-project';
 import { Project } from './../../models/entries/project';
 import { DataIssuesService } from './../../services/data-provider/data-issues.service';
 
-import { issuesStatesArray, IssuesStates } from './../../environments/const-variables/issues-constans';
+import { issuesStatesArray, issuesState } from './../../environments/const-variables/issues-constans';
 import { DragulaService } from 'ng2-dragula';
 import { Injectable } from '@angular/core';
 import { AuthService } from './../../services/auth/auth.service';
 import { DataProjectsService } from './../../services/data-provider/data-projects.service';
 import { Observable } from 'rxjs/Observable';
 import { Issue } from '../../models/entries/issue';
+import { User } from '../../models/entries/user';
 
 
 @Injectable()
 export class AgileBoardsService {
 
     public issues: Issue[];
+    public users: User[];
+    public projectUsers: ProjectUser[];
 
     public projects: Project[];
     public choicedProject: Project;
 
     constructor(
         private projectService: DataProjectsService,
+        private userService: DataUsersService,
         private dragulaService: DragulaService,
         private issuesService: DataIssuesService,
         private auth: AuthService,
@@ -41,8 +48,13 @@ export class AgileBoardsService {
             }
             this.choicedProject = this.projects[0];
         }
-        return this.issuesService.getProjectIssues(this.choicedProject.id).then((issues) => {
-            this.issues = issues;
+        return new Promise((resolve, reject) => {
+            this.initProjectUsers().subscribe(() => {
+                this.issuesService.getProjectIssues(this.choicedProject.id).then((issues) => {
+                    this.issues = issues;
+                    resolve();
+                });
+            });
         });
     }
 
@@ -60,28 +72,6 @@ export class AgileBoardsService {
         });
     }
 
-    private getClass(args: any): string {
-        // tslint:disable-next-line:prefer-const
-        const [e, el] = args.slice(2);
-        return e.className.split(' ')[0];
-    }
-
-    private getState(args: any): number {
-        switch (this.getClass(args)) {
-            case 'open':
-                return IssuesStates.open;
-            case 'in-progress':
-                return IssuesStates.inProgress;
-            case 'to-verify':
-                return IssuesStates.toVerify;
-            case 'done':
-                return IssuesStates.done;
-            default:
-                console.log(this.getClass(args));
-                throw new Error(errorMessages.inalidIssuesStateError);
-        }
-    }
-
     public onChangeIssueState(): void {
         this.dragulaService.drop.subscribe((args) => {
             // tslint:disable-next-line:prefer-const
@@ -92,6 +82,59 @@ export class AgileBoardsService {
             issue.state = this.getState(args);
             this.issuesService.updateIssueState(issue).then();
         });
+    }
+
+    public initProjectUsers(): Observable<void> {
+        return new Observable(observer => {
+            this.getProjectUsers().subscribe((users) => {
+                this.users = users;
+                this.projectUsers = new Array();
+                users.forEach((user) => {
+                    this.projectUsers.push({
+                        name: user.first_name + ' ' + user.last_name,
+                        id: user.id
+                    });
+                });
+                observer.next();
+            });
+        });
+    }
+
+    public getProjectUsers(): Observable<User[]> {
+        const projectUsers = this.choicedProject.users ?
+                        Object.keys(this.choicedProject.users).map(key => this.choicedProject.users[key]) : [];
+        console.log(projectUsers);
+        return Observable.of(projectUsers).mergeMap(users => {
+            return Observable.forkJoin(
+                users.map((projectUser: UserRole) =>
+                    this.userService.getUserById(projectUser.user_id).then(user => {
+                        return user;
+                    })
+                )
+            );
+        });
+    }
+
+    private getClass(args: any): string {
+        // tslint:disable-next-line:prefer-const
+        const [e, el] = args.slice(2);
+        return e.className.split(' ')[0];
+    }
+
+    private getState(args: any): number {
+        switch (this.getClass(args)) {
+            case 'open':
+                return issuesState.open;
+            case 'in-progress':
+                return issuesState.inProgress;
+            case 'to-verify':
+                return issuesState.toVerify;
+            case 'done':
+                return issuesState.done;
+            default:
+                console.log(this.getClass(args));
+                throw new Error(errorMessages.inalidIssuesStateError);
+        }
     }
 
 }

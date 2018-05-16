@@ -1,10 +1,13 @@
+import { matDialogOptions } from './../../environments/const-variables/mat-dialog-options';
+import { IssuesCreateComponent } from './../issues-create/issues-create.component';
+import { MatDialog } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { FormGroup, FormControl } from '@angular/forms';
 import { errorMessages } from './../../environments/const-variables/error-messages';
 import { AgileBoardsService } from './agile-boards.service';
 import { DragulaService } from 'ng2-dragula';
-import { IssuesStates, issuesStatesArray } from './../../environments/const-variables/issues-constans';
+import { issuesState, issuesStatesArray } from './../../environments/const-variables/issues-constans';
 import { DataIssuesService } from './../../services/data-provider/data-issues.service';
 import { Issue } from './../../models/entries/issue';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -35,6 +38,7 @@ export class AgileBoardsComponent implements OnInit, OnDestroy {
         private issuesService: DataIssuesService,
         private dragulaService: DragulaService,
         private route: ActivatedRoute,
+        private createIssueModal: MatDialog,
     ) {
     }
 
@@ -87,16 +91,16 @@ export class AgileBoardsComponent implements OnInit, OnDestroy {
         this.doneIssues = new Array<Issue>();
         issues.forEach((issue: Issue) => {
             switch (issue.state) {
-                case IssuesStates.open:
+                case issuesState.open:
                     this.openIssues.push(issue);
                     break;
-                case IssuesStates.inProgress:
+                case issuesState.inProgress:
                     this.inProgressIssues.push(issue);
                     break;
-                case IssuesStates.toVerify:
+                case issuesState.toVerify:
                     this.toVerifyIssues.push(issue);
                     break;
-                case IssuesStates.done:
+                case issuesState.done:
                     this.doneIssues.push(issue);
                     break;
                 default:
@@ -107,5 +111,15 @@ export class AgileBoardsComponent implements OnInit, OnDestroy {
     }
 
 
+    public createIssue(state: number): void {
+        this.createIssueModal.open(IssuesCreateComponent, {
+            width: matDialogOptions.createIssueWidth,
+            autoFocus: matDialogOptions.autoFocus,
+            data: { project: this.choicedProject, state: state },
+            panelClass: matDialogOptions.createIssuepanelClass
+        }).afterClosed().subscribe(() => {
+           console.log('close');
+        });
+    }
 
 }
