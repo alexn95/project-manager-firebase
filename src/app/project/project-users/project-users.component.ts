@@ -1,7 +1,8 @@
+import { DataProviderService } from './../../../services/data-provider/data-provider.service';
 import { matDialogOptions } from './../../../environments/const-variables/mat-dialog-options';
 import { ProjectInviteUsersComponent } from './../project-users-invite/project-invite-users.comonent';
 import { DataProjectsService } from './../../../services/data-provider/data-projects.service';
-import { projectRoles } from './../../../environments/const-variables/project-roles';
+import { projectRoles, projectRolesArray } from './../../../environments/const-variables/project-roles';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/map';
@@ -11,11 +12,10 @@ import { UserRole } from './../../../models/entries/user-role';
 import { ProjectService } from './../project.service';
 import { Project } from './../../../models/entries/project';
 import { Subscription } from 'rxjs/Subscription';
-import { UserProject } from './user-project.model';
+import { ProjectUserData } from './user-project.model';
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { MatSort, MatTableDataSource, MatDialog } from '@angular/material';
 import { User } from '../../../models/entries/user';
-import { projectRolesArray } from '../../../environments/const-variables/project-roles';
 
 @Component({
     selector: 'app-project-users',
@@ -24,12 +24,13 @@ import { projectRolesArray } from '../../../environments/const-variables/project
 export class ProjectUsersComponent implements OnInit, OnDestroy {
 
     private projectSetSub: Subscription;
+
     public project: Project;
     public roles: {}[];
     public creatorRole = projectRolesArray[projectRoles.creator];
 
-    public dataSource: MatTableDataSource<UserProject>;
-    public users: UserProject[];
+    public dataSource: MatTableDataSource<ProjectUserData>;
+    public users: ProjectUserData[];
 
     public displayedColumns = ['email', 'name', 'role', 'remove'];
 
@@ -39,6 +40,7 @@ export class ProjectUsersComponent implements OnInit, OnDestroy {
         private service: ProjectService,
         private usersService: DataUsersService,
         private projectsService: DataProjectsService,
+        private dataService: DataProviderService,
         private inviteUserDialog: MatDialog
     ) {
         this.roles = [
@@ -50,12 +52,12 @@ export class ProjectUsersComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.projectSetSub = this.service.projectSet.subscribe((project: Project) => {
             this.project = project;
-            this.initProject();
+            this.init();
         });
         const currentProject = this.service.getProject;
         if (currentProject) {
             this.project = currentProject;
-            this.initProject();
+            this.init();
         }
     }
 
@@ -88,31 +90,29 @@ export class ProjectUsersComponent implements OnInit, OnDestroy {
         });
     }
 
-    private getUsers(): Observable<User[]> {
-        const users = Object.keys(this.project.users).map(key => this.project.users[key]);
-        return Observable.of(users)
-            .mergeMap(flatUsers => {
-                return Observable.forkJoin(
-                    flatUsers.map((userData: UserRole) =>
-                        this.usersService.getUserById(userData.user_id)
-                    )
-                );
+    private initUsers(): Observable<void> {
+        return new Observable((observer) => {
+            this.dataService.getProjectUsersRole(this.project.id).then((usersRole) => {
+                this.dataService.getUsersAtProject(usersRole).subscribe((users) => {
+                    users.map((user: User) => {
+                        console.log(projectRolesArray[usersRole.filter(role => role.user_id === user.id)[0].role]);
+                        this.users.push({
+                            user_id: user.id,
+                            email: user.email,
+                            name: user.first_name + ' ' + user.last_name,
+                            role: usersRole.filter(role => role.user_id === user.id)[0].role
+                        });
+                    });
+                    observer.next();
+                });
             });
+        });
     }
 
 
-    private initProject(): void {
-        this.users = new Array<UserProject>();
-        this.getUsers().subscribe(res => {
-            res.map((user: User) => {
-                this.users.push({
-                    user_id: user.id,
-                    email: user.email,
-                    name: user.first_name + ' ' + user.last_name,
-                    role: this.project.users[user.id].role
-                });
-            });
-            console.log(this.users);
+    private init(): void {
+        this.users = new Array<ProjectUserData>();
+        this.initUsers().subscribe(() => {
             this.dataSource = new MatTableDataSource(this.users);
             this.dataSource.sort = this.sort;
         });

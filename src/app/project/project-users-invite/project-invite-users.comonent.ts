@@ -1,4 +1,4 @@
-import { UserProject } from './../project-users/user-project.model';
+import { ProjectUserData } from './../project-users/user-project.model';
 import { UserSearchStatus } from './user-search.model';
 import { User } from './../../../models/entries/user';
 import { DataUsersService } from './../../../services/data-provider/data-users.service';
@@ -27,7 +27,7 @@ export class ProjectInviteUsersComponent implements OnInit, OnDestroy {
     public email: FormControl;
     public errorMatcher = new FormErrorStateMatcher();
     public status: UserSearchStatus;
-    public users: UserProject[];
+    public users: ProjectUserData[];
 
     private invitedUser: User;
     private searchSub: Subscription;

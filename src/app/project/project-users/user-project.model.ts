@@ -1,6 +1,6 @@
-export interface UserProject {
+export interface ProjectUserData {
     user_id: string;
     email: string;
     name: string;
-    role: string;
+    role: number;
 }

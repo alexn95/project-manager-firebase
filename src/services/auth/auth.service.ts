@@ -1,5 +1,5 @@
-import { UserProjectData } from './../../models/entries/user-project';
-import { UserProject } from './../../app/project/project-users/user-project.model';
+import { UserProject } from './../../models/entries/user-project';
+import { ProjectUserData } from './../../app/project/project-users/user-project.model';
 import { snackBarMsgs } from './../../environments/const-variables/snack-bar-msgs';
 import { routingUrl } from './../../environments/const-variables/routing-url';
 import { Observable } from 'rxjs/Observable';
@@ -31,7 +31,7 @@ export class AuthService {
         return this.dbUser;
     }
 
-    get getUserProjectsData(): UserProjectData[] {
+    get getUserProjectsData(): UserProject[] {
         const projects = this.dbUser.projects;
         return projects ? Object.keys(projects).map(key => projects[key]) : [];
     }

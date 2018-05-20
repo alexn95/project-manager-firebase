@@ -1,3 +1,3 @@
-export interface UserProjectData {
+export interface UserProject {
     project_id: string;
 }

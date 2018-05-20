@@ -1,7 +1,6 @@
 import { SnackBarService } from './../../services/snack-bar/snack-bar.service';
 import { Issue } from './../../models/entries/issue';
 import { DataIssuesService } from './../../services/data-provider/data-issues.service';
-import { ProjectUser } from './../../models/entries/project-user';
 import { AgileBoardsService } from './../agile-boards/agile-boards.service';
 import { Observable } from 'rxjs/Observable';
 import { DataUsersService } from './../../services/data-provider/data-users.service';
@@ -15,6 +14,7 @@ import { Project } from '../../models/entries/project';
 import { UserRole } from '../../models/entries/user-role';
 import { User } from '../../models/entries/user';
 import { snackBarMsgs } from '../../environments/const-variables/snack-bar-msgs';
+import { ProjectUser } from '../agile-boards/project-user.model';
 
 @Component({
     selector: 'app-issues-create',
@@ -94,8 +94,7 @@ export class IssuesCreateComponent implements OnInit {
             assigned_user_id: this.assignee.value === this.unassigned.id ? null : this.assignee.value,
             project_id: this.project.id,
             sprint_id: '1',
-            days: null,
-            comments: []
+            days: null
         };
         this.issuesService.saveIssues(data).then(() => {
             this.agileBoardService.issues.push(data);

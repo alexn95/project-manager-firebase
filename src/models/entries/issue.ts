@@ -10,7 +10,6 @@ export interface Issue {
     project_id: string;
     sprint_id: string;
     days: number;
-    comments: Comment[];
 
     create_date: string;
     author_id: string;

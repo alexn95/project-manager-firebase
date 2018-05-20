@@ -1,10 +1,9 @@
-import { ProjectUser } from './../../models/entries/project-user';
+import { DataProviderService } from './../../services/data-provider/data-provider.service';
 import { UserRole } from './../../models/entries/user-role';
 import { DataUsersService } from './../../services/data-provider/data-users.service';
 import { snackBarMsgs } from './../../environments/const-variables/snack-bar-msgs';
 import { SnackBarService } from './../../services/snack-bar/snack-bar.service';
 import { errorMessages } from './../../environments/const-variables/error-messages';
-import { UserProjectData } from './../../models/entries/user-project';
 import { Project } from './../../models/entries/project';
 import { DataIssuesService } from './../../services/data-provider/data-issues.service';
 
@@ -16,6 +15,7 @@ import { DataProjectsService } from './../../services/data-provider/data-project
 import { Observable } from 'rxjs/Observable';
 import { Issue } from '../../models/entries/issue';
 import { User } from '../../models/entries/user';
+import { ProjectUser } from './project-user.model';
 
 
 @Injectable()
@@ -31,6 +31,7 @@ export class AgileBoardsService {
     constructor(
         private projectService: DataProjectsService,
         private userService: DataUsersService,
+        private dataService: DataProviderService,
         private dragulaService: DragulaService,
         private issuesService: DataIssuesService,
         private auth: AuthService,
@@ -63,10 +64,11 @@ export class AgileBoardsService {
         return Observable.of(this.auth.getUserProjectsData)
         .mergeMap(userProjects => {
             return Observable.forkJoin(
-                userProjects.map(userProject =>
-                    this.projectService.getProjectById(userProject.project_id).then(project => {
+                userProjects.map(userProject => {
+                    return this.projectService.getProjectById(userProject.project_id).then(project => {
                         this.projects.push(project);
-                    })
+                    });
+                }
                 )
             );
         });
@@ -86,7 +88,7 @@ export class AgileBoardsService {
 
     public initProjectUsers(): Observable<void> {
         return new Observable(observer => {
-            this.getProjectUsers().subscribe((users) => {
+            this.dataService.getProjectUsers(this.choicedProject.id).subscribe((users) => {
                 this.users = users;
                 this.projectUsers = new Array();
                 users.forEach((user) => {
@@ -100,20 +102,6 @@ export class AgileBoardsService {
         });
     }
 
-    public getProjectUsers(): Observable<User[]> {
-        const projectUsers = this.choicedProject.users ?
-                        Object.keys(this.choicedProject.users).map(key => this.choicedProject.users[key]) : [];
-        console.log(projectUsers);
-        return Observable.of(projectUsers).mergeMap(users => {
-            return Observable.forkJoin(
-                users.map((projectUser: UserRole) =>
-                    this.userService.getUserById(projectUser.user_id).then(user => {
-                        return user;
-                    })
-                )
-            );
-        });
-    }
 
     private getClass(args: any): string {
         // tslint:disable-next-line:prefer-const

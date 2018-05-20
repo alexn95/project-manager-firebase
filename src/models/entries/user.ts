@@ -1,5 +1,5 @@
 import { Invite } from './invite';
-import { UserProject } from '../../app/project/project-users/user-project.model';
+import { UserProject } from './user-project';
 export interface User {
     id: string;
     email: string;

@@ -1,3 +1,4 @@
+import { DataProviderService } from './../../services/data-provider/data-provider.service';
 import { projectRoles } from './../../environments/const-variables/project-roles';
 import { AuthService } from './../../services/auth/auth.service';
 import { DataProjectsService } from './../../services/data-provider/data-projects.service';
@@ -16,7 +17,8 @@ export class ProjectService {
     public projectSet: EventEmitter<Project>;
 
     constructor(
-        private dataProvider: DataProjectsService,
+        private dataProjectService: DataProjectsService,
+        private dataService: DataProviderService,
         private authService: AuthService,
     ) {
         this.projectSet = new EventEmitter<Project>();
@@ -39,17 +41,18 @@ export class ProjectService {
     }
 
     public initProject(id: string): Promise<void> {
-        return this.dataProvider.getProjectById(id)
+        return this.dataProjectService.getProjectById(id)
         .then((project: Project) => {
             this.project = project;
             this.projectSet.emit(project);
-            this.initUserRole();
+            return this.initUserRole();
         });
     }
 
-    private initUserRole(): void {
-        const users = Object.keys(this.project.users).map(key => this.project.users[key]);
-        this.userRole = users.filter(user => user.user_id === this.authService.getUID)[0].role;
+    private initUserRole(): Promise<any> {
+        return this.dataService.getProjectUserRole(this.project.id, this.authService.getUID).then((role) => {
+            this.userRole = role.role;
+        });
     }
 
 }
