@@ -3,7 +3,7 @@ import { ProjectService } from './../project.service';
 import { SnackBarService } from './../../../services/snack-bar/snack-bar.service';
 import { Project } from './../../../models/entries/project';
 import { DataProjectsService } from './../../../services/data-provider/data-projects.service';
-
+import * as moment from 'moment/moment';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
@@ -22,12 +22,15 @@ export class ProjectDetailsComponent implements OnInit, OnDestroy {
 
     private projectSetSub: Subscription;
     public project: Project;
+    public createDate: String;
 
     public errorMatcher = new FormErrorStateMatcher();
     public projectForm: FormGroup;
     public title: FormControl;
     public description: FormControl;
     public code: FormControl;
+
+    private dateFormat = 'Do MMM YYYY, HH:MM';
 
 
     constructor(
@@ -47,6 +50,7 @@ export class ProjectDetailsComponent implements OnInit, OnDestroy {
         if (currentProject) {
             this.project = currentProject;
             this.initProjectForm();
+            this.createDate = moment(currentProject.create_date).format(this.dateFormat);
         }
     }
 

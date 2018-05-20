@@ -11,9 +11,9 @@ export interface Issue {
     sprint_id: string;
     days: number;
 
-    create_date: string;
+    create_date: number;
     author_id: string;
 
-    update_date?: string;
+    update_date?: number;
     update_user_id?: string;
 }

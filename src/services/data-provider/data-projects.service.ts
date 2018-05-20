@@ -43,7 +43,7 @@ export class DataProjectsService {
         const data: Project = {
             id: '',
             code: code,
-            create_date : String(new Date()),
+            create_date: Date.now(),
             description : description,
             title : title,
             issues_count : 12

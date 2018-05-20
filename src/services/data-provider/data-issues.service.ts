@@ -24,7 +24,7 @@ export class DataIssuesService {
 
     public saveIssues(issue: Issue): Promise<any> {
         issue.number = 1;
-        issue.create_date = String(new Date());
+        issue.create_date = Date.now();
         issue.author_id = this.auth.getUID;
         const ref = this.db.ref('issues/' + issue.project_id);
         const postRef = ref.push();

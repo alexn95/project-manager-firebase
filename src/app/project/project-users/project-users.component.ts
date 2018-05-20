@@ -95,7 +95,6 @@ export class ProjectUsersComponent implements OnInit, OnDestroy {
             this.dataService.getProjectUsersRole(this.project.id).then((usersRole) => {
                 this.dataService.getUsersAtProject(usersRole).subscribe((users) => {
                     users.map((user: User) => {
-                        console.log(projectRolesArray[usersRole.filter(role => role.user_id === user.id)[0].role]);
                         this.users.push({
                             user_id: user.id,
                             email: user.email,

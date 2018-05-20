@@ -3,6 +3,6 @@ export interface Project {
     title: string;
     code: string;
     description: string;
-    create_date: string;
+    create_date: number;
     issues_count: number;
 }
