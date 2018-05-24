@@ -1,7 +1,6 @@
+import { functions } from './../../models/const-variables/functions';
 import { DataProviderService } from './data-provider.service';
 import { UserRole } from './../../models/entries/user-role';
-import { errorMessages } from './../../environments/const-variables/error-messages';
-import { projectRoles } from './../../environments/const-variables/project-roles';
 import { AuthService } from './../auth/auth.service';
 import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
@@ -9,8 +8,9 @@ import * as firebase from 'firebase/app';
 import { FirebaseDatabase } from '@firebase/database-types';
 import { AngularFireDatabase, AngularFireDatabaseModule } from 'angularfire2/database';
 import { Http } from '@angular/http';
-import { functions } from '../../environments/const-variables/functions';
 import { Project } from '../../models/entries/project';
+import { projectRoles } from '../../models/const-variables/project-roles';
+import { errorMessages } from '../../models/const-variables/error-messages';
 
 
 

@@ -1,13 +1,9 @@
 import { DataProviderService } from './../../services/data-provider/data-provider.service';
 import { UserRole } from './../../models/entries/user-role';
 import { DataUsersService } from './../../services/data-provider/data-users.service';
-import { snackBarMsgs } from './../../environments/const-variables/snack-bar-msgs';
 import { SnackBarService } from './../../services/snack-bar/snack-bar.service';
-import { errorMessages } from './../../environments/const-variables/error-messages';
 import { Project } from './../../models/entries/project';
 import { DataIssuesService } from './../../services/data-provider/data-issues.service';
-
-import { issuesStatesArray, issuesState } from './../../environments/const-variables/issues-constans';
 import { DragulaService } from 'ng2-dragula';
 import { Injectable } from '@angular/core';
 import { AuthService } from './../../services/auth/auth.service';
@@ -16,6 +12,9 @@ import { Observable } from 'rxjs/Observable';
 import { Issue } from '../../models/entries/issue';
 import { User } from '../../models/entries/user';
 import { ProjectUser } from './project-user.model';
+import { snackBarMsgs } from '../../models/const-variables/snack-bar-msgs';
+import { issuesState } from '../../models/const-variables/issues-constans';
+import { errorMessages } from '../../models/const-variables/error-messages';
 
 
 @Injectable()
@@ -40,13 +39,15 @@ export class AgileBoardsService {
     }
 
     public initChoicedProject(id: string): Promise<void> {
-        const project = this.projects.filter(pr => pr.id === id)[0];
-        if (project) {
-            this.choicedProject = project;
-        } else {
-            if (id) {
+        if (id) {
+            const project = this.projects.filter(pr => pr.id === id)[0];
+            if (project) {
+                this.choicedProject = project;
+            } else {
                 this.snackBar.open(snackBarMsgs.projectNotFound);
+                this.choicedProject = this.projects[0];
             }
+        } else {
             this.choicedProject = this.projects[0];
         }
         return new Promise((resolve, reject) => {

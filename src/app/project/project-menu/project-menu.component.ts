@@ -1,7 +1,3 @@
-import { projectRoles } from './../../../environments/const-variables/project-roles';
-import { routingUrl } from './../../../environments/const-variables/routing-url';
-import { matDialogOptions } from './../../../environments/const-variables/mat-dialog-options';
-import { entities } from './../../../environments/const-variables/enities';
 import { DeleteComponent } from './../../delete/delete.component';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
@@ -9,6 +5,10 @@ import { ProjectService } from './../project.service';
 import { Project } from './../../../models/entries/project';
 import { Component, OnInit, OnDestroy} from '@angular/core';
 import { MatDialog } from '@angular/material';
+import { projectRoles } from '../../../models/const-variables/project-roles';
+import { matDialogOptions } from '../../../models/const-variables/mat-dialog-options';
+import { entities } from '../../../models/const-variables/enities';
+import { routingUrl } from '../../../models/const-variables/routing-url';
 
 
 @Component({

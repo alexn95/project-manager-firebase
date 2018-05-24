@@ -1,4 +1,4 @@
-export interface Issue {
+export class Issue {
     id: string;
     number: number;
     summary: string;
@@ -8,8 +8,8 @@ export interface Issue {
     state: number;
     assigned_user_id: string;
     project_id: string;
-    sprint_id: string;
-    days: number;
+    sprint_id?: string;
+    days?: number;
 
     create_date: number;
     author_id: string;

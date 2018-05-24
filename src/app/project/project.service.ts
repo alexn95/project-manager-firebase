@@ -1,11 +1,11 @@
 import { DataProviderService } from './../../services/data-provider/data-provider.service';
-import { projectRoles } from './../../environments/const-variables/project-roles';
 import { AuthService } from './../../services/auth/auth.service';
 import { DataProjectsService } from './../../services/data-provider/data-projects.service';
 import { Observable } from 'rxjs/Observable';
 import { Project } from './../../models/entries/project';
 import { Injectable, EventEmitter } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { projectRoles } from '../../models/const-variables/project-roles';
 
 
 

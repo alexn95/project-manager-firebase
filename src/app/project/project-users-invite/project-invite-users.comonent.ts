@@ -4,10 +4,7 @@ import { User } from './../../../models/entries/user';
 import { DataUsersService } from './../../../services/data-provider/data-users.service';
 import { Subscription } from 'rxjs/Subscription';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { snackBarMsgs } from './../../../environments/const-variables/snack-bar-msgs';
 import { SnackBarService } from './../../../services/snack-bar/snack-bar.service';
-import { routingUrl } from './../../../environments/const-variables/routing-url';
-import { entities } from './../../../environments/const-variables/enities';
 import { Router } from '@angular/router';
 import { Component, OnInit, Inject, OnDestroy, EventEmitter } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
@@ -16,6 +13,7 @@ import { hasUserValidator } from '../../../services/validators/has-user-validato
 import { confirmPasswordValidator } from '../../../services/validators/confirm-password-validator';
 import { FormErrorStateMatcher } from '../../../services/validators/form-error-state-matcher';
 import { ProjectService } from '../project.service';
+import { snackBarMsgs } from '../../../models/const-variables/snack-bar-msgs';
 
 @Component({
     selector: 'app-invite-users-component',

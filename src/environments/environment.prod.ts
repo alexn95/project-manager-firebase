@@ -1,4 +1,5 @@
 export const environment = {
+    rootFunctionsURL: 'https://us-central1-task-manager-free.cloudfunctions.net',
     production: true,
     firebase: {
         apiKey: 'AIzaSyCo2L0I3GWadM1GxWPUBQYjl_9iybBPgRE',

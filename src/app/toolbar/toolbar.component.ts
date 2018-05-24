@@ -1,10 +1,10 @@
 import { AuthEvents } from './../../services/auth/auth-events';
-import { routingUrl } from './../../environments/const-variables/routing-url';
 import { Router } from '@angular/router';
 import { AuthService } from './../../services/auth/auth.service';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Component, OnInit } from '@angular/core';
 import { User } from 'firebase/app';
+import { routingUrl } from '../../models/const-variables/routing-url';
 
 @Component({
     selector: 'app-toolbar',

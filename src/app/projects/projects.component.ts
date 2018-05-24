@@ -1,9 +1,9 @@
-import { routingUrl } from './../../environments/const-variables/routing-url';
 import { DataProjectsService } from './../../services/data-provider/data-projects.service';
 import { User } from 'firebase/app';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Project } from '../../models/entries/project';
 import { Subscription } from 'rxjs/Subscription';
+import { routingUrl } from '../../models/const-variables/routing-url';
 
 
 @Component({

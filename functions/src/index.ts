@@ -1,4 +1,4 @@
-import { Functions } from './projects-functions';
+import { Functions } from './functions';
 const functions = require('firebase-functions'); // The Cloud Functions for Firebase SDK to create Cloud Functions and setup triggers.
 const admin = require('firebase-admin'); // The Firebase Admin SDK to access the Firebase Realtime Database.
 admin.initializeApp(functions.config().firebase);

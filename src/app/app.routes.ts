@@ -1,6 +1,5 @@
 import { ProjectUsersComponent } from './project/project-users/project-users.component';
 import { ProjectDetailsComponent } from './project/project-details/project-details.component';
-import { routingUrl } from './../environments/const-variables/routing-url';
 import { ProjectComponent } from './project/project.component';
 import { HomeComponent } from './home/home.component';
 import { ProjectsComponent } from './projects/projects.component';
@@ -13,6 +12,7 @@ import { AppComponent } from './app.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { AgileBoardsComponent } from './agile-boards/agile-boards.component';
+import { routingUrl } from '../models/const-variables/routing-url';
 
 
 

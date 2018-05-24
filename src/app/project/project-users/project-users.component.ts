@@ -1,8 +1,6 @@
 import { DataProviderService } from './../../../services/data-provider/data-provider.service';
-import { matDialogOptions } from './../../../environments/const-variables/mat-dialog-options';
 import { ProjectInviteUsersComponent } from './../project-users-invite/project-invite-users.comonent';
 import { DataProjectsService } from './../../../services/data-provider/data-projects.service';
-import { projectRoles, projectRolesArray } from './../../../environments/const-variables/project-roles';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/map';
@@ -16,6 +14,8 @@ import { ProjectUserData } from './user-project.model';
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { MatSort, MatTableDataSource, MatDialog } from '@angular/material';
 import { User } from '../../../models/entries/user';
+import { projectRolesArray, projectRoles } from '../../../models/const-variables/project-roles';
+import { matDialogOptions } from '../../../models/const-variables/mat-dialog-options';
 
 @Component({
     selector: 'app-project-users',

@@ -1,7 +1,5 @@
 import { UserProject } from './../../models/entries/user-project';
 import { ProjectUserData } from './../../app/project/project-users/user-project.model';
-import { snackBarMsgs } from './../../environments/const-variables/snack-bar-msgs';
-import { routingUrl } from './../../environments/const-variables/routing-url';
 import { Observable } from 'rxjs/Observable';
 import { SnackBarService } from './../snack-bar/snack-bar.service';
 import { Router } from '@angular/router';
@@ -11,6 +9,8 @@ import { AngularFireAuth, AngularFireAuthModule } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { User } from '../../models/entries/user';
+import { routingUrl } from '../../models/const-variables/routing-url';
+import { snackBarMsgs } from '../../models/const-variables/snack-bar-msgs';
 
 
 

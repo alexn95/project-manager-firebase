@@ -1,11 +1,11 @@
 import { AgileBoardsService } from './../agile-boards.service';
 import { Project } from './../../../models/entries/project';
 import { DataUsersService } from './../../../services/data-provider/data-users.service';
-import { issuesPriorityArray, issuesPrioroty, issuesState } from './../../../environments/const-variables/issues-constans';
 import { Component, OnInit, Input } from '@angular/core';
 import { DndDropEvent } from 'ngx-drag-drop';
 import { Issue } from '../../../models/entries/issue';
 import { User } from '../../../models/entries/user';
+import { issuesState, issuesPriorityArray, issuesPrioroty } from '../../../models/const-variables/issues-constans';
 
 @Component({
     selector: 'app-issue-card',

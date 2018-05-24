@@ -47,7 +47,6 @@ import { IssuesCreateModule } from './issues-create/issues-create.model';
         routing,
 
         ServicesModule,
-        ToolbarModule,
         LoginPageModule,
         SignupPageModule,
         ProjectsModule,
@@ -56,9 +55,9 @@ import { IssuesCreateModule } from './issues-create/issues-create.model';
         DeleteModule,
         AgileBoardsModule,
         IssuesCreateModule,
+        ToolbarModule,
 
-        // MATERIAL
-        MatSnackBarModule
+        MatSnackBarModule,
     ],
     providers: [
         AuthGuardService,

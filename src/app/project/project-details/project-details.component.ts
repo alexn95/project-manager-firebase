@@ -1,4 +1,3 @@
-import { snackBarMsgs } from './../../../environments/const-variables/snack-bar-msgs';
 import { ProjectService } from './../project.service';
 import { SnackBarService } from './../../../services/snack-bar/snack-bar.service';
 import { Project } from './../../../models/entries/project';
@@ -12,6 +11,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { FormErrorStateMatcher } from '../../../services/validators/form-error-state-matcher';
+import { snackBarMsgs } from '../../../models/const-variables/snack-bar-msgs';
 
 
 @Component({

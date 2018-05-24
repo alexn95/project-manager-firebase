@@ -1,18 +1,18 @@
-import { matDialogOptions } from './../../environments/const-variables/mat-dialog-options';
 import { IssuesCreateComponent } from './../issues-create/issues-create.component';
 import { MatDialog } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { FormGroup, FormControl } from '@angular/forms';
-import { errorMessages } from './../../environments/const-variables/error-messages';
 import { AgileBoardsService } from './agile-boards.service';
 import { DragulaService } from 'ng2-dragula';
-import { issuesState, issuesStatesArray } from './../../environments/const-variables/issues-constans';
 import { DataIssuesService } from './../../services/data-provider/data-issues.service';
 import { Issue } from './../../models/entries/issue';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DndDropEvent } from 'ngx-drag-drop';
 import { Project } from '../../models/entries/project';
+import { issuesState } from '../../models/const-variables/issues-constans';
+import { errorMessages } from '../../models/const-variables/error-messages';
+import { matDialogOptions } from '../../models/const-variables/mat-dialog-options';
 
 
 @Component({
@@ -46,9 +46,14 @@ export class AgileBoardsComponent implements OnInit, OnDestroy {
         // this.issuesService.saveIssues('TaskTaskTaskTas askTaskTask askTaskTask', 'desc', 3);
         this.selectProject = new FormControl();
         this.service.initProjects().switchMap(() => {
+            this.projects = this.service.projects;
             return this.route.params;
         }).subscribe((params) => {
-            this.initProject(params['id']);
+            if (this.projects.length > 0) {
+                this.initProject(params['id']);
+            } else {
+                // проектов не сущуствует
+            }
         });
 
         this.service.onChangeIssueState();
@@ -67,15 +72,11 @@ export class AgileBoardsComponent implements OnInit, OnDestroy {
     }
 
     private initProject(id: string): void {
-        this.projects = this.service.projects;
-        if (this.projects.length > 0) {
-            this.service.initChoicedProject(id)
-            .then(() => {
-                this.projects = this.service.projects;
-                this.initProjectData();
-                this.selectProject.setValue(this.choicedProject, { emitEvent: true });
-            });
-        }
+        this.service.initChoicedProject(id)
+        .then(() => {
+            this.initProjectData();
+            this.selectProject.setValue(this.choicedProject, { emitEvent: true });
+        });
     }
 
     private initProjectData(): void {

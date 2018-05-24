@@ -1,4 +1,4 @@
-export interface Comment {
+export class Comment {
     id: string;
     content: string;
     author_id: string;

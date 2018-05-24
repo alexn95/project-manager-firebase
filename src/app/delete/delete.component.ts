@@ -1,11 +1,11 @@
-import { snackBarMsgs } from './../../environments/const-variables/snack-bar-msgs';
 import { SnackBarService } from './../../services/snack-bar/snack-bar.service';
-import { routingUrl } from './../../environments/const-variables/routing-url';
-import { entities } from './../../environments/const-variables/enities';
 import { DataProjectsService } from './../../services/data-provider/data-projects.service';
 import { Router } from '@angular/router';
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { routingUrl } from '../../models/const-variables/routing-url';
+import { entities } from '../../models/const-variables/enities';
+import { snackBarMsgs } from '../../models/const-variables/snack-bar-msgs';
 
 @Component({
     selector: 'app-delete-component',

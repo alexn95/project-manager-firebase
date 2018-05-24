@@ -4,6 +4,7 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
+    rootFunctionsURL: 'https://us-central1-task-manager-free.cloudfunctions.net',
     production: false,
     firebase: {
         apiKey: 'AIzaSyCo2L0I3GWadM1GxWPUBQYjl_9iybBPgRE',

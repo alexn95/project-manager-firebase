@@ -1,6 +1,6 @@
 import { Invite } from './invite';
 import { UserProject } from './user-project';
-export interface User {
+export class User {
     id: string;
     email: string;
     first_name: string;

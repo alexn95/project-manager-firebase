@@ -1,4 +1,4 @@
-import { functions } from './../../environments/const-variables/functions';
+import { functions } from './../../models/const-variables/functions';
 import { Observable } from 'rxjs/Observable';
 import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';

@@ -5,7 +5,6 @@ import * as firebase from 'firebase/app';
 import { FirebaseDatabase } from '@firebase/database-types';
 import { AngularFireDatabase, AngularFireDatabaseModule } from 'angularfire2/database';
 import { Http } from '@angular/http';
-import { functions } from '../../environments/const-variables/functions';
 import { Issue } from '../../models/entries/issue';
 
 

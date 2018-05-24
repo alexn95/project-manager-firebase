@@ -4,8 +4,6 @@ import { DataIssuesService } from './../../services/data-provider/data-issues.se
 import { AgileBoardsService } from './../agile-boards/agile-boards.service';
 import { Observable } from 'rxjs/Observable';
 import { DataUsersService } from './../../services/data-provider/data-users.service';
-import { issuesTypeArray, issuesType, issuesStatesArray, issuesState,
-         issuesPriorityArray, issuesPrioroty } from './../../environments/const-variables/issues-constans';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { FormErrorStateMatcher } from './../../services/validators/form-error-state-matcher';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
@@ -13,8 +11,10 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Project } from '../../models/entries/project';
 import { UserRole } from '../../models/entries/user-role';
 import { User } from '../../models/entries/user';
-import { snackBarMsgs } from '../../environments/const-variables/snack-bar-msgs';
 import { ProjectUser } from '../agile-boards/project-user.model';
+import { issuesTypeArray, issuesPriorityArray, issuesStatesArray,
+            issuesType, issuesPrioroty } from '../../models/const-variables/issues-constans';
+import { snackBarMsgs } from '../../models/const-variables/snack-bar-msgs';
 
 @Component({
     selector: 'app-issues-create',

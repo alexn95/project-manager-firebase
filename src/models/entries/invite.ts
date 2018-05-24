@@ -1,3 +1,3 @@
-export interface Invite {
+export class Invite {
     project_id: string;
 }

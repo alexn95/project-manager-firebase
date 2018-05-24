@@ -1,5 +1,3 @@
-import { routingUrl } from './../../environments/const-variables/routing-url';
-import { snackBarMsgs } from './../../environments/const-variables/snack-bar-msgs';
 import { SnackBarService } from './../snack-bar/snack-bar.service';
 import { AuthEvents } from './../auth/auth-events';
 import { AuthService } from './../auth/auth.service';
@@ -7,6 +5,8 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
+import { routingUrl } from '../../models/const-variables/routing-url';
+import { snackBarMsgs } from '../../models/const-variables/snack-bar-msgs';
 
 
 @Injectable()
