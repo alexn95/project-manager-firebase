@@ -7,6 +7,13 @@
                 </mat-option>
             </mat-select>
         </div>
+        <div class="agile-boards__select-sprint">
+            <mat-select [formControl]="selectSprint">
+                <mat-option *ngFor="let sprint of sprints" [value]="sprint">
+                    {{ sprint }}
+                </mat-option>
+            </mat-select>
+        </div>
     </div>
     <div class="agile-boards__table wrapper">
         <div class="agile-boards__column">

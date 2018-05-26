@@ -30,7 +30,11 @@ export class AgileBoardsComponent implements OnInit, OnDestroy {
     public projects: Project[];
     public choicedProject: Project;
 
+    public sprints = ['Sprint 1', 'Sprint 2'];
+
     public selectProject: FormControl;
+    public selectSprint: FormControl;
+    public searchIssues: FormControl;
     private selectProjectSub$: Subscription;
 
     constructor(
@@ -45,6 +49,8 @@ export class AgileBoardsComponent implements OnInit, OnDestroy {
     ngOnInit() {
         // this.issuesService.saveIssues('TaskTaskTaskTas askTaskTask askTaskTask', 'desc', 3);
         this.selectProject = new FormControl();
+        this.selectSprint = new FormControl();
+        this.searchIssues = new FormControl();
         this.service.initProjects().switchMap(() => {
             this.projects = this.service.projects;
             return this.route.params;
@@ -76,6 +82,7 @@ export class AgileBoardsComponent implements OnInit, OnDestroy {
         .then(() => {
             this.initProjectData();
             this.selectProject.setValue(this.choicedProject, { emitEvent: true });
+            this.selectSprint.setValue(this.sprints, { emitEvent: true });
         });
     }
 

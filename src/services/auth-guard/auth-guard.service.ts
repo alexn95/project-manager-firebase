@@ -19,7 +19,7 @@ export class AuthGuardService implements CanActivate {
     ) {
     }
 
-    canActivate(): Observable<boolean> {
+    public canActivate(): Observable<boolean> {
         return this.authService.getAuthEvents
             .map(event => event === AuthEvents.AUTHENTICATED)
             .map(

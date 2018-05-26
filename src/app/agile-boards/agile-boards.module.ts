@@ -7,7 +7,8 @@ import { ServicesModule } from './../../services/services.module';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { MatButtonModule, MatDialogModule, MatIconModule, MatCardModule, MatTooltipModule, MatSelectModule } from '@angular/material';
+import { MatButtonModule, MatDialogModule, MatIconModule, MatCardModule, MatTooltipModule,
+    MatSelectModule, MatInputModule, MatCheckboxModule } from '@angular/material';
 import { NgModule } from '@angular/core';
 import { DragulaModule } from 'ng2-dragula';
 
@@ -15,7 +16,6 @@ import { DragulaModule } from 'ng2-dragula';
 
 @NgModule({
     imports: [
-        MatButtonModule,
         RouterModule,
         BrowserModule,
         CommonModule,
@@ -27,6 +27,10 @@ import { DragulaModule } from 'ng2-dragula';
         MatTooltipModule,
         MatSelectModule,
         ReactiveFormsModule,
+        MatButtonModule,
+        MatInputModule,
+        MatCheckboxModule,
+        MatSelectModule,
     ],
     declarations: [
         AgileBoardsComponent,

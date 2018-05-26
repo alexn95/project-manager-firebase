@@ -22,9 +22,9 @@ import { snackBarMsgs } from '../../models/const-variables/snack-bar-msgs';
 })
 export class IssuesCreateComponent implements OnInit {
 
-    private project: Project;
     private issueState: number;
 
+    public project: Project;
     public errorMatcher = new FormErrorStateMatcher();
     public issueForm: FormGroup;
     public summary: FormControl;
