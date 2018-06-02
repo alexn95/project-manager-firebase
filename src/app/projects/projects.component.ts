@@ -1,3 +1,4 @@
+import { FormControl } from '@angular/forms';
 import { DataProjectsService } from './../../services/data-provider/data-projects.service';
 import { User } from 'firebase/app';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -15,23 +16,35 @@ export class ProjectsComponent implements OnInit, OnDestroy {
     public projects: Project[];
     public projectsUrl = routingUrl.projects;
     public agileBoardsUrl = routingUrl.agileBoards;
+    public searchProjects: FormControl;
 
-    private searchSub: Subscription;
+    private searchSub$: Subscription;
 
     constructor(
         private dataProvider: DataProjectsService,
     ) {
-        this.searchSub = dataProvider.searchProjects().subscribe(projects => {
+        this.searchProjects = new FormControl();
+        dataProvider.searchProjects(null).subscribe(projects => {
             this.projects = projects;
         });
-        // dataProvider.saveProject('Project 1', 'description').then();
+        this.searchSub$ = this.searchProjects.valueChanges
+        .debounceTime(800)
+        .subscribe((text) => {
+            dataProvider.searchProjects(text).subscribe(projects => {
+                this.projects = projects;
+            });
+        });
     }
 
     ngOnInit() {
     }
 
     ngOnDestroy() {
-        this.searchSub.unsubscribe();
+        this.searchSub$.unsubscribe();
+    }
+
+    createProject(): void {
+
     }
 
 

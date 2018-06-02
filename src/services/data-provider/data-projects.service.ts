@@ -27,15 +27,30 @@ export class DataProjectsService {
     ) { }
 
 
-    public searchProjects(): Observable<Project[]> {
-        const params = {
-            id: '1',
-            title: 'proj1'
-        };
+    public searchProjects(params: string): Observable<Project[]> {
+        return new Observable(observer => {
+            this.db.ref('/projects')
+            .once('value')
+            .then((res) => {
+                const val = res.val();
+                let projects = val ? Object.keys(val).map(key => val[key]) : [];
+                if (params) {
+                    projects = projects.filter(project =>
+                        project.code.includes(params) ||
+                        project.title.includes(params)
+                    );
+                }
+                observer.next(projects);
+            })
+            .catch((error: Error) => observer.error(error));
+        });
+    }
+
+    public searchProjectsCF(params: string): Observable<Project[]> {
         return this.http.post(functions.searchProjects, params)
         .map((res) => {
             const json = res.json();
-            return json ? Object.keys(json).map(key => json[key]) : [];
+            return json;
         });
     }
 

@@ -1,6 +1,7 @@
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { MatToolbarModule, MatButtonModule, MatCardModule } from '@angular/material';
+import { MatToolbarModule, MatButtonModule, MatCardModule, MatInputModule } from '@angular/material';
 import { ProjectsComponent } from './projects.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ServicesModule } from '../../services/services.module';
@@ -10,10 +11,13 @@ import { ServicesModule } from '../../services/services.module';
         BrowserModule,
         RouterModule,
         ServicesModule,
+        FormsModule,
+        MatInputModule,
+        ReactiveFormsModule,
 
         // MATERIAL
         MatButtonModule,
-        MatCardModule
+        MatCardModule,
     ],
     declarations: [
         ProjectsComponent

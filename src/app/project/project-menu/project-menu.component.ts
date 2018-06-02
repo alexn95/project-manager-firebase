@@ -45,7 +45,8 @@ export class ProjectMenuComponent implements OnInit, OnDestroy {
         this.projectDeleteModal.open(DeleteComponent, {
             width: matDialogOptions.deleteWidth,
             autoFocus: matDialogOptions.autoFocus,
-            data: { id: this.project.id, title: this.project.title, entity: entities.project }
+            data: { id: this.project.id, title: this.project.title, entity: entities.project },
+            panelClass: matDialogOptions.matDialogClass
         }).afterClosed().subscribe(() => {
            console.log('close');
         });

@@ -1,3 +1,4 @@
+import { Comment } from './../../models/entries/comment';
 import { AuthService } from './../auth/auth.service';
 import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
@@ -31,6 +32,34 @@ export class DataIssuesService {
         return postRef.set(issue);
     }
 
+    public updateIssues(issue: Issue): Promise<any> {
+        issue.update_date = Date.now();
+        issue.update_user_id = this.auth.getUID;
+        const ref = this.db.ref('issues/' + issue.project_id).child(issue.id);
+        return ref.update(issue);
+    }
+
+    public addComment(content: string, issueId: string): Promise<Comment> {
+        const comment = new Comment();
+        comment.content = content;
+        comment.create_date = Date.now();
+        comment.author_id = AuthService.CURRENT_USER_ID;
+        const ref = this.db.ref('comments').child(issueId);
+        const postRef = ref.push();
+        comment.id = postRef.key;
+        return postRef.set(comment).then(() => {
+            return comment;
+        });
+    }
+
+    public getIssueComments(issueId: string): Promise<any> {
+        const ref = this.db.ref('comments/' + issueId);
+        return ref.once('value').then((res) => {
+            const json = res.val();
+            return json ? Object.keys(json).map(key => json[key]) : [];
+        });
+    }
+
     public getAllIssues(): Promise<any> {
         const ref = this.db.ref('issues');
         return ref.once('value').then((res) => {
@@ -50,6 +79,11 @@ export class DataIssuesService {
     public updateIssueState(issue: Issue): Promise<any> {
         const ref = this.db.ref('issues/' + issue.project_id + '/' + issue.id + '/state');
         return ref.set(issue.state);
+    }
+
+    public deleteIssue(issue: Issue): Promise<any> {
+        const ref = this.db.ref('issues/' + issue.project_id).child(issue.id);
+        return ref.remove();
     }
 
 }

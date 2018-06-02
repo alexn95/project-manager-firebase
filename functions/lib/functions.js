@@ -5,12 +5,19 @@ class Functions {
     constructor(db) {
         this.db = db;
     }
-    searchProjects(params) {
-        console.log(params);
+    searchProjects(text) {
         return new Observable_1.Observable(observer => {
             this.db.ref('/projects')
                 .once('value')
-                .then((projects) => observer.next(projects))
+                .then((res) => {
+                const val = res.val();
+                let projects = val ? Object.keys(val).map(key => val[key]) : [];
+                if (text) {
+                    projects = projects.filter(project => project.code.includes(text) ||
+                        project.title.includes(text));
+                }
+                observer.next(projects);
+            })
                 .catch((error) => observer.error(error));
         });
     }

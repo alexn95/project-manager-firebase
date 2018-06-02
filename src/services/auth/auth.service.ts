@@ -17,6 +17,8 @@ import { snackBarMsgs } from '../../models/const-variables/snack-bar-msgs';
 @Injectable()
 export class AuthService {
 
+    public static CURRENT_USER_ID: string;
+
     private db: firebase.database.Database = firebase.database();
     private authEvents: ReplaySubject<AuthEvents> = new ReplaySubject(1);
     private user: firebase.User;
@@ -47,6 +49,7 @@ export class AuthService {
                     console.log('%cuser is set to %o', 'color:darkgreen', user);
                     this.user = user;
                     this.UID = user.uid;
+                    AuthService.CURRENT_USER_ID = user.uid;
                     this.getUserById(user.uid).then((dbUser: User) => {
                         this.dbUser = dbUser;
                         this.authEvents.next(AuthEvents.AUTHENTICATED);

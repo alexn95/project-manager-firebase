@@ -84,7 +84,8 @@ export class ProjectUsersComponent implements OnInit, OnDestroy {
         this.inviteUserDialog.open(ProjectInviteUsersComponent, {
             width: matDialogOptions.inviteUsersWidth,
             autoFocus: matDialogOptions.autoFocus,
-            data: { projectId: this.project.id, users: this.users }
+            data: { projectId: this.project.id, users: this.users },
+            panelClass: matDialogOptions.matDialogClass
         }).afterClosed().subscribe(() => {
            console.log('close');
         });

@@ -4,13 +4,22 @@ export class Functions {
 
     constructor(private db: firebase.database.Database) {}
     
-    public searchProjects(params: {}): Observable<any> {
-        console.log(params);
+    public searchProjects(text: string): Observable<any> {
         return new Observable(observer => {
             this.db.ref('/projects')
             .once('value')
-            .then((projects) => observer.next(projects))
-            .catch((error: Error) => observer.error(error))
+            .then((res) => {
+                const val = res.val();
+                let projects = val ? Object.keys(val).map(key => val[key]) : [];
+                if (text) {
+                    projects = projects.filter(project =>
+                        project.code.includes(text) ||
+                        project.title.includes(text)
+                    );
+                }
+                observer.next(projects);
+            })
+            .catch((error: Error) => observer.error(error));
         });    
     }
 

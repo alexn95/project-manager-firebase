@@ -1,4 +1,4 @@
-import { IssuesCreateComponent } from './../issues-create/issues-create.component';
+import { AuthService } from './../../services/auth/auth.service';
 import { MatDialog } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
@@ -13,6 +13,8 @@ import { Project } from '../../models/entries/project';
 import { issuesState } from '../../models/const-variables/issues-constans';
 import { errorMessages } from '../../models/const-variables/error-messages';
 import { matDialogOptions } from '../../models/const-variables/mat-dialog-options';
+import { IssuesCreateComponent } from './issues-create/issues-create.component';
+import * as firebase from 'firebase/app';
 
 
 @Component({
@@ -20,6 +22,8 @@ import { matDialogOptions } from '../../models/const-variables/mat-dialog-option
     templateUrl: './agile-boards.component.html'
 })
 export class AgileBoardsComponent implements OnInit, OnDestroy {
+
+    private db: firebase.database.Database = firebase.database();
 
     public issues: Issue[];
     public openIssues: Issue[];
@@ -30,12 +34,14 @@ export class AgileBoardsComponent implements OnInit, OnDestroy {
     public projects: Project[];
     public choicedProject: Project;
 
-    public sprints = ['Sprint 1', 'Sprint 2'];
-
     public selectProject: FormControl;
-    public selectSprint: FormControl;
     public searchIssues: FormControl;
+    public onlyUserIssue: FormControl;
+
     private selectProjectSub$: Subscription;
+    private searchSub$: Subscription;
+    private searchUserIssueSub$: Subscription;
+    private onChangeSub$: any;
 
     constructor(
         private service: AgileBoardsService,
@@ -47,10 +53,9 @@ export class AgileBoardsComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        // this.issuesService.saveIssues('TaskTaskTaskTas askTaskTask askTaskTask', 'desc', 3);
         this.selectProject = new FormControl();
-        this.selectSprint = new FormControl();
         this.searchIssues = new FormControl();
+        this.onlyUserIssue = new FormControl(false);
         this.service.initProjects().switchMap(() => {
             this.projects = this.service.projects;
             return this.route.params;
@@ -71,10 +76,37 @@ export class AgileBoardsComponent implements OnInit, OnDestroy {
             });
         });
 
+        this.searchSub$ = this.searchIssues.valueChanges
+        .debounceTime(800)
+        .subscribe((text) => {
+            this.filterIssues();
+        });
+
+        this.searchUserIssueSub$ = this.onlyUserIssue.valueChanges
+        .subscribe((check) => {
+            this.filterIssues();
+        });
+
     }
 
     ngOnDestroy () {
         this.selectProjectSub$.unsubscribe();
+        this.searchSub$.unsubscribe();
+        this.searchUserIssueSub$.unsubscribe();
+    }
+
+    private filterIssues(): void {
+        this.issues = this.service.issues;
+        if (this.onlyUserIssue.value) {
+            this.issues = this.issues.filter(issue => issue.assigned_user_id === AuthService.CURRENT_USER_ID);
+        }
+        if (this.searchIssues.value) {
+            this.issues = this.issues.filter(issue =>
+                issue.number === Number(this.searchIssues.value) ||
+                issue.summary.includes(this.searchIssues.value)
+            );
+        }
+        this.issuesForState(this.issues);
     }
 
     private initProject(id: string): void {
@@ -82,12 +114,13 @@ export class AgileBoardsComponent implements OnInit, OnDestroy {
         .then(() => {
             this.initProjectData();
             this.selectProject.setValue(this.choicedProject, { emitEvent: true });
-            this.selectSprint.setValue(this.sprints, { emitEvent: true });
         });
     }
 
     private initProjectData(): void {
         this.choicedProject = this.service.choicedProject;
+        this.subscribeOnAdd();
+        this.subscribeOnDelete();
         this.issues = this.service.issues;
         this.issuesForState(this.issues);
     }
@@ -118,13 +151,33 @@ export class AgileBoardsComponent implements OnInit, OnDestroy {
         });
     }
 
+    private subscribeOnAdd(): void {
+        const ref = this.db.ref('issues/' + this.choicedProject.id);
+        ref.on('child_added', (res) => {
+            this.service.initIssues().then(() => {
+                this.issues = this.service.issues;
+                this.issuesForState(this.issues);
+            });
+        });
+    }
+
+    private subscribeOnDelete(): void {
+        const ref = this.db.ref('issues/' + this.choicedProject.id);
+        ref.on('child_removed', (res) => {
+            this.service.initIssues().then(() => {
+                this.issues = this.service.issues;
+                this.issuesForState(this.issues);
+            });
+        });
+    }
+
 
     public createIssue(state: number): void {
         this.createIssueModal.open(IssuesCreateComponent, {
             width: matDialogOptions.createIssueWidth,
             autoFocus: matDialogOptions.autoFocus,
             data: { project: this.choicedProject, state: state },
-            panelClass: matDialogOptions.createIssuepanelClass
+            panelClass: matDialogOptions.matDialogClass
         }).afterClosed().subscribe(() => {
            console.log('close');
         });

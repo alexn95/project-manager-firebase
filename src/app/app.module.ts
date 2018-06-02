@@ -28,8 +28,6 @@ import { SnackBarService } from '../services/snack-bar/snack-bar.service';
 import { ProjectsComponent } from './projects/projects.component';
 import { HomeComponent } from './home/home.component';
 import { ProjectComponent } from './project/project.component';
-import { IssuesCreateComponent } from './issues-create/issues-create.component';
-import { IssuesCreateModule } from './issues-create/issues-create.model';
 
 
 @NgModule({
@@ -54,7 +52,6 @@ import { IssuesCreateModule } from './issues-create/issues-create.model';
         ProjectModule,
         DeleteModule,
         AgileBoardsModule,
-        IssuesCreateModule,
         ToolbarModule,
 
         MatSnackBarModule,

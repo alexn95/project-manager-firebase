@@ -1,0 +1,131 @@
+<div class="issue-modal">
+    <form [formGroup]="issueForm" (ngSubmit)="updateIssue()" class="issue-modal__content">
+        <div class="issue-modal__left-content">
+            <div class="issue-modal__header">
+                <div class="issue-modal__number">
+                    {{ projectCode }}-{{ issue.number }}
+                </div>
+                <div class="issue-modal__dates">
+                    <div class="issue-modal__date">
+                        created by {{ createUser }} {{ createDate }}
+                    </div>
+                    <div class="issue-modal__date" *ngIf="updateDate">
+                        updated by {{ updateUser }} {{ updateDate }} 
+                    </div>
+                </div>
+            </div>
+            <div class="issue-modal__form-inputs">
+                <mat-form-field class="issue-modal__input">
+                    <input matInput placeholder="Summary" [formControl]="summary"  
+                        [errorStateMatcher]="errorMatcher">
+                    <mat-error *ngIf="summary.hasError('required')">
+                        Title is <strong>required</strong>
+                    </mat-error>
+                    <mat-error *ngIf="summary.hasError('maxlength')">
+                        Title can not be longer than 100 characters.
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="issue-modal__input">
+                    <textarea matInput placeholder="Description" matTextareaAutosize matAutosizeMinRows="1"
+                    matAutosizeMaxRows="12" [formControl]="description" 
+                    [errorStateMatcher]="errorMatcher">
+                    </textarea>
+                    <mat-error *ngIf="description.hasError('maxlength')">
+                        Description can not be longer than 1000 characters.
+                    </mat-error>
+                </mat-form-field>  
+                <div class="issue-modal__action-row">
+                    <button class="issue-modal__action-row_button"
+                        type="submit" [disabled]="!isValid()" mat-raised-button color="primary">
+                        Save change
+                    </button>
+                    <button class="issue-modal__action-row_button"
+                        type="button" [disabled]="!isChangeExist()" mat-raised-button color="primary" (click)="cancel()">
+                        Cancel 
+                    </button> 
+                    <button class="issue-modal__action-row_button"
+                        type="button" [disabled]="false" mat-raised-button color="warn" (click)="deleteIssue()">
+                        Delete 
+                    </button> 
+                </div>
+            </div>
+            <form [formGroup]="commentForm" (ngSubmit)="addComment()" class="issue-modal__comments">
+                <div class="issue-modal__comments_new">
+                    <mat-form-field class="issue-modal__input">
+                        <textarea matInput placeholder="Write a comment" matTextareaAutosize matAutosizeMinRows="1"
+                        matAutosizeMaxRows="4" [formControl]="comment" 
+                        [errorStateMatcher]="errorMatcher">
+                        </textarea>
+                        <mat-error *ngIf="description.hasError('maxlength')">
+                            Description can not be longer than 1000 characters.
+                        </mat-error>
+                    </mat-form-field>  
+                    <button class="issue-modal__comments_button"
+                        type="submit" [disabled]="!commentIsValid()" mat-raised-button color="primary">
+                        Add
+                    </button>
+                </div>
+                <div class="issue-modal__comments_list">
+                    <div class="issue-modal__comments_item" *ngFor="let comment of commentsView">
+                        <div>
+                            <span class="issue-modal__comments_author">{{ comment.author }} </span>
+                            <span class="issue-modal__comments_date">{{ comment.create_date }} </span>
+                        </div>
+                        <div class="issue-modal__comments_content">
+                            {{ comment.content }}
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="issue-modal__right-content">
+            <div class="issue-modal__right-content_row issue-modal__project">
+                <span class="issue-modal__right-content_column_left">For Project</span> 
+                <span class="issue-modal__right-content_column">{{ project.title }}</span>
+            </div>
+            <div class="issue-modal__right-content_row">
+                <span class="issue-modal__right-content_column_left">Type</span> 
+                <mat-form-field class="issue-modal__right-content_column">
+                    <mat-select [formControl]="issueType">
+                        <mat-option *ngFor="let type of issuesTypes" [value]="type">
+                            {{ type }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="issue-modal__right-content_row">
+                <span class="issue-modal__right-content_column_left">Priority</span> 
+                <mat-form-field class="issue-modal__right-content_column">
+                    <mat-select [formControl]="issuePriority">
+                        <mat-option *ngFor="let priority of issuesPriorities" [value]="priority">
+                            {{ priority }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="issue-modal__right-content_row">
+                <span class="issue-modal__right-content_column_left">Assignee</span> 
+                <mat-form-field class="issue-modal__right-content_column">
+                    <mat-select [formControl]="assignee" >
+                        <mat-option [value]="unassigned.id">
+                            {{ unassigned.name }}
+                        </mat-option>
+                        <mat-option *ngFor="let user of issuesUsers" [value]="user.id">
+                            {{ user.name }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="issues-create__right-content_row">
+                <span class="issues-create__right-content_column_left">Ideal days</span> 
+                <mat-form-field class="issues-create__right-content_column">
+                    <input matInput placeholder="" [formControl]="days"  
+                        [errorStateMatcher]="errorMatcher">
+                    <mat-error *ngIf="days.hasError('pattern')">
+                        Days may be numeric.
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+    </form>
+</div>

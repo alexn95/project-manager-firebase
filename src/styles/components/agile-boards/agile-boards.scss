@@ -1,9 +1,7 @@
 @import './../../node_modules/dragula/dist/dragula.min.css';
-$color-active: #FF5A00;
-$border-color: #D1EEFD;
-// $color: #F0F0F0;
-$color: #EAF8FF;
-$select-color: #3F51B5;
+@import './issue-card.scss';
+@import './issue-create.scss';
+@import './issue-modal.scss';
 
 
 .agile-boards {
@@ -12,7 +10,6 @@ $select-color: #3F51B5;
         display: flex;
         flex-direction: column;
         flex: 1 1 auto;
-        // background-color: #FFFFFF;
         font-size: 14px;
         margin: 0 10px;
     }
@@ -26,28 +23,22 @@ $select-color: #3F51B5;
 
     &__select-project {
         color: white;
-        background-color: $color;
+        background-color: $agile-color;
         border-radius: 5px;
-        width: 200px;
-        padding: 10px;
-        margin-right: 10px;
-    }
-
-    &__select-sprint {
-        color: white;
-        background-color: $color;
-        border-radius: 5px;
-        width: 200px;
+        width: 230px;
         padding: 10px;
         margin-right: 10px;
     }
 
     &__search-issues {
-        border-radius: 5px;
-        padding: 10px;
-        display: flex;
-        flex-direction: row;
-        width: auto;
+        // padding: 10px;
+        margin-left: 20px;
+        &_input {
+            width: 300px;
+        }
+        &_checkbox {
+            margin-left: 20px;
+        }
     }
 
     &__create-issue {
@@ -66,27 +57,27 @@ $select-color: #3F51B5;
         display: flex;
         flex-direction: column;
         flex: 1 1 auto;
-        width: 200px;
-        
+        width: 200px;     
         margin-right: 10px;
+
         &_header {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
             align-items: center;
-            background-color: $color;
+            display: -webkit-box;
+            background-color: $agile-color;
             padding: 10px;
             border-radius: 5px;
             margin-bottom: 10px;
-            // border: 1px solid $border-color;
+            // height: 24px;
         }
         
         &_content {
-            background-color: $color;
+            background-color: $agile-color;
             padding: 10px;
             border-radius: 5px;
             flex: 1 1 auto;
-            // border: 1px solid $border-color;
         }
 
     }

@@ -1,20 +1,20 @@
-import { SnackBarService } from './../../services/snack-bar/snack-bar.service';
-import { Issue } from './../../models/entries/issue';
-import { DataIssuesService } from './../../services/data-provider/data-issues.service';
-import { AgileBoardsService } from './../agile-boards/agile-boards.service';
+import { SnackBarService } from './../../../services/snack-bar/snack-bar.service';
+import { Issue } from './../../../models/entries/issue';
+import { DataIssuesService } from './../../../services/data-provider/data-issues.service';
+import { AgileBoardsService } from './../../agile-boards/agile-boards.service';
 import { Observable } from 'rxjs/Observable';
-import { DataUsersService } from './../../services/data-provider/data-users.service';
+import { DataUsersService } from './../../../services/data-provider/data-users.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { FormErrorStateMatcher } from './../../services/validators/form-error-state-matcher';
+import { FormErrorStateMatcher } from './../../../services/validators/form-error-state-matcher';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { Component, OnInit, Inject } from '@angular/core';
-import { Project } from '../../models/entries/project';
-import { UserRole } from '../../models/entries/user-role';
-import { User } from '../../models/entries/user';
-import { ProjectUser } from '../agile-boards/project-user.model';
+import { Project } from '../../../models/entries/project';
+import { UserRole } from '../../../models/entries/user-role';
+import { User } from '../../../models/entries/user';
+import { ProjectUser } from '../../agile-boards/project-user.model';
 import { issuesTypeArray, issuesPriorityArray, issuesStatesArray,
-            issuesType, issuesPrioroty } from '../../models/const-variables/issues-constans';
-import { snackBarMsgs } from '../../models/const-variables/snack-bar-msgs';
+            issuesType, issuesPrioroty } from '../../../models/const-variables/issues-constans';
+import { snackBarMsgs } from '../../../models/const-variables/snack-bar-msgs';
 
 @Component({
     selector: 'app-issues-create',
@@ -32,6 +32,7 @@ export class IssuesCreateComponent implements OnInit {
     public issueType: FormControl;
     public issuePriority: FormControl;
     public assignee: FormControl;
+    public days: FormControl;
 
     public issuesTypes = issuesTypeArray;
     public issuesPriorities = issuesPriorityArray;
@@ -71,12 +72,16 @@ export class IssuesCreateComponent implements OnInit {
         this.issueType = new FormControl(issuesTypeArray[issuesType.task]);
         this.issuePriority = new FormControl(issuesPriorityArray[issuesPrioroty.normal]);
         this.assignee = new FormControl(this.unassigned.id);
+        this.days = new FormControl(null, [
+            Validators.pattern('^[0-9]*$'),
+        ]);
         this.issueForm = new FormGroup({
             summary: this.summary,
             description: this.description,
             issueType: this.issueType,
             issuePriority: this.issuePriority,
-            assignee: this.assignee
+            assignee: this.assignee,
+            days: this.days,
         });
     }
 
@@ -94,7 +99,7 @@ export class IssuesCreateComponent implements OnInit {
             assigned_user_id: this.assignee.value === this.unassigned.id ? null : this.assignee.value,
             project_id: this.project.id,
             sprint_id: '1',
-            days: null
+            days: this.days.value
         };
         this.issuesService.saveIssues(data).then(() => {
             this.agileBoardService.issues.push(data);

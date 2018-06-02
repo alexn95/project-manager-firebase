@@ -60,6 +60,15 @@ export class AgileBoardsService {
         });
     }
 
+    public initIssues(): Promise<void> {
+        return new Promise((resolve, reject) => {
+            this.issuesService.getProjectIssues(this.choicedProject.id).then((issues) => {
+                this.issues = issues;
+                resolve();
+            });
+        });
+    }
+
     public initProjects(): Observable<void[]> {
         this.projects = new Array<Project>();
         return Observable.of(this.auth.getUserProjectsData)

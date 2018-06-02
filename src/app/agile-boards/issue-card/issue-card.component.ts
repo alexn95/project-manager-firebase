@@ -1,3 +1,6 @@
+import { IssueModalComponent } from './../issue-modal/issue-modal.component';
+import { matDialogOptions } from './../../../models/const-variables/mat-dialog-options';
+import { MatDialog } from '@angular/material';
 import { AgileBoardsService } from './../agile-boards.service';
 import { Project } from './../../../models/entries/project';
 import { DataUsersService } from './../../../services/data-provider/data-users.service';
@@ -23,6 +26,7 @@ export class IssueCardComponent implements OnInit {
     constructor(
         private userService: DataUsersService,
         private service: AgileBoardsService,
+        private issueModal: MatDialog,
     ) {
     }
 
@@ -63,7 +67,14 @@ export class IssueCardComponent implements OnInit {
     }
 
     public openIssue(): void {
-        console.log('openIssue');
+        this.issueModal.open(IssueModalComponent, {
+            width: matDialogOptions.issueModalWidth,
+            autoFocus: matDialogOptions.autoFocus,
+            data: { issue: this.issue },
+            panelClass: matDialogOptions.matDialogClass
+        }).afterClosed().subscribe(() => {
+           console.log('close');
+        });
     }
 
 

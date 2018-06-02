@@ -7,13 +7,13 @@
                 </mat-option>
             </mat-select>
         </div>
-        <div class="agile-boards__select-sprint">
-            <mat-select [formControl]="selectSprint">
-                <mat-option *ngFor="let sprint of sprints" [value]="sprint">
-                    {{ sprint }}
-                </mat-option>
-            </mat-select>
-        </div>
+        <form class="agile-boards__search-issues">
+            <mat-form-field class="agile-boards__search-issues_input">
+                <input matInput placeholder="Search" [formControl]="searchIssues">
+            </mat-form-field>
+            <mat-checkbox class="agile-boards__search-issues_checkbox"
+            [formControl]="onlyUserIssue">only my issues</mat-checkbox>
+        </form>
     </div>
     <div class="agile-boards__table wrapper">
         <div class="agile-boards__column">
@@ -34,7 +34,7 @@
             <div class="agile-boards__column_header">
                 <span>In Progress</span>
                 <div class="agile-boards__add-card" (click)="createIssue(1)">
-                    <span class="agile-boards__add-card_text">add a issue</span>
+                    <span class="agile-boards__add-card_text">add issue</span>
                     <mat-icon>add</mat-icon>
                 </div>
             </div>

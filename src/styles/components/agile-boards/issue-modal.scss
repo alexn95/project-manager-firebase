@@ -1,0 +1,128 @@
+.issue-modal {
+    display: flex;
+    flex-direction: column;
+
+    &__content {
+        display: flex;
+        flex-direction: row;
+    }
+    
+    &__header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 20px;
+        font-size: 12px;
+        margin: 0 0 10px 0;
+        color: $color-disabled;
+    }
+
+    &__dates {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+
+    &__date {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    &__left-content {
+        display: flex;
+        flex-direction: column;
+        width: 70%;
+    }
+    
+    &__form-inputs {
+        padding: 0 20px;
+    }
+
+    &__action-row {
+        display: flex;
+        justify-content: flex-start;
+        
+        &_button {
+            margin-right: 20px !important;
+        }
+    }
+
+    &__comments {
+        display: flex;
+        flex-direction: column;
+        margin-top: 20px;
+        padding: 10px 20px 20px 20px;
+        background-color: $back-color-two;
+        &_new {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+        &_button {
+            margin-left: 20px !important; 
+            height: fit-content;
+        }
+
+        &_list {
+            font-size: 14px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        &_item {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            margin-top: 10px;
+        }
+        &_author {
+            margin-right: 5px;
+        }
+        &_date {
+            font-size: 10px;
+            color: $color-disabled
+        }
+        &_content {
+            margin: 10px;
+            overflow-wrap: break-word;
+        }
+    }
+
+    &__input {
+        width: 100%;
+    }
+
+    &__right-content {
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 auto;
+        background-color: $back-color;
+        font-size: 14px !important;
+        padding: 20px;
+
+        
+        &_row {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        &_column {
+
+            display: flex;
+            justify-content: flex-start;
+            flex: 1;
+            &_left {
+                margin-right: 10px;
+                width: 30%;
+            }
+        }
+ 
+    }
+
+    &__project {
+        margin-bottom: 10px;
+    }
+
+
+}

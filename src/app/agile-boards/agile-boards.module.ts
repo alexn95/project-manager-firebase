@@ -1,5 +1,5 @@
-import { IssuesCreateComponent } from './../issues-create/issues-create.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { IssueModalComponent } from './issue-modal/issue-modal.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AgileBoardsService } from './agile-boards.service';
 import { IssueCardComponent } from './issue-card/issue-card.component';
 import { AgileBoardsComponent } from './agile-boards.component';
@@ -8,9 +8,10 @@ import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { MatButtonModule, MatDialogModule, MatIconModule, MatCardModule, MatTooltipModule,
-    MatSelectModule, MatInputModule, MatCheckboxModule } from '@angular/material';
+    MatSelectModule, MatInputModule, MatCheckboxModule, MatListModule } from '@angular/material';
 import { NgModule } from '@angular/core';
 import { DragulaModule } from 'ng2-dragula';
+import { IssuesCreateComponent } from './issues-create/issues-create.component';
 
 
 
@@ -31,20 +32,24 @@ import { DragulaModule } from 'ng2-dragula';
         MatInputModule,
         MatCheckboxModule,
         MatSelectModule,
+        MatListModule,
+        FormsModule,
     ],
     declarations: [
         AgileBoardsComponent,
-        IssueCardComponent
+        IssueCardComponent,
+        IssueModalComponent,
+        IssuesCreateComponent,
     ],
     exports: [
         AgileBoardsComponent,
-        IssueCardComponent
     ],
     providers: [
         AgileBoardsService
     ],
     entryComponents: [
-        IssuesCreateComponent
+        IssuesCreateComponent,
+        IssueModalComponent,
     ]
 })
 export class AgileBoardsModule {

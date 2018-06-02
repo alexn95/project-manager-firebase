@@ -1,20 +1,14 @@
-$color: #1866C5;
-$bac-color-active: #37479F;
-$color-disabled: #999;
-$color-active: #FF5A00;
-$color-delete: red;
-
 .link {
     overflow: hidden;
     display: -webkit-box;
     text-decoration: none;
-    color: $color;
+    color: $main-color;
     cursor: pointer;
     :visited {
-        color: $color;
+        color: $main-color;
     }
     &__active {
-        background-color: $bac-color-active !important;
+        background-color: $main-color-active !important;
         &_color_orange {
             color: $color-active !important;
         }

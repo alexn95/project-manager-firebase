@@ -5,36 +5,47 @@
             <div class="issues-create__header">
                 Create issue
             </div>
-            <div class="issues-create__form-inputs">
-                <mat-form-field class="issues-create__input">
-                    <input matInput placeholder="Summary" [formControl]="summary"  
-                        [errorStateMatcher]="errorMatcher">
-                    <mat-error *ngIf="summary.hasError('required')">
-                        Title is <strong>required</strong>
-                    </mat-error>
-                    <mat-error *ngIf="summary.hasError('maxlength')">
-                        Title can not be longer than 100 characters.
-                    </mat-error>
-                </mat-form-field>
-                <mat-form-field class="issues-create__input">
-                    <textarea matInput placeholder="Description" matTextareaAutosize matAutosizeMinRows="1"
-                    matAutosizeMaxRows="12" [formControl]="description" 
+            <mat-form-field class="issues-create__input">
+                <input matInput placeholder="Summary" [formControl]="summary"  
                     [errorStateMatcher]="errorMatcher">
-                    </textarea>
-                    <mat-error *ngIf="description.hasError('maxlength')">
-                        Description can not be longer than 1000 characters.
-                    </mat-error>
-                </mat-form-field>   
-            </div>
+                <mat-error *ngIf="summary.hasError('required')">
+                    Title is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="summary.hasError('maxlength')">
+                    Title can not be longer than 100 characters.
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="issues-create__input">
+                <textarea matInput placeholder="Description" matTextareaAutosize matAutosizeMinRows="1"
+                matAutosizeMaxRows="12" [formControl]="description" 
+                [errorStateMatcher]="errorMatcher">
+                </textarea>
+                <mat-error *ngIf="description.hasError('maxlength')">
+                    Description can not be longer than 1000 characters.
+                </mat-error>
+            </mat-form-field>   
             <div class="issues-create__action-row">
-                <button class="issues-create__action-row_button"
-                    type="submit" [disabled]="!isValid()" mat-raised-button color="primary">
-                    Submit
-                </button>
-                <button class="issues-create__action-row_button"
-                    type="button" [disabled]="false" mat-raised-button color="primary" (click)="cancel()">
-                    Cancel 
-                </button>
+                <div>
+                    <button class="issues-create__action-row_button"
+                        type="submit" [disabled]="!isValid()" mat-raised-button color="primary">
+                        Submit
+                    </button>
+                    <button class="issues-create__action-row_button"
+                        type="button" [disabled]="false" mat-raised-button color="primary" (click)="cancel()">
+                        Cancel 
+                    </button>
+                </div>
+                <div class="issues-create__days">
+                    <span class="issues-create__days_text">Ideal days</span> 
+                    <mat-form-field class="issues-create__days_input">
+                        <input matInput placeholder="" [formControl]="days"  
+                            [errorStateMatcher]="errorMatcher">
+                        <mat-error *ngIf="days.hasError('pattern')">
+                            Only numeric.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                
             </div>
         </div>
         <div class="issues-create__right-content">
