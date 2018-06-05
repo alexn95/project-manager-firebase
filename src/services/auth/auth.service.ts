@@ -1,3 +1,4 @@
+import { Invite } from './../../models/entries/invite';
 import { UserProject } from './../../models/entries/user-project';
 import { ProjectUserData } from './../../app/project/project-users/user-project.model';
 import { Observable } from 'rxjs/Observable';
@@ -38,6 +39,15 @@ export class AuthService {
         return projects ? Object.keys(projects).map(key => projects[key]) : [];
     }
 
+    get getUserInvites(): Invite[] {
+        const projects = this.dbUser.invites;
+        return projects ? Object.keys(projects).map(key => projects[key]) : [];
+    }
+
+    get getAuthEvents(): ReplaySubject<AuthEvents> {
+        return this.authEvents;
+    }
+
     constructor(
         private fireAuth: AngularFireAuth,
         private router: Router,
@@ -62,9 +72,25 @@ export class AuthService {
         );
     }
 
-    get getAuthEvents(): ReplaySubject<AuthEvents> {
-        return this.authEvents;
+    public updateUserData(): Promise<any> {
+        return this.getUserById(this.UID).then((dbUser: User) => {
+            this.dbUser = dbUser;
+            return;
+        });
     }
+
+
+    public getUserProjectsId(): string[] {
+        const result = Array();
+        this.getUserInvites.map(projectData => {
+            result.push(projectData.project_id);
+        });
+        this.getUserProjectsData.map(projectData => {
+            result.push(projectData.project_id);
+        });
+        return result;
+    }
+
 
     public fetchUser(): Observable<firebase.User> {
         return new Observable(observer => {

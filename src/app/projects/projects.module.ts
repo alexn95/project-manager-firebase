@@ -1,3 +1,4 @@
+import { ProjectCreateComponent } from './project-create/project-create.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -20,12 +21,16 @@ import { ServicesModule } from '../../services/services.module';
         MatCardModule,
     ],
     declarations: [
-        ProjectsComponent
+        ProjectsComponent,
+        ProjectCreateComponent
     ],
     exports: [
         ProjectsComponent
     ],
     providers: [
+    ],
+    entryComponents: [
+        ProjectCreateComponent
     ]
 })
 export class ProjectsModule {

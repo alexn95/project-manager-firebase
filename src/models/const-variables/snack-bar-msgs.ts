@@ -63,6 +63,11 @@ export const snackBarMsgs = {
         message: 'New issue was created.',
         action: actionClose,
         config: { duration: timeToClose }
+    },
+    projectCreate: {
+        message: 'New project was created.',
+        action: actionClose,
+        config: { duration: timeToClose }
     }
 };
 

@@ -4,6 +4,7 @@
     &__projects {
         display: flex;
         flex-direction: row;
+        flex-wrap: wrap;
     }
 
 }
@@ -23,7 +24,7 @@
 
 .project-card {
     margin: 10px;
-    width: 190px;
+    width: 170px;
     &__header {
         font-size: 20px;
     }
@@ -31,6 +32,7 @@
     &__desc {
         margin-bottom: 15px; 
         font-size: 12px;
+        height: 12px;
         color: #999;
         white-space: nowrap; 
         overflow: hidden;

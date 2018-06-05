@@ -10,7 +10,6 @@ import { Issue } from '../../models/entries/issue';
 
 
 
-
 @Injectable()
 export class DataIssuesService {
 

@@ -29,20 +29,24 @@ export class DataProjectsService {
 
     public searchProjects(params: string): Observable<Project[]> {
         return new Observable(observer => {
-            this.db.ref('/projects')
-            .once('value')
-            .then((res) => {
-                const val = res.val();
-                let projects = val ? Object.keys(val).map(key => val[key]) : [];
-                if (params) {
-                    projects = projects.filter(project =>
-                        project.code.includes(params) ||
-                        project.title.includes(params)
-                    );
-                }
-                observer.next(projects);
-            })
-            .catch((error: Error) => observer.error(error));
+            this.auth.updateUserData().then(() => {
+                const projectsId = this.auth.getUserProjectsId();
+                const ref = this.db.ref('/projects');
+                const projectsRef =  projectsId.map(id =>
+                    ref.child(id).once('value', project => project)
+                );
+                Promise.all(projectsRef).then((result) => {
+                    const val = result.map(res => res.val());
+                    let projects = val ? Object.keys(val).map(key => val[key]) : [];
+                    if (params) {
+                        projects = projects.filter(project =>
+                            project.code.toLowerCase().includes(params) ||
+                            project.title.toLowerCase().includes(params)
+                        );
+                    }
+                    observer.next(projects);
+                });
+            });
         });
     }
 
@@ -61,13 +65,15 @@ export class DataProjectsService {
             create_date: Date.now(),
             description : description,
             title : title,
-            issues_count : 12
+            issues_count : 0
         };
         const ref = this.db.ref('projects');
         const postRef = ref.push();
         data.id = postRef.key;
         return postRef.set(data).then( () => {
-            return this.dataService.saveProjectUser(data.id, this.auth.getUID, projectRoles.creator);
+            return this.dataService.saveProjectUser(data.id, this.auth.getUID, projectRoles.creator).then( () => {
+                return this.dataService.addProjectToUserProject(data.id, this.auth.getUID);
+            });
         });
     }
 

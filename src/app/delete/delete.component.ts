@@ -8,7 +8,7 @@ import { entities } from '../../models/const-variables/enities';
 import { snackBarMsgs } from '../../models/const-variables/snack-bar-msgs';
 
 @Component({
-    selector: 'app-delete-component',
+    selector: 'app-delete',
     templateUrl: './delete.component.html'
 })
 export class DeleteComponent implements OnInit {

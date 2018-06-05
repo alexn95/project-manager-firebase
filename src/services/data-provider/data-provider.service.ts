@@ -30,6 +30,13 @@ export class DataProviderService {
         });
     }
 
+    public addProjectToUserProject(projectId: string, userId: string): Promise<any> {
+        const ref = this.db.ref('users').child(userId).child('projects').child(projectId);
+        return ref.set({
+            project_id: projectId
+        });
+    }
+
     public getProjectUsersRole(projectId: string): Promise<UserRole[]> {
         const ref = this.db.ref('projects_users').child(projectId);
         return ref.once('value').then((result) => {

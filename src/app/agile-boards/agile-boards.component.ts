@@ -1,20 +1,20 @@
-import { AuthService } from './../../services/auth/auth.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
-import { FormGroup, FormControl } from '@angular/forms';
-import { AgileBoardsService } from './agile-boards.service';
-import { DragulaService } from 'ng2-dragula';
-import { DataIssuesService } from './../../services/data-provider/data-issues.service';
-import { Issue } from './../../models/entries/issue';
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { DndDropEvent } from 'ngx-drag-drop';
-import { Project } from '../../models/entries/project';
-import { issuesState } from '../../models/const-variables/issues-constans';
-import { errorMessages } from '../../models/const-variables/error-messages';
-import { matDialogOptions } from '../../models/const-variables/mat-dialog-options';
-import { IssuesCreateComponent } from './issues-create/issues-create.component';
 import * as firebase from 'firebase/app';
+import { DragulaService } from 'ng2-dragula';
+import { Subscription } from 'rxjs/Subscription';
+
+import { errorMessages } from '../../models/const-variables/error-messages';
+import { issuesState } from '../../models/const-variables/issues-constans';
+import { matDialogOptions } from '../../models/const-variables/mat-dialog-options';
+import { Project } from '../../models/entries/project';
+import { Issue } from './../../models/entries/issue';
+import { AuthService } from './../../services/auth/auth.service';
+import { DataIssuesService } from './../../services/data-provider/data-issues.service';
+import { AgileBoardsService } from './agile-boards.service';
+import { IssuesCreateComponent } from './issues-create/issues-create.component';
 
 
 @Component({
