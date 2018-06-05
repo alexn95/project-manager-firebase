@@ -12,18 +12,20 @@
     </form>
     <div class="projects-container__projects">
         <mat-card class="project-card" *ngFor="let project of projects">
-            <div class="project-card__sub-row">
+            <div *ngIf="!project.isInvite" class="project-card__sub-row">
                 <a routerLink="/{{ projectsUrl }}/{{ project.id }}" class="project-card__header link" >{{ project.title }}</a>
+            </div>
+            <div *ngIf="project.isInvite" class="project-card__sub-row">
+                <a  class="project-card__header link disabled-link" >{{ project.title }}</a>
             </div>
             <div class="project-card__desc">{{ project.description }}</div>
             <div class="project-card__info">Project code: {{ project.code }}</div>
-            <div class="project-card__sub-row">
+            <div *ngIf="!project.isInvite" class="project-card__sub-row">
                 <a routerLink="/{{ agileBoardsUrl }}/{{ project.id }}" class="project-card__info link">{{ project.issues_count }} issues</a>
             </div>
-            <div class="project-card__sub-row">
-                <a routerLink="/{{ agileBoardsUrl }}/{{ project.id }}" class="project-card__info link" >Assign to me</a>
+            <div *ngIf="project.isInvite" class="project-card__sub-row">
+                <a (click)="joinProject(project.id)" class="project-card__info link">join project</a>
             </div>
-            
         </mat-card>
     </div>
 </div>

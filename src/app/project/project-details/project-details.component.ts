@@ -1,3 +1,4 @@
+import { projectRoles } from './../../../models/const-variables/project-roles';
 import { ProjectService } from './../project.service';
 import { SnackBarService } from './../../../services/snack-bar/snack-bar.service';
 import { Project } from './../../../models/entries/project';
@@ -59,17 +60,20 @@ export class ProjectDetailsComponent implements OnInit, OnDestroy {
     }
 
     private initProjectForm(): void {
-        this.title = new FormControl(this.project.title, [
-            Validators.required,
-            Validators.maxLength(100)
-        ]);
-        this.description = new FormControl(this.project.description, [
-            Validators.maxLength(1000)
-        ]);
-        this.code = new FormControl(this.project.code, [
-            Validators.required,
-            Validators.maxLength(20)
-        ]);
+        this.title = new FormControl(
+            { value: this.project.title, disabled: !this.isAdmin() },
+            [Validators.required,
+            Validators.maxLength(100)]
+        );
+        this.description = new FormControl(
+            { value: this.project.description ? this.project.description : '', disabled: !this.isAdmin() },
+            [Validators.maxLength(1000)]
+        );
+        this.code = new FormControl(
+           { value: this.project.code, disabled: !this.isAdmin() },
+           [Validators.required,
+            Validators.maxLength(20)]
+        );
         this.projectForm = new FormGroup({
             title: this.title,
             description: this.description,
@@ -79,22 +83,28 @@ export class ProjectDetailsComponent implements OnInit, OnDestroy {
 
 
     public isChangeExist(): boolean {
+        const desc = this.project.description ? this.project.description : '';
         return  this.project.title !== this.title.value ||
-                this.project.description !== this.description.value ||
+                desc !== this.description.value ||
                 this.project.code !== this.code.value;
     }
 
     public updateProject(): void {
         this.project.title = this.title.value;
-        this.project.description = this.description.value;
+        this.project.description = this.description.value ? this.description.value : '';
         this.project.code = this.code.value;
         this.dataProvider.updateProject(this.project).then(() =>  this.snackNar.open(snackBarMsgs.updateProjectSuccess));
     }
 
     public cancel(): void {
         this.title.setValue(this.project.title);
-        this.description.setValue(this.project.description);
+        this.description.setValue(this.project.description ? this.project.description : null);
         this.code.setValue(this.project.code);
+    }
+
+    public isAdmin(): boolean {
+        return  this.service.getUserRole === projectRoles.admin ||
+                this.service.getUserRole === projectRoles.creator;
     }
 
 

@@ -60,7 +60,7 @@ import { hasUserValidator } from '../../services/validators/has-user-validator';
             useExisting: forwardRef(() => hasUserValidator), multi: true
         },
         ProjectService,
-        DataUsersService
+        DataUsersService,
     ],
     entryComponents: [
         DeleteComponent,

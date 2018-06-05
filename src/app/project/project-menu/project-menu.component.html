@@ -20,20 +20,15 @@
             {{ project.issues_count }} issues
         </button>
     </a>
-    <a [routerLink]="getCreateIssuesUrl()" class="project-menu__item project-menu__item_primary">
-        <button  mat-button color="primary">
-            Create issues
-        </button>
-    </a>
-    <div *ngIf="isAdmin()" class="project-menu__item project-menu__item_primary">
-        <button  mat-button color="primary">
-            Invaite user
-        </button>
-    </div>
-    <div *ngIf="isCreator()" class="project-menu__border"></div>
+    <div class="project-menu__border"></div>
     <div *ngIf="isCreator()" class="project-menu__item project-menu__item_warn">
         <button  mat-button color="warn" (click)="deleteProject()">
             Delete project
+        </button>
+    </div>
+    <div *ngIf="!isCreator()" class="project-menu__item project-menu__item_warn">
+        <button  mat-button color="warn" (click)="leaveProject()">
+            Leave project
         </button>
     </div>
 </div>

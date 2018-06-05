@@ -49,6 +49,21 @@ export const snackBarMsgs = {
         action: actionClose,
         config: { duration: timeToClose }
     },
+    leaveProjectSuccess: {
+        message: 'Project was left.',
+        action: actionClose,
+        config: { duration: timeToClose }
+    },
+    removeUserSuccess: {
+        message: 'User was removed.',
+        action: actionClose,
+        config: { duration: timeToClose }
+    },
+    deleteIssueSuccess: {
+        message: 'Issue was deleted.',
+        action: actionClose,
+        config: { duration: timeToClose }
+    },
     userInviteSuccess: {
         message: 'User was invited.',
         action: actionClose,

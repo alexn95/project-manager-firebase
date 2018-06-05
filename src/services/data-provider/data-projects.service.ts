@@ -169,26 +169,16 @@ export class DataProjectsService {
 
     }
 
-
     public leaveProject(projectId: string, userId: string): Promise<any> {
         const refU = this.db.ref('users/' + userId).child('projects').child(projectId);
         const refPU = this.db.ref('projects_users/' + projectId).child(userId);
         return refU.remove().then(() => refPU.remove());
     }
 
-
     public changeUserRole(userId: string, projectId: string, role: number): Promise<any> {
         const ref = this.db.ref('projects_users').child(projectId).child(userId);
         return ref.update({
             role: role
-        });
-    }
-
-    public joinUser(userId: string, projectId: string): Promise<any> {
-        const ref = this.db.ref('projects/' + projectId + '/users/' + userId);
-        return ref.set({
-            role: 2,
-            user_id: userId
         });
     }
 

@@ -102,7 +102,7 @@ export class IssuesCreateComponent implements OnInit {
             days: this.days.value
         };
         this.issuesService.saveIssues(data).then(() => {
-            this.agileBoardService.issues.push(data);
+            // this.agileBoardService.issues.push(data);
             this.snackBar.open(snackBarMsgs.issueCreate);
             this.dialogRef.close();
         });

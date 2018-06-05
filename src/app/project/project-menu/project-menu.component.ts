@@ -7,8 +7,8 @@ import { Component, OnInit, OnDestroy} from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { projectRoles } from '../../../models/const-variables/project-roles';
 import { matDialogOptions } from '../../../models/const-variables/mat-dialog-options';
-import { entities } from '../../../models/const-variables/enities';
 import { routingUrl } from '../../../models/const-variables/routing-url';
+import { deleteType } from '../../../models/const-variables/enities';
 
 
 @Component({
@@ -18,7 +18,7 @@ import { routingUrl } from '../../../models/const-variables/routing-url';
 export class ProjectMenuComponent implements OnInit, OnDestroy {
 
     public project: Project;
-    public userRole: projectRoles;
+    public isLoad: boolean;
 
     private projectSetSub: Subscription;
 
@@ -34,7 +34,6 @@ export class ProjectMenuComponent implements OnInit, OnDestroy {
         this.projectSetSub = this.service.projectSet.subscribe((project: Project) => {
             this.project = project;
         });
-        this.userRole = this.service.getUserRole;
     }
 
     ngOnDestroy() {
@@ -45,10 +44,17 @@ export class ProjectMenuComponent implements OnInit, OnDestroy {
         this.projectDeleteModal.open(DeleteComponent, {
             width: matDialogOptions.deleteWidth,
             autoFocus: matDialogOptions.autoFocus,
-            data: { id: this.project.id, title: this.project.title, entity: entities.project },
+            data: { id: this.project.id, type: deleteType.deleteProject },
             panelClass: matDialogOptions.matDialogClass
-        }).afterClosed().subscribe(() => {
-           console.log('close');
+        });
+    }
+
+    public leaveProject(): void {
+        this.projectDeleteModal.open(DeleteComponent, {
+            width: matDialogOptions.deleteWidth,
+            autoFocus: matDialogOptions.autoFocus,
+            data: { id: this.project.id, type: deleteType.leaveProject },
+            panelClass: matDialogOptions.matDialogClass
         });
     }
 
@@ -69,11 +75,13 @@ export class ProjectMenuComponent implements OnInit, OnDestroy {
     }
 
     public isCreator(): boolean {
-        return this.userRole === projectRoles.creator;
+        return this.service.getUserRole === projectRoles.creator;
     }
 
     public isAdmin(): boolean {
-        return this.userRole === projectRoles.admin || this.userRole === projectRoles.creator;
+        return  this.service.getUserRole === projectRoles.admin ||
+                this.service.getUserRole === projectRoles.creator;
     }
+
 
 }

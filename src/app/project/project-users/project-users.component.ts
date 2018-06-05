@@ -1,3 +1,4 @@
+import { DeleteComponent } from './../../delete/delete.component';
 import { DataProviderService } from './../../../services/data-provider/data-provider.service';
 import { ProjectInviteUsersComponent } from './../project-users-invite/project-invite-users.comonent';
 import { DataProjectsService } from './../../../services/data-provider/data-projects.service';
@@ -16,6 +17,7 @@ import { MatSort, MatTableDataSource, MatDialog } from '@angular/material';
 import { User } from '../../../models/entries/user';
 import { projectRolesArray, projectRoles } from '../../../models/const-variables/project-roles';
 import { matDialogOptions } from '../../../models/const-variables/mat-dialog-options';
+import { deleteType } from '../../../models/const-variables/enities';
 
 @Component({
     selector: 'app-project-users',
@@ -41,11 +43,13 @@ export class ProjectUsersComponent implements OnInit, OnDestroy {
         private usersService: DataUsersService,
         private projectsService: DataProjectsService,
         private dataService: DataProviderService,
-        private inviteUserDialog: MatDialog
+        private inviteUserDialog: MatDialog,
+        private removeUserDialog: MatDialog
     ) {
         this.roles = [
             { role: projectRolesArray[projectRoles.admin], value: projectRoles.admin },
-            { role: projectRolesArray[projectRoles.developer], value: projectRoles.developer }
+            { role: projectRolesArray[projectRoles.developer], value: projectRoles.developer },
+            { role: projectRolesArray[projectRoles.creator], value: projectRoles.creator }
         ];
     }
 
@@ -71,13 +75,15 @@ export class ProjectUsersComponent implements OnInit, OnDestroy {
         this.dataSource.filter = filterValue;
     }
 
-    public isCreator(role: number): boolean {
+    public isUserCreator(role: number): boolean {
         return role === projectRoles.creator;
     }
 
     public changeRole(role: number, userId: string): void {
         this.projectsService.changeUserRole(userId, this.project.id, role)
-            .then(() => this.service.setUserRole = role);
+            .then(() => {
+            // this.service.setUserRole = role
+            });
     }
 
     public inviteUsers(): void {
@@ -109,7 +115,6 @@ export class ProjectUsersComponent implements OnInit, OnDestroy {
         });
     }
 
-
     private init(): void {
         this.users = new Array<ProjectUserData>();
         this.initUsers().subscribe(() => {
@@ -118,6 +123,32 @@ export class ProjectUsersComponent implements OnInit, OnDestroy {
         });
     }
 
+    public removeUser(userId: string, role: number): void {
+        if (this.canRemoveUser(role)) {
+            this.removeUserDialog.open(DeleteComponent, {
+                width: matDialogOptions.deleteWidth,
+                autoFocus: matDialogOptions.autoFocus,
+                data: { projectId: this.project.id, userId: userId, type: deleteType.removeUser },
+                panelClass: matDialogOptions.matDialogClass
+            }).afterClosed().subscribe(() => {
+                this.init();
+            });
+        }
+    }
+
+    public isCreator(): boolean {
+        return this.service.getUserRole === projectRoles.creator;
+    }
+
+    public isAdmin(): boolean {
+        return  this.service.getUserRole === projectRoles.admin ||
+                this.service.getUserRole === projectRoles.creator;
+    }
+
+    public canRemoveUser(role: number): boolean {
+        return  (role === projectRoles.developer && this.isAdmin()) ||
+                (role !== projectRoles.creator && this.isCreator());
+    }
 
 
 }

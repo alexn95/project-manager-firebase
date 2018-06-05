@@ -1,3 +1,5 @@
+import { matDialogOptions } from './../../../models/const-variables/mat-dialog-options';
+import { DeleteComponent } from './../../delete/delete.component';
 import { CommentView } from './comment-view.model';
 import { Comment } from './../../../models/entries/comment';
 import { DataIssuesService } from './../../../services/data-provider/data-issues.service';
@@ -9,11 +11,12 @@ import { Project } from './../../../models/entries/project';
 import { FormErrorStateMatcher } from './../../../services/validators/form-error-state-matcher';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { issuesStatesArray, issuesPriorityArray, issuesTypeArray } from './../../../models/const-variables/issues-constans';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material';
 import { Issue } from './../../../models/entries/issue';
 import { Component, OnInit, Inject } from '@angular/core';
 import { ProjectUser } from '../project-user.model';
 import * as moment from 'moment/moment';
+import { deleteType } from '../../../models/const-variables/enities';
 
 @Component({
     selector: 'app-issue-modal',
@@ -62,6 +65,7 @@ export class IssueModalComponent implements OnInit {
         private service: AgileBoardsService,
         private usersService: DataUsersService,
         private issuesService: DataIssuesService,
+        private deleteIssueDialog: MatDialog,
         @Inject(MAT_DIALOG_DATA) private data: any,
     ) {
     }
@@ -196,8 +200,15 @@ export class IssueModalComponent implements OnInit {
     }
 
     public deleteIssue(): void {
-        this.issuesService.deleteIssue(this.issue).then(() => {
-            this.dialogRef.close();
+        this.deleteIssueDialog.open(DeleteComponent, {
+            width: matDialogOptions.deleteWidth,
+            autoFocus: matDialogOptions.autoFocus,
+            data: { issue: this.issue, type: deleteType.deleteIssue },
+            panelClass: matDialogOptions.matDialogClass
+        }).afterClosed().subscribe((isDeleted) => {
+            if (isDeleted) {
+                this.dialogRef.close();
+            }
         });
     }
 

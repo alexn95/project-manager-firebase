@@ -1,5 +1,6 @@
-export const entities = {
-    project: 'project',
-    issues: 'issues',
-    user: 'user',
-};
+export enum deleteType {
+    leaveProject,
+    deleteProject,
+    deleteIssue,
+    removeUser
+}

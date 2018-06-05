@@ -75,4 +75,24 @@ export class DataProviderService {
         });
     }
 
+    public joinProject(userId: string, projectId: string): Promise<any> {
+        const refPU = this.db.ref('projects_users').child(projectId).child(userId);
+        const refU = this.db.ref('users').child(userId).child('projects').child(projectId);
+        return Promise.all([
+            refPU.set({
+                role: 2,
+                user_id: userId
+            }),
+            refU.set({
+                project_id: projectId
+            }),
+            this.removeInvite(userId, projectId)
+        ]);
+    }
+
+    public removeInvite(userId: string, projectId: string): Promise<any> {
+        const ref = this.db.ref('users').child(userId).child('invites').child(projectId);
+        return ref.remove();
+    }
+
 }

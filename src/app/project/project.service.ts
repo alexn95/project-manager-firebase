@@ -44,8 +44,10 @@ export class ProjectService {
         return this.dataProjectService.getProjectById(id)
         .then((project: Project) => {
             this.project = project;
-            this.projectSet.emit(project);
-            return this.initUserRole();
+            return this.initUserRole().then(() => {
+                this.projectSet.next(project);
+                return;
+            });
         });
     }
 

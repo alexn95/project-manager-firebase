@@ -22,13 +22,18 @@ export class DataIssuesService {
     ) { }
 
     public saveIssues(issue: Issue): Promise<any> {
-        issue.number = 1;
-        issue.create_date = Date.now();
-        issue.author_id = this.auth.getUID;
-        const ref = this.db.ref('issues/' + issue.project_id);
-        const postRef = ref.push();
-        issue.id = postRef.key;
-        return postRef.set(issue);
+        const refI = this.db.ref('issues/' + issue.project_id);
+        const refP = this.db.ref('projects/' + issue.project_id).child('issues_count');
+        return refP.once('value').then((res) => {
+            let count = res.val();
+            issue.number = ++count;
+            issue.create_date = Date.now();
+            issue.author_id = this.auth.getUID;
+            const postRef = refI.push();
+            issue.id = postRef.key;
+            refP.set(count);
+            return postRef.set(issue);
+        });
     }
 
     public updateIssues(issue: Issue): Promise<any> {
@@ -81,8 +86,13 @@ export class DataIssuesService {
     }
 
     public deleteIssue(issue: Issue): Promise<any> {
-        const ref = this.db.ref('issues/' + issue.project_id).child(issue.id);
-        return ref.remove();
+        const refI = this.db.ref('issues/' + issue.project_id).child(issue.id);
+        const refP = this.db.ref('projects/' + issue.project_id).child('issues_count');
+        return refP.once('value').then((res) => {
+            const count = res.val();
+            refP.set(count !== 0 ? count - 1 : 0);
+            return refI.remove();
+        });
     }
 
 }

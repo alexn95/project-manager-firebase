@@ -1,5 +1,5 @@
 <div class="project-details-container container" *ngIf="project">
-    <form [formGroup]="projectForm" (ngSubmit)="updateProject()" class="project-details-form form">
+    <form [formGroup]="projectForm" (ngSubmit)="updateProject()" class="project-details-form form" >
         <div class="project-details-form__header">Project details</div>
         <div class="project-details-form__create-date">
             <span>{{ createDate }}</span>
@@ -19,9 +19,9 @@
         </div>
 
         <div class="form__direction_row">
-            <mat-form-field class="project-details-form__code project-details-form__input">
+            <mat-form-field class="project-details-form__code project-details-form__input" >
                 <input matInput placeholder="Project code" [formControl]="code"  
-                    [errorStateMatcher]="errorMatcher">
+                    [errorStateMatcher]="errorMatcher" >
                 <mat-error *ngIf="code.hasError('required')">
                     Code is <strong>required</strong>
                 </mat-error>

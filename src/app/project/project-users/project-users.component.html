@@ -22,10 +22,9 @@
             <ng-container matColumnDef="role">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Role </mat-header-cell>
                 <mat-cell *matCellDef="let row">
-                    <span *ngIf="isCreator(row.role)">{{ creatorRole }}</span>
-                    <mat-select *ngIf="!isCreator(row.role)" [(value)] = "row.role" 
+                    <mat-select [(value)] = "row.role"  [disabled]="isUserCreator(row.role) || !isCreator()"
                         (change)="changeRole($event.value, row.user_id)">
-                        <mat-option *ngFor="let role of roles" [value]="role.value">
+                        <mat-option [disabled]="role.value === 0" *ngFor="let role of roles" [value]="role.value">
                             {{ role.role }}
                         </mat-option>
                     </mat-select>
@@ -34,9 +33,12 @@
             <ng-container matColumnDef="remove">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> </mat-header-cell>
                 <mat-cell *matCellDef="let row"> 
-                    <div [ngClass]="{'link': true, 'remove-link': !isCreator(row.role), 'disabled-link': isCreator(row.role)}">
+                    <a [ngClass]="{ 'link': true, 
+                                    'remove-link': canRemoveUser(row.role), 
+                                    'disabled-link': !canRemoveUser(row.role) }"
+                        (click)="removeUser(row.user_id, row.role)" >
                         remove user
-                    </div>
+                    </a>
                 </mat-cell>
             </ng-container>
 

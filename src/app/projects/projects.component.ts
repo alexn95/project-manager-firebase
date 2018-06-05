@@ -1,3 +1,5 @@
+import { AuthService } from './../../services/auth/auth.service';
+import { DataProviderService } from './../../services/data-provider/data-provider.service';
 import { dialogRefResult } from './../../models/const-variables/dialog-ref-result';
 import { matDialogOptions } from './../../models/const-variables/mat-dialog-options';
 import { MatDialog } from '@angular/material';
@@ -25,13 +27,14 @@ export class ProjectsComponent implements OnInit, OnDestroy {
     private searchSub$: Subscription;
 
     constructor(
-        private dataProvider: DataProjectsService,
+        private projectService: DataProjectsService,
+        private dataProvider: DataProviderService,
         private projectCreateModal: MatDialog,
     ) {
     }
 
     private searchProjects(text: string): void {
-        this.dataProvider.searchProjects(text).subscribe(projects => {
+        this.projectService.searchProjects(text).subscribe(projects => {
             this.projects = projects;
         });
     }
@@ -50,7 +53,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
         this.searchSub$.unsubscribe();
     }
 
-    createProject(): void {
+    public createProject(): void {
         this.projectCreateModal.open(ProjectCreateComponent, {
             width: matDialogOptions.projectCreateWidth,
             autoFocus: matDialogOptions.autoFocus,
@@ -60,6 +63,12 @@ export class ProjectsComponent implements OnInit, OnDestroy {
                 this.searchProjects(this.searchProjectsForm.value);
             }
             console.log('close');
+        });
+    }
+
+    public joinProject(projectId: string): void {
+        this.dataProvider.joinProject(AuthService.CURRENT_USER_ID, projectId).then(() => {
+            this.searchProjects(this.searchProjectsForm.value);
         });
     }
 
