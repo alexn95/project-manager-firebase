@@ -27,27 +27,63 @@ export class DataProjectsService {
     ) { }
 
 
-    public searchProjects(params: string): Observable<Project[]> {
+    public searchProjects(text: string): Observable<Project[]> {
         return new Observable(observer => {
             this.auth.updateUserData().then(() => {
-                const projectsId = this.auth.getUserProjectsId();
-                const ref = this.db.ref('/projects');
-                const projectsRef =  projectsId.map(id =>
-                    ref.child(id).once('value', project => project)
-                );
-                Promise.all(projectsRef).then((result) => {
-                    const val = result.map(res => res.val());
-                    let projects = val ? Object.keys(val).map(key => val[key]) : [];
-                    if (params) {
-                        projects = projects.filter(project =>
-                            project.code.toLowerCase().includes(params) ||
-                            project.title.toLowerCase().includes(params)
-                        );
+                this.getProjects(text).then((projects) => {
+                    if (projects.length > 0) {
+                        this.getProjectsWithRole(projects).subscribe((prsRole) => {
+                            observer.next(prsRole);
+                        });
+                    } else {
+                        observer.next([]);
                     }
-                    observer.next(projects);
                 });
             });
         });
+    }
+
+    private getProjectsWithRole(projects: Project[]): Observable<Project[]> {
+        const ref = this.db.ref('/projects_users');
+        return Observable.of(projects)
+        .mergeMap(prs => {
+            return Observable.forkJoin(
+                prs.map(pr => {
+                    return Observable.fromPromise(ref.child(pr.id).child(AuthService.CURRENT_USER_ID)
+                        .once('value').then((role) => {
+                            const val = role.val();
+                            pr.isInvite = val === null;
+                            return pr;
+                        })
+                    );
+                })
+            );
+        });
+    }
+
+
+    private getProjects(text: string): Promise<Project[]> {
+        const projectsId = this.auth.getUserProjectsId();
+        const ref = this.db.ref('/projects');
+        const projectsRef =  projectsId.map(id =>
+            ref.child(id).once('value', project => project)
+        );
+        return Promise.all(projectsRef).then((result) => {
+            const val = result.map(res => res.val());
+            let projects = val ? Object.keys(val).map(key => val[key]) : [];
+            projects = this.filterProjects(projects, text);
+            return projects;
+        });
+    }
+
+    private filterProjects(projects: Project[], text: string): Project[] {
+        if (text) {
+            projects = projects.filter(project =>
+                project.code.toLowerCase().includes(text.toLowerCase()) ||
+                project.title.toLowerCase().includes(text.toLowerCase())
+            );
+        }
+        return projects;
     }
 
     public searchProjectsCF(params: string): Observable<Project[]> {
@@ -94,8 +130,52 @@ export class DataProjectsService {
 
     public deleteProject(id: string): Promise<any> {
         const ref = this.db.ref('projects/' + id);
+        return ref.remove().then(() => {
+            return this.deleteProjectUsers(id).subscribe(() => {
+                return this.deleteProjectIssue(id);
+            });
+        });
+    }
+
+    public deleteProjectIssue(projectId: string): Promise<any> {
+        const ref = this.db.ref('issues').child(projectId);
         return ref.remove();
     }
+
+
+    public deleteProjectUsers(projectId: string): Observable<null> {
+        const refPU = this.db.ref('projects_users/' + projectId);
+        return new Observable(observer => {
+            this.dataService.getProjectUsersRole(projectId).then((getProjectUsersRole) => {
+                this.deleteProjectIdFormUsers(projectId, getProjectUsersRole).subscribe(() => {
+                    refPU.remove().then(() => observer.next());
+                });
+            });
+        });
+    }
+
+    private deleteProjectIdFormUsers(projectId: string, usersRole: UserRole[]): Observable<any[]> {
+        const refU = this.db.ref('users');
+        return Observable.of(usersRole)
+        .mergeMap(usersRoleMap => {
+            return Observable.forkJoin(
+                usersRoleMap.map(user => {
+                    return Observable.fromPromise(
+                        refU.child(user.user_id).child('projects').child(projectId).remove()
+                    );
+                })
+            );
+        });
+
+    }
+
+
+    public leaveProject(projectId: string, userId: string): Promise<any> {
+        const refU = this.db.ref('users/' + userId).child('projects').child(projectId);
+        const refPU = this.db.ref('projects_users/' + projectId).child(userId);
+        return refU.remove().then(() => refPU.remove());
+    }
+
 
     public changeUserRole(userId: string, projectId: string, role: number): Promise<any> {
         const ref = this.db.ref('projects_users').child(projectId).child(userId);

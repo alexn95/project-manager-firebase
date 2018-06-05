@@ -5,4 +5,5 @@ export class Project {
     description: string;
     create_date: number;
     issues_count: number;
+    isInvite?: boolean;
 }
