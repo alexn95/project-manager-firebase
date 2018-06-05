@@ -1,0 +1,52 @@
+.home {
+    display: flex;
+    flex-direction: column;
+    &__header {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 330px;
+        color: #fff;
+        background-color: $home-header-color;
+        &_main-text {
+            font-family: 'Graduate', cursive;
+            font-size: 56px;
+            margin: 20px;
+        }
+        &_desc-text {
+            font-size: 20px;
+        }
+        &_button {
+            color: #000;
+            margin: 50px;
+        }
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        margin: 30px;
+        &__item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px;
+            max-width: 300px;
+            &_header {
+                font-size: 30px;
+                margin: 20px;
+            }
+            &_text {
+                font-size: 20px;
+            }
+        }
+    }
+}
+
+
+app-home {
+    height: 100%;
+}
