@@ -18,6 +18,11 @@ import { routingUrl } from '../models/const-variables/routing-url';
 
 const routes: Routes = [
     {
+        path: '',
+        redirectTo: routingUrl.home,
+        pathMatch: 'full'
+    },
+    {
         path: routingUrl.home,
         component: HomeComponent
     },
